@@ -3,6 +3,8 @@ package dueloDeLeyendas.dominio.denuncias
 
 import org.eclipse.xtend.lib.annotations.Accessors
 import dueloDeLeyendas.dominio.jugador.Jugador
+import java.util.List
+import java.util.ArrayList
 
 @Accessors class Denuncia {
 	String justificacion
@@ -10,17 +12,19 @@ import dueloDeLeyendas.dominio.jugador.Jugador
 	Jugador denunciado
 	MotivoDenuncia motivo
 
-	new(String justificacion, Jugador denunciante, Jugador denunciado, MotivoDenuncia motivo) {
-		this.justificacion = justificacion
+	new(Jugador denunciante, Jugador denunciado) {
 		this.denunciante = denunciante
 		this.denunciado = denunciado
-		if (this.esValida()) {
-			this.motivo = motivo
-		} else {
-			this.motivo = new AbusoDelSistemaDeDenuncias()
-		}
 	}
-
+	
+	def List<String> tiposDeDenuncia() {
+		var List<String> lista = new ArrayList
+		lista.add("Abuso de habilidad")
+		lista.add("Comunicacion abusiva")
+		lista.add("Feed intencional")
+		lista
+	}
+	
 	def boolean esValida() {
 		return this.tieneMasDeTresPalabras(justificacion)
 	}
@@ -44,6 +48,10 @@ import dueloDeLeyendas.dominio.jugador.Jugador
 
 	def void castigarJugador(Jugador jug) {
 		jug.sumaleATuPesoDeDenuncia(motivo.peso)
+	}
+	
+		def getTiposDeDenuncia() {
+		#[new AbusoHabilidad, new ComunicacionAbusiva, new FeedIntencional]
 	}
 
 }

@@ -7,5 +7,9 @@ import org.eclipse.xtend.lib.annotations.Accessors
 	new() {
 		super(10)
 	}
+	
+	def override toString(){
+		"Feed intencional"
+	}
 
 }

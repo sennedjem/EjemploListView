@@ -5,4 +5,7 @@ class AbusoHabilidad extends MotivoDenuncia {
 		super(5)
 	}
 
+	override def toString(){
+		return "Abuso de habilidad"
+	}
 }
