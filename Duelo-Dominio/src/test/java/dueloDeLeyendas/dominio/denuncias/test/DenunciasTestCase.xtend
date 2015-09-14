@@ -10,6 +10,8 @@ import dueloDeLeyendas.dominio.denuncias.Denuncia
 import dueloDeLeyendas.dominio.jugador.Jugador
 import dueloDeLeyendas.dominio.denuncias.MotivoDenuncia
 import dueloDeLeyendas.dominio.denuncias.FeedIntencional
+import dueloDeLeyendas.dominio.denuncias.AbusoHabilidad
+import dueloDeLeyendas.dominio.denuncias.AbusoDelSistemaDeDenuncias
 
 class denunciaTestCase {
 	package Denuncia denFalsa
@@ -22,8 +24,8 @@ class denunciaTestCase {
 		denunciante = mock(typeof(Jugador))
 		denunciado = mock(typeof(Jugador))
 		motivo = new FeedIntencional()
-		denFalsa = new Denuncia("hola chau", denunciante, denunciado, motivo)
-		denVerdadera = new Denuncia("se dejo matar mas de 10 veces no lo soporto mas", denunciante, denunciado, motivo)
+		denFalsa = new Denuncia(denunciante, denunciado)
+		denVerdadera = new Denuncia(denunciante, denunciado)
 		denFalsa = spy(denFalsa)
 		denVerdadera = spy(denVerdadera)
 	}
@@ -32,6 +34,7 @@ class denunciaTestCase {
 	 * Este test prueba el metodo esValida
 	 */
 	@Test def void testEsValida() {
+		denFalsa.justificacion = "hola chau"
 		assertFalse(denFalsa.esValida())
 		denFalsa.setJustificacion("lo denuncio porque se dejo matar mas de 10 veces")
 		assertTrue(denFalsa.esValida())
@@ -41,6 +44,7 @@ class denunciaTestCase {
 	 * Este test prueba el metodo realizarPenalizacion
 	 */
 	@Test def void testRealizarPenalizacionConDenunciaFalsa() {
+		denFalsa.motivo = new AbusoDelSistemaDeDenuncias
 		denFalsa.realizarPenalizacion()
 		verify(denFalsa).castigarJugador(denunciante)
 	}
@@ -49,6 +53,7 @@ class denunciaTestCase {
 	 * Este test prueba el metodo realizarPenalizacion
 	 */
 	@Test def void testRealizarPenalizacionConDenunciaVerdadera() {
+		denVerdadera.motivo = new AbusoHabilidad
 		denVerdadera.realizarPenalizacion()
 		verify(denVerdadera).castigarJugador(denunciado)
 	}
@@ -57,6 +62,7 @@ class denunciaTestCase {
 	 * Este test prueba el metodo castigarJugador
 	 */
 	@Test def void testCastigarJugador() {
+		denVerdadera.motivo = new FeedIntencional
 		denVerdadera.castigarJugador(denunciado)
 		verify(denunciado).sumaleATuPesoDeDenuncia(10)
 	}
