@@ -10,10 +10,7 @@ import dueloDeLeyendas.dominio.personaje.Personaje
 import dueloDeLeyendas.dominio.sistemaDeDuelos.SistemaDeDuelos
 
 @Accessors class Jugador {
-	/*
-	 * 
-	 */
-	
+		
 	var String nombreJugador
 	var Integer pesoDenuncias
 	var Integer puntuacionRanking
