@@ -26,10 +26,11 @@ class DenunciaValidaWindow extends SimpleWindow<Denuncia>{
 			text = "Hemos sancionado a " + modelObject.denunciado.nombreJugador
 			foreground = Color.WHITE
 			background = Color.BLACK
-		]
+			]
+			
 		
 		new Label(mainPanel).text = "En Duelo de Leyendas somos partidarios del fair play.
-									Gracias por ayudarnos a mantenernos así!!!"
+Gracias por ayudarnos a mantenernos así!!!"
 	}
 	
 }
