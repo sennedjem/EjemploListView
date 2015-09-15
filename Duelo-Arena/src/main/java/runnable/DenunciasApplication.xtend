@@ -14,9 +14,13 @@ class DenunciasApplication extends Application {
 	
 	override createMainWindow() {
 		var Jugador denunciante = new Jugador("CapitanZanahoria", new SistemaDeDuelos(new RealizadorDuelo))
-		var Jugador denunciado = new Jugador("Ammumu", new SistemaDeDuelos(new RealizadorDuelo))
+		var Jugador denunciado = new Jugador("CapitanPuerro", new SistemaDeDuelos(new RealizadorDuelo))
 		var Denuncia den = new Denuncia(denunciante,denunciado) 
+<<<<<<< HEAD
+		new CrearDenunciaWindow(this, den)
+=======
 		new DenunciaInvalidaWindow(this, den)
+>>>>>>> cc0023f544fd46a950a01cfb63156ec921e5781b
 	}
 	
 	def static main(String[] args) {

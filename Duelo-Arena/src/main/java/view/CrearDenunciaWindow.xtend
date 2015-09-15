@@ -49,14 +49,14 @@ class CrearDenunciaWindow extends SimpleWindow<Denuncia> {
 		new Selector(denunciasPanel)=>[
 			allowNull=false
 			bindItemsToProperty ("tiposDeDenuncia")
-			bindValueToProperty ("motivo")			
+			bindValueToProperty ("motivo")
+			width = 250		
 		]
 		
 		new Label(denunciasPanel).setText("Detalles")
 		new TextBox(denunciasPanel)=>[
-			height = 100
-			width = 100
 			bindValueToProperty("justificacion")
+			width = 250
 		]
 		
 		
@@ -66,7 +66,11 @@ class CrearDenunciaWindow extends SimpleWindow<Denuncia> {
 		//if (modelObject.esValida)
 			//new DenunciaValidaWindow(modelObject)
 		  //else
+<<<<<<< HEAD
+		  //	new DenunciaInvalidaWindow(modelObject)
+=======
 		  	//new DenunciaInvalidaWindow(modelObject)
+>>>>>>> cc0023f544fd46a950a01cfb63156ec921e5781b
 	}
 	
 	def cerrar(){
