@@ -19,6 +19,7 @@ class SistemaDeDuelosTestCase {
 	var Jugador jugador2
 	
 	@Before def void setUp() {
+		realizadorDuel = mock(typeof(RealizadorDuelo))
 		sistema = new SistemaDeDuelos(realizadorDuel)
 		jugador = new Jugador("DarthJ0rge", sistema)
 		jugador1 =new Jugador("Flynn_Lives", sistema)
