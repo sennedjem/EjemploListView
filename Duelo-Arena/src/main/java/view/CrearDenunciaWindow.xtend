@@ -66,11 +66,7 @@ class CrearDenunciaWindow extends SimpleWindow<Denuncia> {
 		//if (modelObject.esValida)
 			//new DenunciaValidaWindow(modelObject)
 		  //else
-<<<<<<< HEAD
 		  //	new DenunciaInvalidaWindow(modelObject)
-=======
-		  	//new DenunciaInvalidaWindow(modelObject)
->>>>>>> cc0023f544fd46a950a01cfb63156ec921e5781b
 	}
 	
 	def cerrar(){

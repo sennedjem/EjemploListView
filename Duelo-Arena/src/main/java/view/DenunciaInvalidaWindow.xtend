@@ -33,11 +33,8 @@ class DenunciaInvalidaWindow extends SimpleWindow<Denuncia> {
 		
 		new Label(mainPanel).text = "Hemos detectado que tu denuncia no tiene fundamentos sólidos.
 En duelo de leyendas desalentamos este tipo de actitudes y somos partidarios del fair play.
-<<<<<<< HEAD
 Con lo que has recibido una sanción por tu actitud antideportiva,esperamos que reflexiones sobre tu actitud."
-=======
-Con lo que has recibido una sanción por tu actitud antideportiva, esperamos que reflexiones sobre tu actitud."
->>>>>>> cc0023f544fd46a950a01cfb63156ec921e5781b
-	}
 	
+}
+
 }
