@@ -17,7 +17,7 @@ class DenunciasApplication extends Application {
 		var Jugador denunciado = new Jugador("CapitanPuerro", new SistemaDeDuelos(new RealizadorDuelo))
 		var Denuncia den = new Denuncia(denunciante,denunciado) 
 
-		new DenunciaInvalidaWindow(this, den)
+		new CrearDenunciaWindow(this, den)
 	}
 	
 	def static main(String[] args) {

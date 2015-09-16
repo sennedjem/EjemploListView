@@ -1,14 +1,14 @@
 package view
 
 import dueloDeLeyendas.dominio.denuncias.Denuncia
-import org.uqbar.arena.windows.SimpleWindow
 import org.uqbar.arena.windows.WindowOwner
 import org.uqbar.arena.widgets.Panel
 import org.uqbar.arena.widgets.Label
 import java.awt.Color
 import org.uqbar.arena.widgets.Button
+import org.uqbar.arena.windows.Dialog
 
-class DenunciaValidaWindow extends SimpleWindow<Denuncia>{
+class DenunciaValidaWindow extends Dialog<Denuncia>{
 	
 	new(WindowOwner parent, Denuncia model) {
 		super(parent, model)

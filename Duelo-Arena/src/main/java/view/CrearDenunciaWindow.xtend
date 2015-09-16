@@ -10,7 +10,7 @@ import org.uqbar.arena.layout.ColumnLayout
 import java.awt.Color
 import org.uqbar.arena.widgets.Selector
 import org.uqbar.arena.widgets.TextBox
-import dueloDeLeyendas.dominio.denuncias.AbusoDelSistemaDeDenuncias
+import org.uqbar.arena.windows.Dialog
 
 class CrearDenunciaWindow extends SimpleWindow<Denuncia> {
 	
@@ -63,11 +63,25 @@ class CrearDenunciaWindow extends SimpleWindow<Denuncia> {
 	}
 	
 	def verificar(){
-		//if (modelObject.esValida)
-			//new DenunciaValidaWindow(modelObject)
-		  //else
-		  //	new DenunciaInvalidaWindow(modelObject)
+		if (modelObject.esValida)
+			verDenunciaValidaWindow
+		  else
+		    verDenunciaInvalidaWindow
 	}
+	
+	def verDenunciaValidaWindow(){
+		this.openDialog(new DenunciaValidaWindow(this, modelObject))
+	}
+	
+	def verDenunciaInvalidaWindow(){
+		this.openDialog(new DenunciaInvalidaWindow(this, modelObject))
+	}
+	
+	def openDialog(Dialog<?> dialog) {
+		dialog.open
+	}
+	
+	
 	
 	def cerrar(){
 		modelObject.justificacion = null
