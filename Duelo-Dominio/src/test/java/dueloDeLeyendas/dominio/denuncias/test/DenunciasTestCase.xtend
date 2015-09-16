@@ -10,18 +10,21 @@ import dueloDeLeyendas.dominio.denuncias.Denuncia
 import dueloDeLeyendas.dominio.jugador.Jugador
 import dueloDeLeyendas.dominio.denuncias.MotivoDenuncia
 import dueloDeLeyendas.dominio.denuncias.FeedIntencional
+import dueloDeLeyendas.dominio.denuncias.AbusoDelSistemaDeDenuncias
 
 class denunciaTestCase {
-	package Denuncia denFalsa
-	package Denuncia denVerdadera
-	package Jugador denunciante
-	package Jugador denunciado
-	package MotivoDenuncia motivo
+	var Denuncia denFalsa
+	var Denuncia denVerdadera
+	var Jugador denunciante
+	var Jugador denunciado
+	var MotivoDenuncia motivo
+	var MotivoDenuncia abusoDeSistema
 
 	@Before def void setUp() {
 		denunciante = mock(typeof(Jugador))
 		denunciado = mock(typeof(Jugador))
 		motivo = new FeedIntencional()
+		abusoDeSistema = new AbusoDelSistemaDeDenuncias()
 		denFalsa = new Denuncia(denunciante, denunciado)
 		denVerdadera = new Denuncia(denunciante, denunciado)
 		denFalsa = spy(denFalsa)
@@ -32,7 +35,6 @@ class denunciaTestCase {
 	 * Este test prueba el metodo esValida
 	 */
 	@Test def void testEsValida() {
-		assertFalse(denFalsa.esValida())
 		denFalsa.setJustificacion("lo denuncio porque se dejo matar mas de 10 veces")
 		assertTrue(denFalsa.esValida())
 	}
@@ -41,6 +43,7 @@ class denunciaTestCase {
 	 * Este test prueba el metodo realizarPenalizacion
 	 */
 	@Test def void testRealizarPenalizacionConDenunciaFalsa() {
+		denFalsa.motivo = abusoDeSistema
 		denFalsa.realizarPenalizacion()
 		verify(denFalsa).castigarJugador(denunciante)
 	}
@@ -49,6 +52,7 @@ class denunciaTestCase {
 	 * Este test prueba el metodo realizarPenalizacion
 	 */
 	@Test def void testRealizarPenalizacionConDenunciaVerdadera() {
+		denVerdadera.motivo = motivo
 		denVerdadera.realizarPenalizacion()
 		verify(denVerdadera).castigarJugador(denunciado)
 	}
@@ -57,6 +61,7 @@ class denunciaTestCase {
 	 * Este test prueba el metodo castigarJugador
 	 */
 	@Test def void testCastigarJugador() {
+		denVerdadera.motivo = motivo
 		denVerdadera.castigarJugador(denunciado)
 		verify(denunciado).sumaleATuPesoDeDenuncia(10)
 	}
