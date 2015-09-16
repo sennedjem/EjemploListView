@@ -26,7 +26,7 @@ import java.util.ArrayList
 	}
 	
 	def boolean esValida() {
-		return this.tieneMasDeTresPalabras(justificacion)
+		return this.tieneMasDeTresPalabras(justificacion)&& this.justificacion.length()>20
 	}
 
 	def private boolean tieneMasDeTresPalabras(String justificacion2) {
