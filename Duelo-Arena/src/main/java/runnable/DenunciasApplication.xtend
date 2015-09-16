@@ -9,6 +9,8 @@ import view.CrearDenunciaWindow
 import dueloDeLeyendas.dominio.realizarDuelo.RealizadorDuelo
 import view.DenunciaInvalidaWindow
 import view.DenunciaValidaWindow
+import dueloDeLeyendas.dominio.applicationModel.DueloDeLeyendasModel
+import view.DueloDeLeyendasWindow
 
 class DenunciasApplication extends Application {
 	
@@ -17,7 +19,7 @@ class DenunciasApplication extends Application {
 		var Jugador denunciado = new Jugador("CapitanPuerro", new SistemaDeDuelos(new RealizadorDuelo))
 		var Denuncia den = new Denuncia(denunciante,denunciado) 
 
-		new CrearDenunciaWindow(this, den)
+		new DueloDeLeyendasWindow(this, new DueloDeLeyendasModel)
 	}
 	
 	def static main(String[] args) {
