@@ -50,15 +50,21 @@ class DueloDeLeyendasWindow extends SimpleWindow <DueloDeLeyendasModel>{
 		val panelSelected = new Panel(sndMainPanel) =>[
 			layout = new VerticalLayout()
 			]
-		
-	
+			
 		crearPanelPersonajeSeleccionado(panelSelected)
+		
+		//Crear panel stats
+		val panelStats = new Panel(sndMainPanel)=>[
+			layout = new VerticalLayout
+		]
+		
+		crearPanelStats(panelStats)
 	}
 	
 	def crearTablaPersonajes(Panel panel){
 		val table = new Table<PersonajePuntaje> (panel, typeof(PersonajePuntaje))=>[
 			bindItemsToProperty("personajePuntaje")
-			bindValueToProperty("personajeFiltrado")
+			bindValueToProperty("personajeSeleccionado") //personajesFiltrados
 			height = 1000
 			width = 10000
 		]
@@ -84,5 +90,72 @@ class DueloDeLeyendasWindow extends SimpleWindow <DueloDeLeyendasModel>{
 			bindValueToProperty("personajeSeleccionado.pers.nombre")
 			foreground = Color.BLUE
 		]
+		
+				new Label(panel) => [
+			text = "Especialidades:"
+			foreground = Color.GREEN
+		]
+
+		new Table<String> (panel, typeof (String))=>[
+			bindItemsToProperty("personajeSeleccionado.pers.especialidades")
+		]
+		
+		new Label(panel) => [
+			text = "Debilidades:"
+			foreground = Color.GREEN
+		]
+		
+		new Table<String> (panel, typeof (String)) => [
+			bindItemsToProperty("personajeSeleccionado.pers.debilidades")
+		]
+		
+		new Label(panel) => [
+			text = "Mejor Posición:"
+			foreground = Color.GREEN
+		]
+		
+		new Label(panel) =>[
+			bindValueToProperty("personajeSeleccionado.pers.posicionIdeal")
+		]
+	}
+	
+	def crearPanelStats(Panel panel) {
+		new Label(panel)=>[
+			text = "Stats"
+			foreground = Color.BLUE
+		]
+		
+		//VER POR QUE NO CAMBIA CUANDO CAMBIO UN PERSONAJE
+		var Panel stats = new Panel(panel).layout = new ColumnLayout(2)
+		
+		//Pongo todas las stats del personaje
+		new Label(stats).text="Jugadas"
+		
+		new Label(stats).bindValueToProperty("estadisticasDeJugadorConPersonaje.cantJugados")
+		
+		new Label(stats).text="Ganadas"
+		
+		new Label(stats).bindValueToProperty("estadisticasDeJugadorConPersonaje.cantDuelosGanados")
+		
+		new Label(stats).text="Kills"
+		
+		new Label(stats).bindValueToProperty("estadisticasDeJugadorConPersonaje.cantKills")
+		
+		new Label(stats).text="Deads"
+		
+		new Label(stats).bindValueToProperty("estadisticasDeJugadorConPersonaje.cantDeads")
+		
+		new Label(stats).text="Assists"
+		
+		new Label(stats).bindValueToProperty("estadisticasDeJugadorConPersonaje.assists")
+		
+		new Label(stats).text="Mejor ubicación"
+		
+		new Label(stats).bindValueToProperty("estadisticasDeJugadorConPersonaje.mejorUbicacion")
+		
+		new Label(stats).text="Puntaje"
+		
+		new Label(stats).bindValueToProperty("estadisticasDeJugadorConPersonaje.clasificacion")
+		
 	}
 }
