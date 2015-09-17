@@ -11,6 +11,8 @@ import org.uqbar.arena.widgets.tables.Table
 import org.uqbar.arena.widgets.tables.Column
 import org.uqbar.arena.layout.VerticalLayout
 import org.uqbar.arena.layout.ColumnLayout
+import org.uqbar.arena.widgets.TextBox
+import org.apache.commons.lang.StringUtils
 
 class DueloDeLeyendasWindow extends SimpleWindow <DueloDeLeyendasModel>{
 	
@@ -33,19 +35,32 @@ class DueloDeLeyendasWindow extends SimpleWindow <DueloDeLeyendasModel>{
 		
 		val sndMainPanel = new Panel(mainPanel).layout = new ColumnLayout(3)
 		
+		//Crear panel de tablas
 		val tablas = new Panel(sndMainPanel).layout = new VerticalLayout
+		val panelSelector = new Panel(tablas).layout = new ColumnLayout(2)
+		new Label(panelSelector).text = "Personaje buscado"
+		new TextBox(panelSelector) =>[
+			withFilter [ event | StringUtils.isAlpha(event.potentialTextResult)]
+			bindValueToProperty("buscado")
+		]
 		crearTablaPersonajes(tablas)
+
 		
+		//Crear panel personaje seleccionado
 		val panelSelected = new Panel(sndMainPanel) =>[
 			layout = new VerticalLayout()
-			crearPanelPersonajeSeleccionado
-		]
+			]
+		
+	
+		crearPanelPersonajeSeleccionado(panelSelected)
 	}
 	
 	def crearTablaPersonajes(Panel panel){
 		val table = new Table<PersonajePuntaje> (panel, typeof(PersonajePuntaje))=>[
 			bindItemsToProperty("personajePuntaje")
-			bindValueToProperty("personajeSeleccionado")
+			bindValueToProperty("personajeFiltrado")
+			height = 1000
+			width = 10000
 		]
 		this.describeResultGrid(table)
 	}
@@ -66,7 +81,8 @@ class DueloDeLeyendasWindow extends SimpleWindow <DueloDeLeyendasModel>{
 	
 	def crearPanelPersonajeSeleccionado(Panel panel){
 		new Label(panel) => [
-			text = model.personajeSeleccionado.nombre
+			bindValueToProperty("personajeSeleccionado.pers.nombre")
+			foreground = Color.BLUE
 		]
 	}
 }
