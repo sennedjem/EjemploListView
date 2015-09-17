@@ -26,12 +26,12 @@ import dueloDeLeyendas.dominio.estadisticas.Estadisticas
 
 	def Jugador encontrarRivalAcorde(Jugador jugador, Personaje personaje){
 		val rankingMenor = jugador.ranking - 100
-		val rankingMayor = jugador.ranking + 100		
+		val rankingMayor = jugador.ranking + 100	
 		for (Jugador j: jugadores){
 			if((rankingMenor < j.ranking || rankingMayor > j.ranking) && j!=jugador)
 			return j
 		}
-		return generarJugadorMrX(jugador, personaje)
+		throw new NoHayRival()
 	}
 	
 	def Jugador generarJugadorMrX(Jugador jugador, Personaje personaje) {
