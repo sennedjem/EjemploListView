@@ -6,6 +6,7 @@ import org.uqbar.arena.widgets.Panel
 import org.uqbar.arena.windows.SimpleWindow
 import org.uqbar.arena.windows.WindowOwner
 import org.uqbar.arena.widgets.Label
+import org.uqbar.arena.windows.Dialog
 
 class NoHayRivalWindow extends SimpleWindow<SistemaDeDuelos>{
 	
@@ -34,15 +35,19 @@ class NoHayRivalWindow extends SimpleWindow<SistemaDeDuelos>{
 	}
 	
 	def getNuevoDuelo() {
-		//Vuelve a la pantalla del sistema
+		this.openDialog(new DueloDeLeyendasWindow(this, modelObject))
 	}
 	
 	override protected createFormPanel(Panel mainPanel) {
 		new Label(mainPanel).text ="¡NO HAY NADIE CON MAS PODER QUE VOS!
 Puedes intensificar tu poder batiendote a duelo con un bot o esperar a un rival digno de tu poder"
 	}
+	
+	def openDialog(Dialog<?> dialog) {
+		dialog.open
+	}	
 		
-	}
+}
 	
 	
 	

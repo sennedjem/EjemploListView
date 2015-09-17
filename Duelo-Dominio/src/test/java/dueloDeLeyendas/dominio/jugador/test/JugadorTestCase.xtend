@@ -28,6 +28,7 @@ class JugadorTestCase {
 		when(estadistica.personaje).thenReturn(personaje)
 		when(estadistica.cantDuelosGanados).thenReturn(20)
 		jugador.misEstadisticas.add(estadistica)
+		jugador.personajes.add(personaje)
 	}
 	
 	@Test def void testRanking(){
@@ -42,5 +43,20 @@ class JugadorTestCase {
 		assertEquals(expected, actual)
 	} 
 	
+	@Test def void testAgregarPersonaje(){
+		jugador.agregarPersonaje(personaje1)
+		var Boolean expected = true
+		var Boolean actual = jugador.personajes.contains(personaje1)
+		var Integer exp = 2
+		var Integer act = jugador.personajes.size
+		assertEquals(expected, actual)
+		assertEquals(exp, act) 
+	}
+	
+	@Test def void testGetEstadistica(){
+		var Estadisticas expected = estadistica
+		var Estadisticas actual = jugador.getEstadisticas(personaje)
+		assertEquals(expected, actual)
+	}
 	
 }
