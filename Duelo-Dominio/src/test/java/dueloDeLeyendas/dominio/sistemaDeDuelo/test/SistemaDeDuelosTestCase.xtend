@@ -22,7 +22,9 @@ class SistemaDeDuelosTestCase {
 		realizadorDuel = mock(typeof(RealizadorDuelo))
 		sistema = new SistemaDeDuelos(realizadorDuel)
 		jugador = new Jugador("DarthJ0rge", sistema)
+		jugador = spy(jugador)
 		jugador1 =new Jugador("Flynn_Lives", sistema)
+		jugador1 = spy(jugador1)
 		jugador2 = new Jugador("ZeroCool", sistema)
 		personaje = mock(typeof(Personaje))
 		personaje1 = mock(typeof(Personaje))
@@ -55,6 +57,8 @@ class SistemaDeDuelosTestCase {
 	}
 	 
 	@Test def void TestencontrarRivalAcorde(){
+		when(jugador.ranking).thenReturn(100)
+		when(jugador1.ranking).thenReturn(100)
 		var Jugador expected = jugador1
 		var Jugador actual = sistema.encontrarRivalAcorde(jugador, personaje)
 		assertEquals(expected, actual)
