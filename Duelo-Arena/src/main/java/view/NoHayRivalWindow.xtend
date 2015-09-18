@@ -7,15 +7,13 @@ import org.uqbar.arena.windows.SimpleWindow
 import org.uqbar.arena.windows.WindowOwner
 import org.uqbar.arena.widgets.Label
 import org.uqbar.arena.windows.Dialog
+import dueloDeLeyendas.dominio.applicationModel.DueloDeLeyendasModel
+import dueloDeLeyendas.dominio.realizarDuelo.RealizadorDuelo
 
-class NoHayRivalWindow extends SimpleWindow<SistemaDeDuelos>{
+class NoHayRivalWindow extends SimpleWindow<DueloDeLeyendasModel>{
 	
-	new(WindowOwner parent, SistemaDeDuelos model) {
-		super(parent, model)
-		taskDescription = "¡No tienes rival"
-		//foregound = color.WHITE
-		//background = color.RED
-		
+	new(WindowOwner parent, DueloDeLeyendasModel model) {
+		super(parent, model)		
 	}
 	
 	override protected addActions(Panel actionsPanel) {
@@ -26,17 +24,25 @@ class NoHayRivalWindow extends SimpleWindow<SistemaDeDuelos>{
 		
 		new Button(actionsPanel)=>[
 			caption="Buscar un nuevo duelo"
-			onClick [ | this.nuevoDuelo ]			
+			onClick [ | this.close ]			
 		]
 	}
 	
 	def generarBot() {
-		//Crear jugador mrX
+		val mrX = modelObject.sistema.generarJugadorMrX(modelObject.jugador, modelObject.personajeSeleccionado.pers)
+		var dueloBot = new RealizadorDuelo=>[
+			posicion = modelObject.posicion
+			retador = modelObject.jugador
+			rival = mrX
+			retadorPersonaje = modelObject.personajeSeleccionado.pers
+			rivalPersonaje = modelObject.sistema.buscarPersonajeParaDuelo(modelObject.jugador, modelObject.personajeSeleccionado.pers)
+		]
+		modelObject.realizador= dueloBot
+		//esperar Resultado de duelo window
+		openDialog(new ResultadoDueloWindow(this, modelObject))
 	}
 	
-	def getNuevoDuelo() {
-		this.openDialog(new DueloDeLeyendasWindow(this, modelObject))
-	}
+	
 	
 	override protected createFormPanel(Panel mainPanel) {
 		new Label(mainPanel).text ="¡NO HAY NADIE CON MAS PODER QUE VOS!

@@ -18,11 +18,12 @@ class DueloDeLeyendasModel {
 	Jugador jugador
 	SistemaDeDuelos sistema
 	List<PersonajePuntaje> personajesFiltrados
-	//List<PersonajePuntaje>
 	List<Personaje> personajes
 	PersonajePuntaje personajeSeleccionado
 	String buscado
 	Estadisticas statsPersonajeSeleccionado
+	String posicion
+	RealizadorDuelo realizador
 	
 	new(){
 		sistema = new SistemaDeDuelos(new RealizadorDuelo)
