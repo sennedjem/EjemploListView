@@ -1,5 +1,5 @@
 package dueloDeLeyendas.dominio.duelo
-//
+
 
 import org.eclipse.xtend.lib.annotations.Accessors
 import dueloDeLeyendas.dominio.jugador.Jugador
