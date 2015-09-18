@@ -9,21 +9,26 @@ import org.eclipse.xtend.lib.annotations.Accessors
 import java.util.List
 import java.util.ArrayList
 import org.uqbar.commons.utils.Observable
+import dueloDeLeyendas.dominio.estadisticas.Estadisticas
+import org.uqbar.commons.model.ObservableUtils
 
 @Observable
 @Accessors
 class DueloDeLeyendasModel {
 	Jugador jugador
 	SistemaDeDuelos sistema
-	List<Personaje> personajesFiltrados
+	List<PersonajePuntaje> personajesFiltrados
+	//List<PersonajePuntaje>
 	List<Personaje> personajes
 	PersonajePuntaje personajeSeleccionado
 	String buscado
+	Estadisticas statsPersonajeSeleccionado
 	
 	new(){
 		sistema = new SistemaDeDuelos(new RealizadorDuelo)
 		jugador = new Jugador("Marcos", sistema)
 		personajes = new ArrayList
+		personajesFiltrados = new ArrayList
 		inicializarPersonajes
 		inicializarStats
 	}	
@@ -73,20 +78,22 @@ class DueloDeLeyendasModel {
 			agregarPersonaje(per4)
 			agregarPersonaje(per5)
 		]
-		
-		personajeSeleccionado = new PersonajePuntaje (per1, 40)
+		personajeSeleccionado = new PersonajePuntaje(per1, jugador.getEstadisticas(per1).getClasificacion)
 	}
 	
+	//Setear stats para todos
 	def inicializarStats(){
-		setearEstadisticas(jugador, personajes.get(0), 60)
-		setearEstadisticas(jugador, personajes.get(1), 40)
-		setearEstadisticas(jugador, personajes.get(3), 10)
-		setearEstadisticas(jugador, personajes.get(4), 55)
+		setearEstadisticas(jugador, personajes.get(0), 60, 40)
+		setearEstadisticas(jugador, personajes.get(1), 40, 50)
+		setearEstadisticas(jugador, personajes.get(3), 10, 70)
+		setearEstadisticas(jugador, personajes.get(4), 55, 45)
+		
+		personajesFiltrados = getPersonajePuntaje(personajes)
 	}
 	
-	def setearEstadisticas(Jugador jugador, Personaje personaje, Integer clas) {
+	def setearEstadisticas(Jugador jugador, Personaje personaje, Integer clas, Integer assist) {
 		jugador.getEstadisticas(personaje)=>[
-			assists = 10
+			assists = assist
 			cantDeads = 3
 			cantDuelosGanados = 7
 			cantKills = 7
@@ -94,6 +101,7 @@ class DueloDeLeyendasModel {
 			mejorUbicacion = "TOP"
 			ubicacionesUsadas = new HashSet
 		]
+	
 	}
 		
 	def getPersonajePuntaje(){
@@ -109,9 +117,55 @@ class DueloDeLeyendasModel {
 		perpunt
 	}
 	
+	def getPersonajePuntaje(List<Personaje> pers){
+		var List<PersonajePuntaje> perpunt = new ArrayList
+		for (Personaje p : pers)
+			if (jugador.getEstadisticas(p) == null){
+				perpunt.add(new PersonajePuntaje(p, 0))
+				}
+				else{ 
+					val double clas = jugador.getEstadisticas(p).getClasificacion
+					perpunt.add (new PersonajePuntaje(p,clas))
+			}
+		perpunt
+	}
+	
 	def void setBuscado(String nombre){
-		this.buscado = nombre;
-		personajesFiltrados = personajes.filter[it.nombre.contains(nombre)].toList
+		buscado = nombre
+		var filtrados = personajes.filter[it.nombre.contains(nombre)].toList
+		System.out.println(personajes.size)
+		personajesFiltrados = getPersonajePuntaje(filtrados)
+		System.out.println(personajes.size)
 	}
 
-}
+	
+	def getStatsPersonajeSeleccionado(){
+		if(personajeSeleccionado != null)
+			jugador.getEstadisticas(personajeSeleccionado.pers)
+			else
+			  this.dummyStats(personajeSeleccionado)
+	}
+	
+	
+	def setPersonajeSeleccionado(PersonajePuntaje p){
+		personajeSeleccionado = p
+		ObservableUtils.firePropertyChanged(this, "statsPersonajeSeleccionado")
+	}
+	
+	def dummyStats(PersonajePuntaje pp){
+		var est = new Estadisticas(pp.pers, null)=>[
+			assists = 0
+			cantDeads = 0
+			cantDuelosGanados = 0
+			cantDuelosIniciados = 0
+			cantKills = 0
+			clasificacion = 0
+			mejorUbicacion = ""
+			ubicacionesUsadas = new HashSet
+			cantJugados = 0
+			clasificacion = 0
+		]
+		est
+	}
+
+} 

@@ -13,6 +13,8 @@ import org.uqbar.arena.layout.VerticalLayout
 import org.uqbar.arena.layout.ColumnLayout
 import org.uqbar.arena.widgets.TextBox
 import org.apache.commons.lang.StringUtils
+import org.uqbar.arena.widgets.Button
+import org.uqbar.arena.windows.Dialog
 
 class DueloDeLeyendasWindow extends SimpleWindow <DueloDeLeyendasModel>{
 	
@@ -59,11 +61,38 @@ class DueloDeLeyendasWindow extends SimpleWindow <DueloDeLeyendasModel>{
 		]
 		
 		crearPanelStats(panelStats)
+		
+		new Label(panelStats)=>[
+			text = "Jugar"
+			foreground = Color.BLUE
+		]
+		
+		var botones = new Panel(panelStats).layout = new ColumnLayout(2)
+		
+		new Button(botones)=>[
+			caption = "TOP"
+			onClick[| dueloTop]
+		]
+		/*
+		new Button(botones)=>[
+			caption = "MID"
+			onClick[| dueloMid]
+		]
+		
+		new Button(botones)=>[
+			caption = "BOT"
+			onClick[| dueloBot]
+		]
+
+		new Button(botones)=>[
+			caption = "JUNGLE"
+			onClick[| dueloJungle]
+		]*/
 	}
 	
 	def crearTablaPersonajes(Panel panel){
 		val table = new Table<PersonajePuntaje> (panel, typeof(PersonajePuntaje))=>[
-			bindItemsToProperty("personajePuntaje")
+			bindItemsToProperty("personajesFiltrados")
 			bindValueToProperty("personajeSeleccionado") //personajesFiltrados
 			height = 1000
 			width = 10000
@@ -131,31 +160,46 @@ class DueloDeLeyendasWindow extends SimpleWindow <DueloDeLeyendasModel>{
 		//Pongo todas las stats del personaje
 		new Label(stats).text="Jugadas"
 		
-		new Label(stats).bindValueToProperty("estadisticasDeJugadorConPersonaje.cantJugados")
+		new Label(stats).bindValueToProperty("statsPersonajeSeleccionado.assists")
 		
 		new Label(stats).text="Ganadas"
 		
-		new Label(stats).bindValueToProperty("estadisticasDeJugadorConPersonaje.cantDuelosGanados")
+		new Label(stats).bindValueToProperty("statsPersonajeSeleccionado.cantDuelosGanados")
 		
 		new Label(stats).text="Kills"
 		
-		new Label(stats).bindValueToProperty("estadisticasDeJugadorConPersonaje.cantKills")
+		new Label(stats).bindValueToProperty("statsPersonajeSeleccionado.cantKills")
 		
 		new Label(stats).text="Deads"
 		
-		new Label(stats).bindValueToProperty("estadisticasDeJugadorConPersonaje.cantDeads")
+		new Label(stats).bindValueToProperty("statsPersonajeSeleccionado.cantDeads")
 		
 		new Label(stats).text="Assists"
 		
-		new Label(stats).bindValueToProperty("estadisticasDeJugadorConPersonaje.assists")
+		new Label(stats).bindValueToProperty("statsPersonajeSeleccionado.assists")
 		
 		new Label(stats).text="Mejor ubicación"
 		
-		new Label(stats).bindValueToProperty("estadisticasDeJugadorConPersonaje.mejorUbicacion")
+		new Label(stats).bindValueToProperty("statsPersonajeSeleccionado.mejorUbicacion")
 		
 		new Label(stats).text="Puntaje"
 		
-		new Label(stats).bindValueToProperty("estadisticasDeJugadorConPersonaje.clasificacion")
-		
+		new Label(stats).bindValueToProperty("personajeSeleccionado.clasificacion")		
+	
 	}
+	
+	def dueloTop(){
+		modelObject.sistema.iniciarDuelo(modelObject.jugador, modelObject.personajeSeleccionado.pers, "TOP")
+		openDialog(new ResultadoDueloWindow(this, modelObject))
+	}
+	
+	def dueloMiddle(){
+		modelObject.sistema.iniciarDuelo(modelObject.jugador, modelObject.personajeSeleccionado.pers, "MIDDLE")
+		openDialog(new ResultadoDueloWindow(this, modelObject))
+	}
+	
+	def openDialog(Dialog<?> dialog) {
+		dialog.open
+	}
+
 }
