@@ -48,6 +48,7 @@ import dueloDeLeyendas.dominio.sistemaDeDuelos.SistemaDeDuelos
 	
 	def agregarPersonaje(Personaje pers){
 		personajes.add(pers)
+		misEstadisticas.add(new Estadisticas(pers, this))
 	}
 	
 	def getEstadisticas (Personaje pers){
