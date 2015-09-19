@@ -7,10 +7,13 @@ import java.util.HashSet
 
 import dueloDeLeyendas.dominio.jugador.Jugador
 import dueloDeLeyendas.dominio.personaje.Personaje
+import org.uqbar.commons.utils.Observable
 
 /*
  * Esta clase modela las estadísticas correspondientes a un jugador y un personaje
  */
+ 
+@Observable
 @Accessors class Estadisticas {
 	
 	val Personaje personaje
@@ -20,6 +23,7 @@ import dueloDeLeyendas.dominio.personaje.Personaje
 	var Integer cantKills
 	var Integer cantDeads
 	var Integer assists
+	var Integer cantJugados
 	var Set<String> ubicacionesUsadas
 	var String mejorUbicacion
 	var double clasificacion
@@ -36,6 +40,7 @@ import dueloDeLeyendas.dominio.personaje.Personaje
 		cantKills = 0
 		cantDeads = 0
 		assists = 0
+		cantJugados = 0
 		ubicacionesUsadas = new HashSet
 		mejorUbicacion = ""
 		clasificacion = 0
@@ -134,6 +139,13 @@ import dueloDeLeyendas.dominio.personaje.Personaje
 		
 	}
 	
+	def setCantJugados(Integer n){
+		n
+	}
+	
+	def getCantJugados(){
+		cantDuelosGanados + assists + cantDeads
+	}
 	
 	def double poderDeAtaque(){
 	//calcula el poder de ataque del personaje del jugador
