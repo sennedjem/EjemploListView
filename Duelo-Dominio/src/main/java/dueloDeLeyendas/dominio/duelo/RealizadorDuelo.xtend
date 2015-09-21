@@ -28,7 +28,7 @@ import dueloDeLeyendas.dominio.estadisticas.Estadisticas
 					if(poderAtaqueRetador == poderAtaqueRival){
 						ret.empateSumarAEstadisticas(ret, retPer, pos, poderAtaqueRetador)
 						riv.empateSumarAEstadisticas(ret,rivPer, pos, poderAtaqueRetador)
-						return	new ResultadoDuelo(ret, ret, ret, riv, retPer, rivPer, pos, poderAtaqueRetador, poderAtaqueRival)
+						return	new ResultadoDuelo(ret, riv, ret, riv, retPer, rivPer, pos, poderAtaqueRetador, poderAtaqueRival)
 				}
 			}
 
