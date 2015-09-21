@@ -7,8 +7,9 @@ import org.eclipse.xtend.lib.annotations.Accessors
 import java.util.ArrayList
 import dueloDeLeyendas.dominio.jugador.Jugador
 import dueloDeLeyendas.dominio.personaje.Personaje
-import dueloDeLeyendas.dominio.realizarDuelo.RealizadorDuelo
+import dueloDeLeyendas.dominio.duelo.RealizadorDuelo
 import dueloDeLeyendas.dominio.estadisticas.Estadisticas
+import dueloDeLeyendas.dominio.duelo.ResultadoDuelo
 
 @Accessors class SistemaDeDuelos {
 	
@@ -68,7 +69,7 @@ import dueloDeLeyendas.dominio.estadisticas.Estadisticas
 	}
 
 	/*Inicia un nuevo duelo con los parametros necesarios */
-	def void iniciarDuelo(Jugador ret, Personaje personaje, String pos){
+	def ResultadoDuelo iniciarDuelo(Jugador ret, Personaje personaje, String pos){
 		val Personaje rivPers = this.buscarPersonajeParaDuelo(ret, personaje)
 		val Jugador rival = this.encontrarRivalAcorde (ret, personaje)
 		realizadorDuelo.realizarDuelo(pos, ret, rival, personaje, rivPers)

@@ -3,7 +3,7 @@ package dueloDeLeyendas.dominio.jugador.test
 import dueloDeLeyendas.dominio.jugador.Jugador
 import dueloDeLeyendas.dominio.sistemaDeDuelos.SistemaDeDuelos
 import dueloDeLeyendas.dominio.personaje.Personaje
-import dueloDeLeyendas.dominio.realizarDuelo.RealizadorDuelo
+import dueloDeLeyendas.dominio.duelo.RealizadorDuelo
 import org.junit.Before
 import static org.mockito.Mockito.*
 import dueloDeLeyendas.dominio.estadisticas.Estadisticas

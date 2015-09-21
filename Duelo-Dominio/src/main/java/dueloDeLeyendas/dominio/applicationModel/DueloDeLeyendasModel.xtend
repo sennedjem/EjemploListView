@@ -208,7 +208,7 @@ class DueloDeLeyendasModel {
 	/**
 	 * Setea el resultado del duelo en el colaborador de la clase
 	 */
-	def setResultado(){
+	def ResultadoDuelo setResultado(){
 		resultado = sistema.iniciarDuelo(jugador, personajeSeleccionado.pers, posicion)
 	}
 

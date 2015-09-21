@@ -7,7 +7,7 @@ import org.junit.Before
 import static org.mockito.Mockito.*
 import org.junit.Test
 import static org.junit.Assert.*
-import dueloDeLeyendas.dominio.realizarDuelo.RealizadorDuelo
+import dueloDeLeyendas.dominio.duelo.RealizadorDuelo
 
 class SistemaDeDuelosTestCase {
 	var SistemaDeDuelos sistema
