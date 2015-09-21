@@ -7,9 +7,7 @@ import java.util.List
 import java.util.ArrayList
 import dueloDeLeyendas.dominio.personaje.Personaje
 
-/*
- * Esta clase se encarga de testear la funcionalidad de la clase Personaje
- */
+/* Teste la funcionalidad de la clase Personaje */
 class PersonajeTestCase {
 	
 	var Personaje vipper
@@ -36,10 +34,34 @@ class PersonajeTestCase {
 		assertTrue(especialidades.contains("Ataque frontal"))
 	}
 	
-	@Test def void testSetClasificacion() {
-		vipper.setClasificacion(30)
+	@Test def void testSetClasificacionNOOB() {
+		vipper.setClasificacion(11)
 		val String clasificacionVipper = vipper.getClasificacion
-		
-		assertEquals (clasificacionVipper, "SHAME-ON-YOU")
+		assertEquals (clasificacionVipper, "NOOB")
 	}
+	
+	@Test def void testSetClasificacionMANCO() {
+		vipper.setClasificacion(15)
+		val String clasificacionVipper = vipper.getClasificacion
+		assertEquals (clasificacionVipper, "MANCO")
+	}
+	
+	@Test def void testSetClasificacionKILLINGSPREAD() {
+		vipper.setClasificacion(74)
+		val String clasificacionVipper = vipper.getClasificacion
+		assertEquals (clasificacionVipper, "KILLING-SPREAD")
+	}
+	
+	@Test def void testSetClasificacionDOMINADOR() {
+		vipper.setClasificacion(76)
+		val String clasificacionVipper = vipper.getClasificacion
+		assertEquals (clasificacionVipper, "DOMINADOR")
+	}
+	
+	@Test def void testSetClasificacionRAMPAGE() {
+		vipper.setClasificacion(100)
+		val String clasificacionVipper = vipper.getClasificacion
+		assertEquals (clasificacionVipper, "RAMPAGE")
+	}
+	
 }

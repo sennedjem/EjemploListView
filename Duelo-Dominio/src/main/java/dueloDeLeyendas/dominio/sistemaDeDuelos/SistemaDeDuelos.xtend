@@ -17,6 +17,7 @@ import dueloDeLeyendas.dominio.estadisticas.Estadisticas
 	var List<Personaje> personajesDesactivados
 	val RealizadorDuelo realizadorDuelo
 	
+	/*Constructor, crea una nueva instacia de sistema con un realizador de duelos*/
 	new(RealizadorDuelo rd){
 		jugadores = new ArrayList
 		personajesDisponibles = new ArrayList
@@ -24,6 +25,7 @@ import dueloDeLeyendas.dominio.estadisticas.Estadisticas
 		realizadorDuelo = rd
 	}
 
+	/*Dado un jugador y un personaje, busca un rival apropiado. De no encontrar ninguna lanza una excepcion */
 	def Jugador encontrarRivalAcorde(Jugador jugador, Personaje personaje){
 		val rankingMenor = jugador.ranking - 100
 		val rankingMayor = jugador.ranking + 100	
@@ -34,6 +36,7 @@ import dueloDeLeyendas.dominio.estadisticas.Estadisticas
 		throw new NoHayRival()
 	}
 	
+	/*Crea y retorna al jugador Mr.X cuando no hay un rival apropiado. Se inicializa con parametros identicos al retador*/
 	def Jugador generarJugadorMrX(Jugador jugador, Personaje personaje) {
 		var Jugador mrX= new Jugador("MR.x", this)
 		val Personaje per=filtrarPersonaje(personajesDisponibles, personaje)
@@ -57,18 +60,22 @@ import dueloDeLeyendas.dominio.estadisticas.Estadisticas
 		mrX
 	}
 	
+	/*Busca un personaje para el duelo distinto al del retador */
 	def Personaje filtrarPersonaje(List<Personaje> personajes, Personaje pers) {
 		for(Personaje j: personajes)
 			if(j != pers)
 				return j
 	}
 
+	/*Inicia un nuevo duelo con los parametros necesarios */
 	def void iniciarDuelo(Jugador ret, Personaje personaje, String pos){
 		val Personaje rivPers = this.buscarPersonajeParaDuelo(ret, personaje)
 		val Jugador rival = this.encontrarRivalAcorde (ret, personaje)
 		realizadorDuelo.realizarDuelo(pos, ret, rival, personaje, rivPers)
 	}
 	
+	/*Retorna un personaje apto para iniciar el duelo, de no encontrar ninguno devuelve cualquier personaje siendo este
+	 * siempre distinto al personaje del retador */
 	def Personaje buscarPersonajeParaDuelo(Jugador jugador, Personaje personaje) { 
 		var List<Personaje> personajesAptos = new ArrayList
 		var Personaje personajeApto
@@ -83,23 +90,20 @@ import dueloDeLeyendas.dominio.estadisticas.Estadisticas
 		return personajeApto
 	}
 	
+	/*Agregar un personaje a la lista de personajes disponibles para usar */
 	def void agregarPersonaje(Personaje personaje){
 		personajesDisponibles.add(personaje)
 	}
-	
-	def  void modificarPersonaje(){
-		//454545454545454545454
-	}
-	
+		
+	/*Elimina al personaje de la lista de personajes disponibles pero no del sistema alcenandolo en otra lista */
 	def desactivarPersonaje(Personaje personaje){
 		this.personajesDesactivados.add(personaje)
 		this.personajesDisponibles.remove(personaje)
 	}
 	
 	
-	/* agregar un jugador previamente creado a la lista de jugadores*/
+	/* Agrega un jugador previamente creado a la lista de jugadores*/
 	def void agregarJugador(Jugador jugador){
-		//jugadores.add(new Jugador(nombreJugador, this)) 
 		jugadores.add(jugador)
 	}
 	

@@ -27,12 +27,5 @@ class JugadorDueloTestCase {
 		personaje1 = mock (typeof(Personaje))
 		estadistica = mock (typeof(Estadisticas))
 		estadistica1 = mock (typeof(Estadisticas))
-		when(estadistica.jugador).thenReturn(jugador)
-		when(estadistica.personaje).thenReturn(personaje)
-		when(estadistica.cantDuelosGanados).thenReturn(20)
-		when(estadistica1.jugador).thenReturn(jugador1)
-		when(estadistica1.personaje).thenReturn(personaje1)
-		when(estadistica1.cantDuelosGanados).thenReturn(25)
-		
 	}
 }
