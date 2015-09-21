@@ -23,12 +23,12 @@ import org.uqbar.commons.utils.Observable
 	var Integer cantKills
 	var Integer cantDeads
 	var Integer assists
-	var Integer cantJugados
+	var Integer jugados
 	var Set<String> ubicacionesUsadas
 	var String mejorUbicacion
 	var double clasificacion
 	
-	/*
+	/**
 	 * Este constructor crea una instancia de la clase Estadisticas con los personajes y jugadores pasados
 	 * por parametro y todos los demas valores inicializados en 0, o lista vacia.
 	 */
@@ -40,13 +40,13 @@ import org.uqbar.commons.utils.Observable
 		cantKills = 0
 		cantDeads = 0
 		assists = 0
-		cantJugados = 0
+		jugados = 0
 		ubicacionesUsadas = new HashSet
 		mejorUbicacion = ""
 		clasificacion = 0
 	}
 	
-	/*
+	/**
 	 * Este metodo aumenta en uno la cantidad de duelos iniciados.
 	 */
 	 def void sumarIniciado(){
@@ -139,16 +139,18 @@ import org.uqbar.commons.utils.Observable
 		
 	}
 	
-	def setCantJugados(Integer n){
-		n
+	def setJugados(Integer n){
+		jugados = n
 	}
 	
-	def getCantJugados(){
+	def getJugadosn(){
 		cantDuelosGanados + assists + cantDeads
 	}
 	
+	/**
+	 * Calcula el poder de ataque del personaje del jugador
+	 */
 	def double poderDeAtaque(){
-	//calcula el poder de ataque del personaje del jugador
 		return (clasificacion * (cantKills + assists / 2 - cantDeads) * cantDuelosIniciados)
 	} 
 	 

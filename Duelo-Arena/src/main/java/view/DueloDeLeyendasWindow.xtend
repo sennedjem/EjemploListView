@@ -155,13 +155,12 @@ class DueloDeLeyendasWindow extends SimpleWindow <DueloDeLeyendasModel>{
 			foreground = Color.BLUE
 		]
 		
-		//VER POR QUE NO CAMBIA CUANDO CAMBIO UN PERSONAJE
 		var Panel stats = new Panel(panel).layout = new ColumnLayout(2)
 		
 		//Pongo todas las stats del personaje
 		new Label(stats).text="Jugadas"
 		
-		new Label(stats).bindValueToProperty("statsPersonajeSeleccionado.assists")
+		new Label(stats).bindValueToProperty("statsPersonajeSeleccionado.jugados")
 		
 		new Label(stats).text="Ganadas"
 		
