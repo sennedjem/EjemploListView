@@ -47,7 +47,7 @@ import org.eclipse.xtend.lib.annotations.Accessors
 	
 	/*Devuelve la clasificación del personaje en números */
 	def getClasificacionNumerica() {
-		this.clasificacion
+		clasificacion
 	}
 	
 }
