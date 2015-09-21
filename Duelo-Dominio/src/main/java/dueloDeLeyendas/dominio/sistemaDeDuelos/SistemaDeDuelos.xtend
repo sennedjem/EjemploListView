@@ -65,7 +65,9 @@ import dueloDeLeyendas.dominio.duelo.ResultadoDuelo
 	def Personaje filtrarPersonaje(List<Personaje> personajes, Personaje pers) {
 		for(Personaje j: personajes)
 			if(j != pers)
-				return j
+			return j
+	//movies.filter[ movie | movie.categories.contains('Action') ].size 
+	//var filtrados = personajes.filter[it.nombre.contains(nombre)].toList
 	}
 
 	/*Inicia un nuevo duelo con los parametros necesarios */
