@@ -33,6 +33,7 @@ class NoHayRivalWindow extends Dialog<DueloDeLeyendasModel>{
 		var dueloBot = new RealizadorDuelo
 		val resultadoDuelo = dueloBot.realizarDuelo(modelObject.posicion,modelObject.jugador,mrX,modelObject.personajeSeleccionado.pers,modelObject.sistema.buscarPersonajeParaDuelo(modelObject.jugador, modelObject.personajeSeleccionado.pers)) 
 		openDialog(new ResultadoDueloWindow(this, resultadoDuelo))
+		this.close
 	}
 	
 	

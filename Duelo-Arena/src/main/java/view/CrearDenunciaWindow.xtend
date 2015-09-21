@@ -67,6 +67,7 @@ class CrearDenunciaWindow extends Dialog<Denuncia> {
 			verDenunciaValidaWindow
 		  else
 		    verDenunciaInvalidaWindow
+	     this.close
 	}
 	
 	def verDenunciaValidaWindow(){

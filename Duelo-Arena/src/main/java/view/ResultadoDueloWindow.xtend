@@ -33,6 +33,7 @@ class ResultadoDueloWindow extends Dialog <ResultadoDuelo>{//
 	def crearDenuncia() {
 		var Denuncia  den = new Denuncia(modelObject.iniciador, modelObject.retado)
 		this.openDialog(new CrearDenunciaWindow(this, den))
+		this.close
 	}
 	
 		def openDialog(Dialog<?> dialog) {
