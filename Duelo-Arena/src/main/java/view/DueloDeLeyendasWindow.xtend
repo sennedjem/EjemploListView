@@ -15,6 +15,7 @@ import org.uqbar.arena.widgets.TextBox
 import org.apache.commons.lang.StringUtils
 import org.uqbar.arena.widgets.Button
 import org.uqbar.arena.windows.Dialog
+import dueloDeLeyendas.dominio.sistemaDeDuelos.NoHayRival
 
 class DueloDeLeyendasWindow extends SimpleWindow <DueloDeLeyendasModel>{
 	
@@ -71,23 +72,23 @@ class DueloDeLeyendasWindow extends SimpleWindow <DueloDeLeyendasModel>{
 		
 		new Button(botones)=>[
 			caption = "TOP"
-			onClick[| dueloTop]
+			onClick[| iniciarDuelo("TOP")]
 		]
-		/*
+		
 		new Button(botones)=>[
 			caption = "MID"
-			onClick[| dueloMid]
+			onClick[| iniciarDuelo("MID")]
 		]
 		
 		new Button(botones)=>[
 			caption = "BOT"
-			onClick[| dueloBot]
+			onClick[| iniciarDuelo("BOT")]
 		]
 
 		new Button(botones)=>[
 			caption = "JUNGLE"
-			onClick[| dueloJungle]
-		]*/
+			onClick[| iniciarDuelo("JUNGLE")]
+		]
 	}
 	
 	def crearTablaPersonajes(Panel panel){
@@ -120,7 +121,7 @@ class DueloDeLeyendasWindow extends SimpleWindow <DueloDeLeyendasModel>{
 			foreground = Color.BLUE
 		]
 		
-				new Label(panel) => [
+		new Label(panel) => [
 			text = "Especialidades:"
 			foreground = Color.GREEN
 		]
@@ -188,14 +189,14 @@ class DueloDeLeyendasWindow extends SimpleWindow <DueloDeLeyendasModel>{
 	
 	}
 	
-	def dueloTop(){
-		modelObject.sistema.iniciarDuelo(modelObject.jugador, modelObject.personajeSeleccionado.pers, "TOP")
-		openDialog(new ResultadoDueloWindow(this, modelObject))
-	}
-	
-	def dueloMiddle(){
-		modelObject.sistema.iniciarDuelo(modelObject.jugador, modelObject.personajeSeleccionado.pers, "MIDDLE")
-		openDialog(new ResultadoDueloWindow(this, modelObject))
+	def iniciarDuelo(String pos){
+		try {
+			modelObject.setPosicion = pos
+			modelObject.setResultado
+			openDialog(new ResultadoDueloWindow(this, modelObject.resultado))
+		} catch(NoHayRival e){
+			openDialog(new NoHayRivalWindow(this, modelObject))
+		}
 	}
 	
 	def openDialog(Dialog<?> dialog) {

@@ -2,7 +2,6 @@ package dueloDeLeyendas.dominio.applicationModel
 
 import dueloDeLeyendas.dominio.jugador.Jugador
 import dueloDeLeyendas.dominio.sistemaDeDuelos.SistemaDeDuelos
-import dueloDeLeyendas.dominio.realizarDuelo.RealizadorDuelo
 import dueloDeLeyendas.dominio.personaje.Personaje
 import java.util.HashSet
 import org.eclipse.xtend.lib.annotations.Accessors
@@ -11,6 +10,8 @@ import java.util.ArrayList
 import org.uqbar.commons.utils.Observable
 import dueloDeLeyendas.dominio.estadisticas.Estadisticas
 import org.uqbar.commons.model.ObservableUtils
+import dueloDeLeyendas.dominio.duelo.RealizadorDuelo
+import dueloDeLeyendas.dominio.duelo.ResultadoDuelo
 
 @Observable
 @Accessors
@@ -24,6 +25,7 @@ class DueloDeLeyendasModel {
 	Estadisticas statsPersonajeSeleccionado
 	String posicion
 	RealizadorDuelo realizador
+	ResultadoDuelo resultado
 	
 	new(){
 		sistema = new SistemaDeDuelos(new RealizadorDuelo)
@@ -133,10 +135,11 @@ class DueloDeLeyendasModel {
 	
 	def void setBuscado(String nombre){
 		buscado = nombre
+		if (nombre == ""){
+			personajesFiltrados = getPersonajePuntaje(personajes)
+		}
 		var filtrados = personajes.filter[it.nombre.contains(nombre)].toList
-		System.out.println(personajes.size)
 		personajesFiltrados = getPersonajePuntaje(filtrados)
-		System.out.println(personajes.size)
 	}
 
 	
@@ -167,6 +170,10 @@ class DueloDeLeyendasModel {
 			clasificacion = 0
 		]
 		est
+	}
+	
+	def setResultado(){
+		resultado = sistema.iniciarDuelo(jugador, personajeSeleccionado.pers, posicion)
 	}
 
 } 
