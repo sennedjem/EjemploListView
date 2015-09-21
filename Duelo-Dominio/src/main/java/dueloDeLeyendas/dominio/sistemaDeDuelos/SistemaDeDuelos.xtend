@@ -66,8 +66,6 @@ import dueloDeLeyendas.dominio.duelo.ResultadoDuelo
 		for(Personaje j: personajes)
 			if(j != pers)
 			return j
-	//movies.filter[ movie | movie.categories.contains('Action') ].size 
-	//var filtrados = personajes.filter[it.nombre.contains(nombre)].toList
 	}
 
 	/*Inicia un nuevo duelo con los parametros necesarios */
@@ -115,4 +113,15 @@ import dueloDeLeyendas.dominio.duelo.ResultadoDuelo
 		jugadores.add(new Jugador(nombreJugador, this))
 	}	
 	
+	def void agregarHabilidadPersonaje(Personaje per, String habilidad){
+		if(personajesDisponibles.contains(per))
+			per.agregarEspecialidad(habilidad)
+		
+	}
+	
+	def void agregarDebilidadPersonaje(Personaje per, String debilidad){
+		if(personajesDisponibles.contains(per))
+			per.agregarDebilidad(debilidad)
+
+	}
 }
