@@ -17,18 +17,18 @@ import dueloDeLeyendas.dominio.estadisticas.Estadisticas
 		if (poderAtaqueRetador > poderAtaqueRival) {
 			ret.ganeSumarAEstadisticas(ret,retPer, pos,poderAtaqueRetador)
 			riv.perdiSumarAEstadisticas(ret,rivPer, pos, poderAtaqueRetador)
-			return new ResultadoDuelo(ret, riv, retPer, rivPer, pos, poderAtaqueRetador, poderAtaqueRival)
+			return new ResultadoDuelo(ret, riv,ret, riv, retPer, rivPer, pos, poderAtaqueRetador, poderAtaqueRival)
 		} else 
 			if(poderAtaqueRival > poderAtaqueRetador){
 				riv.ganeSumarAEstadisticas(ret,rivPer, pos, poderAtaqueRetador)
 				ret.perdiSumarAEstadisticas(ret, retPer, pos, poderAtaqueRetador)
-				return new ResultadoDuelo(riv, ret, rivPer, retPer, pos, poderAtaqueRival, poderAtaqueRetador)
+				return new ResultadoDuelo(ret, riv,riv, ret, rivPer, retPer, pos, poderAtaqueRival, poderAtaqueRetador)
 				}
 				else 
 					if(poderAtaqueRetador == poderAtaqueRival){
 						ret.empateSumarAEstadisticas(ret, retPer, pos, poderAtaqueRetador)
 						riv.empateSumarAEstadisticas(ret,rivPer, pos, poderAtaqueRetador)
-						return	new ResultadoDuelo(ret, riv, retPer, rivPer, pos, poderAtaqueRetador, poderAtaqueRival)
+						return	new ResultadoDuelo(ret, riv, ret, riv, retPer, rivPer, pos, poderAtaqueRetador, poderAtaqueRival)
 				}
 			}
 

@@ -31,8 +31,9 @@ class NoHayRivalWindow extends Dialog<DueloDeLeyendasModel>{
 	def generarBot() {
 		val mrX = modelObject.sistema.generarJugadorMrX(modelObject.jugador, modelObject.personajeSeleccionado.pers)
 		var dueloBot = new RealizadorDuelo
-		val ResultadorealizarDuelo = dueloBot.realizarDuelo(modelObject.posicion,modelObject.jugador,mrX,modelObject.personajeSeleccionado.pers,modelObject.sistema.buscarPersonajeParaDuelo(modelObject.jugador, modelObject.personajeSeleccionado.pers)) 
-		openDialog(new ResultadoDueloWindow(this, ResultadorealizarDuelo))
+		val resultadoDuelo = dueloBot.realizarDuelo(modelObject.posicion,modelObject.jugador,mrX,modelObject.personajeSeleccionado.pers,modelObject.sistema.buscarPersonajeParaDuelo(modelObject.jugador, modelObject.personajeSeleccionado.pers)) 
+		openDialog(new ResultadoDueloWindow(this, resultadoDuelo))
+		this.close
 	}
 	
 	

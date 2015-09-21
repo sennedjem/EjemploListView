@@ -196,6 +196,7 @@ class DueloDeLeyendasWindow extends SimpleWindow <DueloDeLeyendasModel>{
 		} catch(NoHayRival e){
 			this.openDialog(new NoHayRivalWindow(this, modelObject))
 		}
+		
 	}
 	
 	def openDialog(Dialog<?> dialog) {
