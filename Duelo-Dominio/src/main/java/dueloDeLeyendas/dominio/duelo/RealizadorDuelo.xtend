@@ -33,4 +33,3 @@ import dueloDeLeyendas.dominio.estadisticas.Estadisticas
 			}
 
 		}
-		

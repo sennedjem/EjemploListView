@@ -148,7 +148,7 @@ class DueloDeLeyendasModel {
 			if (jugador.getEstadisticas(p) == null){
 				perpunt.add(new PersonajePuntaje(p, 0))
 				}
-				else{ 
+				else{
 					val double clas = jugador.getEstadisticas(p).getClasificacion
 					perpunt.add (new PersonajePuntaje(p,clas))
 			}
