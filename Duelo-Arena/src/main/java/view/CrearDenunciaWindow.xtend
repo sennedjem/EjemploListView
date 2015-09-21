@@ -12,7 +12,7 @@ import org.uqbar.arena.widgets.Selector
 import org.uqbar.arena.widgets.TextBox
 import org.uqbar.arena.windows.Dialog
 
-class CrearDenunciaWindow extends SimpleWindow<Denuncia> {
+class CrearDenunciaWindow extends Dialog<Denuncia> {
 	
 	new(WindowOwner parent, Denuncia model) {
 		super(parent, model)

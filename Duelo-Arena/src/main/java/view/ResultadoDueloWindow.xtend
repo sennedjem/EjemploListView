@@ -8,6 +8,8 @@ import org.uqbar.arena.widgets.Label
 import java.awt.Color
 import org.uqbar.arena.layout.HorizontalLayout
 import org.uqbar.arena.layout.ColumnLayout
+import org.uqbar.arena.widgets.Button
+import dueloDeLeyendas.dominio.denuncias.Denuncia
 
 class ResultadoDueloWindow extends Dialog <ResultadoDuelo>{//
 
@@ -17,20 +19,39 @@ class ResultadoDueloWindow extends Dialog <ResultadoDuelo>{//
 	}
 	
 	override protected addActions(Panel actionsPanel) {
-		//Implemento mi propio action panel
+			new Button(actionsPanel)=>[
+			caption="Aceptar resultado"
+			onClick [ | this.close ]			
+		]
+		
+			new Button(actionsPanel)=>[
+			caption="Denunciar actitud antideportiva"
+			onClick [ | this.crearDenuncia ]			
+		]
+	}
+	
+	def crearDenuncia() {
+		var Denuncia  den = new Denuncia(modelObject.iniciador, modelObject.retado)
+		this.openDialog(new CrearDenunciaWindow(this, den))
+	}
+	
+		def openDialog(Dialog<?> dialog) {
+		dialog.open
 	}
 	
 	override protected createFormPanel(Panel mainPanel) {
 		new Label(mainPanel)=>[
-			//text = modelObject.ganador.nombreJugador + "vs" + modelObject.perdedor.nombreJugador
-			text = "vs" 
+			text = modelObject.ganador.nombreJugador + "vs" + modelObject.perdedor.nombreJugador
 			foreground = Color.WHITE
 			background = Color.BLACK
 			]
 	
 		new Label(mainPanel)=>[
-			//text = "Ganaste contra" //modelObject.perdedor.nombreJugador
-			text = "Ganaste contra" 
+			if(!(modelObject.poderAtaqueGanador == modelObject.poderAtaquePerdedor)){
+			text = "Ganaste contra" + modelObject.perdedor.nombreJugador }
+				else { 
+					text = "empate contra" + modelObject.perdedor.nombreJugador
+						}
 			foreground = Color.GREEN
 			background = Color.YELLOW
 			]
@@ -42,16 +63,16 @@ class ResultadoDueloWindow extends Dialog <ResultadoDuelo>{//
 		var panelInfo = new Panel(mainPanel)
 		panelInfo.setLayout(new HorizontalLayout)
 	
-	if(modelObject.poderAtaqueGanador == modelObject.poderAtaquePerdedor){
+	if(!(modelObject.poderAtaqueGanador == modelObject.poderAtaquePerdedor)){
 	new Label(panelInfo)=>[
-			text = "Ganador: " // + modelObject.ganador.nombreJugador + "!!" +  "- " + modelObject.poderAtaqueGanador + "puntos contra " + modelObject.poderAtaquePerdedor 
+			text = "Ganador: " + modelObject.ganador.nombreJugador + "!!" +  "- " + modelObject.poderAtaqueGanador + "puntos contra " + modelObject.poderAtaquePerdedor 
 			foreground = Color.BLUE
 			background = Color.YELLOW
 			]
 		}
 		else 	{
 			new Label(panelInfo)=>[
-			text = "Empate " // + modelObject.ganador.nombreJugador + ""  + modelObject.poderAtaqueGanador + "puntos contra " + modelObject.perdedor.nombreJugador + modelObject.poderAtaquePerdedor 
+			text = "Empate " + modelObject.ganador.nombreJugador + " "  + modelObject.poderAtaqueGanador + " puntos contra " + modelObject.poderAtaquePerdedor 
 			foreground = Color.BLUE
 			background = Color.YELLOW
 			]
@@ -61,12 +82,12 @@ class ResultadoDueloWindow extends Dialog <ResultadoDuelo>{//
 	def void crearStatsPorJugador(Panel panel){
 			panel.setLayout(new ColumnLayout(3))
 			new Label(panel)=>[
-			text = ""//jugador.nombre
+			text = modelObject.ganador.nombreJugador
 			foreground = Color.WHITE
 			background = Color.BLUE
 		]
 			new Label(panel)=>[
-			text = "Stats"// + personaje.nombre
+			text = "Stats" + modelObject.ganadorPersonaje
 			foreground = Color.BLUE
 		]
 		new Label(panel).text="Jugadas"

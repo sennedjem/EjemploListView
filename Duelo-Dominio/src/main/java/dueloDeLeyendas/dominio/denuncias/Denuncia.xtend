@@ -17,6 +17,7 @@ import java.util.ArrayList
 		this.denunciado = denunciado
 	}
 	
+	
 	/*Agrega los tipos de denuncia existentes en el sistema */
 	def List<String> tiposDeDenuncia() {
 		var List<String> lista = new ArrayList

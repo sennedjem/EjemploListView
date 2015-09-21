@@ -5,6 +5,8 @@ import dueloDeLeyendas.dominio.jugador.Jugador
 import dueloDeLeyendas.dominio.personaje.Personaje
 
 @Accessors class ResultadoDuelo {
+	var Jugador iniciador
+	var Jugador retado
 	var Jugador ganador
 	var Jugador perdedor
 	var Personaje ganadorPersonaje
@@ -15,7 +17,9 @@ import dueloDeLeyendas.dominio.personaje.Personaje
 	
 	
 	
-	new(Jugador jugador, Jugador jugador2, Personaje personaje, Personaje personaje2, String string, double d, double e) {
+	new(Jugador elQueInicio,Jugador quienRetaron,Jugador jugador, Jugador jugador2, Personaje personaje, Personaje personaje2, String string, double d, double e) {
+		iniciador = elQueInicio
+		retado = quienRetaron
 		ganador = jugador
 		perdedor = jugador2
 		ganadorPersonaje = personaje
