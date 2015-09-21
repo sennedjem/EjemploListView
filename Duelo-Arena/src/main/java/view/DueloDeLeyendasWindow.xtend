@@ -194,7 +194,7 @@ class DueloDeLeyendasWindow extends SimpleWindow <DueloDeLeyendasModel>{
 			modelObject.setResultado
 			openDialog(new ResultadoDueloWindow(this, modelObject.resultado))
 		} catch(NoHayRival e){
-			openDialog(new NoHayRivalWindow(this, modelObject))
+			this.openDialog(new NoHayRivalWindow(this, modelObject))
 		}
 	}
 	

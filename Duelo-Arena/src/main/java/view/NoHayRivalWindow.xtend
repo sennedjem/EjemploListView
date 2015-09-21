@@ -8,11 +8,11 @@ import org.uqbar.arena.windows.WindowOwner
 import org.uqbar.arena.widgets.Label
 import org.uqbar.arena.windows.Dialog
 import dueloDeLeyendas.dominio.applicationModel.DueloDeLeyendasModel
-import dueloDeLeyendas.dominio.realizarDuelo.RealizadorDuelo
+import dueloDeLeyendas.dominio.duelo.RealizadorDuelo
 
-class NoHayRivalWindow extends SimpleWindow<DueloDeLeyendasModel>{
+class NoHayRivalWindow extends Dialog<DueloDeLeyendasModel>{
 	
-	new(WindowOwner parent, DueloDeLeyendasModel model) {
+	new(SimpleWindow parent, DueloDeLeyendasModel model) {
 		super(parent, model)		
 	}
 	
@@ -30,16 +30,9 @@ class NoHayRivalWindow extends SimpleWindow<DueloDeLeyendasModel>{
 	
 	def generarBot() {
 		val mrX = modelObject.sistema.generarJugadorMrX(modelObject.jugador, modelObject.personajeSeleccionado.pers)
-		var dueloBot = new RealizadorDuelo=>[
-			posicion = modelObject.posicion
-			retador = modelObject.jugador
-			rival = mrX
-			retadorPersonaje = modelObject.personajeSeleccionado.pers
-			rivalPersonaje = modelObject.sistema.buscarPersonajeParaDuelo(modelObject.jugador, modelObject.personajeSeleccionado.pers)
-		]
-		modelObject.realizador= dueloBot
-		//esperar Resultado de duelo window
-		openDialog(new ResultadoDueloWindow(this, modelObject))
+		var dueloBot = new RealizadorDuelo
+		val ResultadorealizarDuelo = dueloBot.realizarDuelo(modelObject.posicion,modelObject.jugador,mrX,modelObject.personajeSeleccionado.pers,modelObject.sistema.buscarPersonajeParaDuelo(modelObject.jugador, modelObject.personajeSeleccionado.pers)) 
+		openDialog(new ResultadoDueloWindow(this, ResultadorealizarDuelo))
 	}
 	
 	

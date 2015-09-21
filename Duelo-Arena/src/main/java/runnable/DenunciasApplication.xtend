@@ -6,7 +6,7 @@ import dueloDeLeyendas.dominio.jugador.Jugador
 import dueloDeLeyendas.dominio.sistemaDeDuelos.SistemaDeDuelos
 import dueloDeLeyendas.dominio.denuncias.AbusoHabilidad
 import view.CrearDenunciaWindow
-import dueloDeLeyendas.dominio.realizarDuelo.RealizadorDuelo
+import dueloDeLeyendas.dominio.duelo.RealizadorDuelo
 import view.DenunciaInvalidaWindow
 import view.DenunciaValidaWindow
 import dueloDeLeyendas.dominio.applicationModel.DueloDeLeyendasModel
