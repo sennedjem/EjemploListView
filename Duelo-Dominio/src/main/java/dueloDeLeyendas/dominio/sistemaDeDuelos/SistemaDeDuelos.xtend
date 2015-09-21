@@ -98,10 +98,16 @@ import dueloDeLeyendas.dominio.duelo.ResultadoDuelo
 		
 	/*Elimina al personaje de la lista de personajes disponibles pero no del sistema alcenandolo en otra lista */
 	def desactivarPersonaje(Personaje personaje){
-		this.personajesDesactivados.add(personaje)
-		this.personajesDisponibles.remove(personaje)
+		personajesDesactivados.add(personaje)
+		personajesDisponibles.remove(personaje)
 	}
 	
+	/*Reactiva un personaje */
+	def activarPersonaje(Personaje personaje){
+		if(personajesDesactivados.contains(personaje))
+			personajesDisponibles.add(personaje)
+			personajesDesactivados.remove(personaje)
+	}
 	
 	/* Agrega un jugador previamente creado a la lista de jugadores*/
 	def void agregarJugador(Jugador jugador){
@@ -113,15 +119,27 @@ import dueloDeLeyendas.dominio.duelo.ResultadoDuelo
 		jugadores.add(new Jugador(nombreJugador, this))
 	}	
 	
+	/*Agrega una habilidad al personaje pasado por parametro */
 	def void agregarHabilidadPersonaje(Personaje per, String habilidad){
 		if(personajesDisponibles.contains(per))
 			per.agregarEspecialidad(habilidad)
-		
 	}
 	
+	/*Agrega una debilidad al personaje pasado por parametro */
 	def void agregarDebilidadPersonaje(Personaje per, String debilidad){
 		if(personajesDisponibles.contains(per))
 			per.agregarDebilidad(debilidad)
-
+	}
+	
+	/*Quita una hablidad al personaje pasado por parametro */
+	def void quitarHabilidad(Personaje per, String habilidad){
+		if(personajesDisponibles.contains(per))
+			per.especialidades.remove(habilidad)
+	}
+	
+	/*Quita una hablidad al personaje pasado por parametro */
+	def void quitarDebilidad(Personaje per, String debilidad){
+		if(personajesDisponibles.contains(per))
+			per.especialidades.remove(debilidad)
 	}
 }
