@@ -3,7 +3,7 @@ package dueloDeLeyendas.dominio.duelo
 import org.eclipse.xtend.lib.annotations.Accessors
 import dueloDeLeyendas.dominio.jugador.Jugador
 import dueloDeLeyendas.dominio.personaje.Personaje
-
+import dueloDeLeyendas.dominio.estadisticas.Estadisticas
 
 @Accessors class ResultadoDuelo {
 	var Jugador iniciador
@@ -11,7 +11,9 @@ import dueloDeLeyendas.dominio.personaje.Personaje
 	var Jugador ganador
 	var Jugador perdedor
 	var Personaje ganadorPersonaje
-	var Personaje perdedorPersonaje
+	var Personaje perdedorPersonaje 
+	var Estadisticas estGanadorConPersonaje
+	var Estadisticas estPerdedorConPersonaje
 	var String posicion
 	var double poderAtaqueGanador
 	var double poderAtaquePerdedor
@@ -25,6 +27,8 @@ import dueloDeLeyendas.dominio.personaje.Personaje
 		perdedor = jugador2
 		ganadorPersonaje = personaje
 		perdedorPersonaje = personaje2
+		estGanadorConPersonaje = ganador.getEstadisticas(ganadorPersonaje)
+		estPerdedorConPersonaje = perdedor.getEstadisticas(perdedorPersonaje)
 		posicion = string
 		poderAtaqueGanador = d
 		poderAtaquePerdedor = e
