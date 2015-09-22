@@ -26,14 +26,16 @@ class DueloDeLeyendasModel {
 	String posicion
 	RealizadorDuelo realizador
 	ResultadoDuelo resultado
+	Jugador capitanZanahoria
 	
 	/**Inicializa todos los colaboradores de la clase */
 	new(){
 		sistema = new SistemaDeDuelos(new RealizadorDuelo)
 		jugador = new Jugador("Marcos", sistema)
+		capitanZanahoria = new Jugador("capitanZanahoria", sistema)
 		personajes = new ArrayList
 		personajesFiltrados = new ArrayList
-		sistema.agregarJugador(new Jugador("CapitanZanahoria", sistema))
+		sistema.agregarJugador(capitanZanahoria)
 		inicializarPersonajes
 		inicializarStats
 	}	
@@ -75,12 +77,15 @@ class DueloDeLeyendasModel {
 			add(per3)
 			add(per4)
 			add(per5)
-			add(per6)
-			add(per7)
-			add(per8)
 		]
 		
 		jugador =>[
+			agregarPersonaje(per1)
+			agregarPersonaje(per2)
+			agregarPersonaje(per4)
+			agregarPersonaje(per5)
+		]
+		capitanZanahoria =>[
 			agregarPersonaje(per1)
 			agregarPersonaje(per2)
 			agregarPersonaje(per4)
@@ -95,20 +100,27 @@ class DueloDeLeyendasModel {
 		setearEstadisticas(jugador, personajes.get(1), 40, 50, 4, 9, "MID")
 		setearEstadisticas(jugador, personajes.get(3), 10, 70, 7, 0, "JUNGLE")
 		setearEstadisticas(jugador, personajes.get(4), 55, 45, 4, 20, "BOT")
+		setearEstadisticas(capitanZanahoria, personajes.get(0), 60, 40, 5, 8, "TOP")
+		setearEstadisticas(capitanZanahoria, personajes.get(1), 40, 50, 4, 9, "MID")
+		setearEstadisticas(capitanZanahoria, personajes.get(3), 10, 70, 7, 0, "JUNGLE")
+		setearEstadisticas(capitanZanahoria, personajes.get(4), 55, 45, 4, 20, "BOT")
 		
 		personajesFiltrados = getPersonajePuntaje()
-	}
+
+	}	
+
 	
 	/**Setea las estadisticas del personaje pasado por parametro y con el jugador y datos pasados por parámetro */
-	def setearEstadisticas(Jugador jugador, Personaje personaje, Integer clas, Integer assist,
+	def setearEstadisticas(Jugador jugador, Personaje personaje, Integer clas, Integer assist1,
 							Integer deads, Integer kills, String pos) {
 		jugador.getEstadisticas(personaje)=>[
-			assists = assist
+			assists = assist1
 			cantDeads = deads
 			cantDuelosGanados = 7
 			cantKills = kills
 			clasificacion = clas
 			mejorUbicacion = pos
+			cantDuelosIniciados = 1
 			ubicacionesUsadas = new HashSet
 		]
 	
