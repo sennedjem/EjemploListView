@@ -17,6 +17,7 @@ import org.uqbar.arena.widgets.Button
 import org.uqbar.arena.windows.Dialog
 import dueloDeLeyendas.dominio.sistemaDeDuelos.NoHayRival
 
+/**Modela la ventana del sistema desde la cual un jugador puede elegir personajes y retar a duelo a otros jugadores */
 class DueloDeLeyendasWindow extends SimpleWindow <DueloDeLeyendasModel>{
 	
 	new(WindowOwner parent, DueloDeLeyendasModel model) {

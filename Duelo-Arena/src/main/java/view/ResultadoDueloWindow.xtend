@@ -11,6 +11,7 @@ import org.uqbar.arena.layout.ColumnLayout
 import org.uqbar.arena.widgets.Button
 import dueloDeLeyendas.dominio.denuncias.Denuncia
 
+/**Modela la ventana que muestra el resultado de un duelo */
 class ResultadoDueloWindow extends Dialog <ResultadoDuelo>{//
 
 	
@@ -30,6 +31,7 @@ class ResultadoDueloWindow extends Dialog <ResultadoDuelo>{//
 		]
 	}
 	
+	/**Abre la ventana de Denuncia si el jugador lo cree necesario */
 	def crearDenuncia() {
 		var Denuncia  den = new Denuncia(modelObject.iniciador, modelObject.retado)
 		this.openDialog(new CrearDenunciaWindow(this, den))

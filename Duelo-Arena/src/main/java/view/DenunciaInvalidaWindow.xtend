@@ -9,6 +9,7 @@ import org.uqbar.arena.widgets.Label
 import java.awt.Color
 import org.uqbar.arena.windows.Dialog
 
+/**Modela la ventana de una denuncia invalida */
 class DenunciaInvalidaWindow extends Dialog<Denuncia> {
 	
 	new(WindowOwner parent, Denuncia model) {

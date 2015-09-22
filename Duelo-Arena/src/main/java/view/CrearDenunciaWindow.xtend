@@ -12,6 +12,7 @@ import org.uqbar.arena.widgets.Selector
 import org.uqbar.arena.widgets.TextBox
 import org.uqbar.arena.windows.Dialog
 
+/**Modela la ventana desde donde se realizan las denuncias */
 class CrearDenunciaWindow extends Dialog<Denuncia> {
 	
 	new(WindowOwner parent, Denuncia model) {
@@ -62,6 +63,7 @@ class CrearDenunciaWindow extends Dialog<Denuncia> {
 		
 	}
 	
+	/**Verifica la validez de la denuncia y abre la correspondiente ventana dependiendo del caso */
 	def verificar(){
 		if (modelObject.esValida)
 			verDenunciaValidaWindow
@@ -70,10 +72,12 @@ class CrearDenunciaWindow extends Dialog<Denuncia> {
 	     this.close
 	}
 	
+	/**Abre una ventana indicando que se sanciono al jugador denunciado si se conprueba que la denuncia es valida */
 	def verDenunciaValidaWindow(){
 		this.openDialog(new DenunciaValidaWindow(this, modelObject))
 	}
 	
+	/**Abre una ventana indicando que se sanciono al jugador denunciante porque los motivos de la denuncia no son validos */
 	def verDenunciaInvalidaWindow(){
 		this.openDialog(new DenunciaInvalidaWindow(this, modelObject))
 	}
@@ -83,7 +87,7 @@ class CrearDenunciaWindow extends Dialog<Denuncia> {
 	}
 	
 	
-	
+	/**Cierra la ventana */
 	def cerrar(){
 		modelObject.justificacion = null
 		modelObject.motivo = null

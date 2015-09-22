@@ -10,11 +10,13 @@ import org.uqbar.arena.windows.Dialog
 import dueloDeLeyendas.dominio.applicationModel.DueloDeLeyendasModel
 import dueloDeLeyendas.dominio.duelo.RealizadorDuelo
 
+/**Modela la ventana que se muestra cuando no se encuentra un rival para un jugador que quiere realizar un duelo */
 class NoHayRivalWindow extends Dialog<DueloDeLeyendasModel>{
 	
 	new(SimpleWindow parent, DueloDeLeyendasModel model) {
 		super(parent, model)		
 	}
+	
 	
 	override protected addActions(Panel actionsPanel) {
 		new Button(actionsPanel)=>[
@@ -28,6 +30,7 @@ class NoHayRivalWindow extends Dialog<DueloDeLeyendasModel>{
 		]
 	}
 	
+	/**Genera un bot para pelear contra el retador, se realiza el duelo y se abre la ventana con el resultado del mismo */
 	def generarBot() {
 		val mrX = modelObject.sistema.generarJugadorMrX(modelObject.jugador, modelObject.personajeSeleccionado.pers)
 		var dueloBot = new RealizadorDuelo
