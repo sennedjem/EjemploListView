@@ -121,7 +121,8 @@ class DueloDeLeyendasModel {
 			clasificacion = clas
 			mejorUbicacion = pos
 			cantDuelosIniciados = 1
-			ubicacionesUsadas = new HashSet
+			ubicacionesUsadas = new ArrayList()
+
 		]
 	
 	}
@@ -191,7 +192,7 @@ class DueloDeLeyendasModel {
 			cantDuelosIniciados = new Integer(0)
 			cantKills = new Integer(0)
 			mejorUbicacion = ""
-			ubicacionesUsadas = new HashSet
+			ubicacionesUsadas = new ArrayList()
 			jugados = new Integer(0)
 			clasificacion = new Integer(0)
 		]

@@ -55,7 +55,7 @@ import java.util.HashSet
 			cantKills = 10
 			cantDeads = 10
 			assists = 10
-			ubicacionesUsadas = new HashSet
+			ubicacionesUsadas = new ArrayList()
 			mejorUbicacion = "TOP"
 			clasificacion = 20
 		]

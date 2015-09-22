@@ -8,6 +8,8 @@ import java.util.Set
 import dueloDeLeyendas.dominio.jugador.Jugador
 import dueloDeLeyendas.dominio.estadisticas.Estadisticas
 import dueloDeLeyendas.dominio.personaje.Personaje
+import java.util.ArrayList
+import java.util.List
 
 /*
  * Esta clase se encarga de testear la funcionalidad de la clase Estadisticas
@@ -60,14 +62,14 @@ class EstadisticasTestCase {
 	
 	@Test def void testAgregarUbicacionSinRepetidos(){
 		est.agregarUbicacion("TOP")
-		val Set<String> ubicaciones = est.getUbicacionesUsadas
+		val List<String> ubicaciones = est.getUbicacionesUsadas
 		
 		assertTrue (ubicaciones.contains("TOP"))		
 	}
 	
 	@Test def void testAgregarUbicacionConRepetidos(){
 		est.agregarUbicacion("MID")
-		var Set<String> ubicaciones = est.getUbicacionesUsadas
+		var List<String> ubicaciones = est.getUbicacionesUsadas
 		
 		assertTrue (ubicaciones.contains("MID"))
 		assertEquals (ubicaciones.size, 1)

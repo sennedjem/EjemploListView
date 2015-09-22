@@ -8,6 +8,8 @@ import java.util.HashSet
 import dueloDeLeyendas.dominio.jugador.Jugador
 import dueloDeLeyendas.dominio.personaje.Personaje
 import org.uqbar.commons.utils.Observable
+import java.util.List
+import java.util.ArrayList
 
 /**Modela las estadísticas correspondientes a un jugador y un personaje */
  
@@ -22,7 +24,7 @@ import org.uqbar.commons.utils.Observable
 	var Integer cantDeads
 	var Integer assists
 	var Integer jugados
-	var Set<String> ubicacionesUsadas
+	var List<String>ubicacionesUsadas
 	var String mejorUbicacion
 	var double clasificacion
 	
@@ -37,7 +39,7 @@ import org.uqbar.commons.utils.Observable
 		cantDeads = 0
 		assists = 0
 		jugados = 0
-		ubicacionesUsadas = new HashSet
+	    ubicacionesUsadas = new ArrayList()	
 		mejorUbicacion = ""
 		clasificacion = 0
 	}
@@ -137,6 +139,17 @@ import org.uqbar.commons.utils.Observable
 		return (clasificacion * (cantKills + assists / 2 - cantDeads) * cantDuelosIniciados)
 	} 
 	 
+	def vecesQueUsoPosicionIdeal(){
+		var cantPosicionIdeal = 0
+		for(ubicacion: ubicacionesUsadas){
+			if(ubicacion == mejorUbicacion)
+				cantPosicionIdeal ++
+		}
+		return cantPosicionIdeal
+	} 
 	
+	def esRampage(){
+		return cantDuelosGanados >= 5 && vecesQueUsoPosicionIdeal >=5
+	}
 	
 }
