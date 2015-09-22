@@ -13,17 +13,25 @@ class SistemaDeDuelosXTestCase {
 	Jugador jugador
 	SistemaDeDuelos sistema
 	Personaje personaje
+	Personaje personaje1
 	Estadisticas esta
 	RealizadorDuelo realizador
 	
 	@Before def void setUp() {
 		sistema = new SistemaDeDuelos(realizador)
 		personaje = mock(typeof(Personaje))
+		personaje1 = mock(typeof(Personaje))
 		jugador = new Jugador ("Tard1s007", sistema)
 		esta= new Estadisticas(personaje, jugador)
 		jugador.agregarPersonaje(personaje)
+		sistema.agregarPersonaje(personaje)
+		sistema.agregarPersonaje(personaje1)
+		sistema.generarJugadorMrX(jugador, personaje)
 	}
 	
+	@Test def void testduelosIniciadosMrX(){
+		
+	}
 	
 	
 }
