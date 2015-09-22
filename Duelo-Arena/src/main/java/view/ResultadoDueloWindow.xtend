@@ -10,6 +10,7 @@ import org.uqbar.arena.layout.HorizontalLayout
 import org.uqbar.arena.layout.ColumnLayout
 import org.uqbar.arena.widgets.Button
 import dueloDeLeyendas.dominio.denuncias.Denuncia
+import org.uqbar.arena.layout.VerticalLayout
 
 /**Modela la ventana que muestra el resultado de un duelo */
 class ResultadoDueloWindow extends Dialog <ResultadoDuelo>{//
@@ -44,14 +45,14 @@ class ResultadoDueloWindow extends Dialog <ResultadoDuelo>{//
 	
 	override protected createFormPanel(Panel mainPanel) {
 		new Label(mainPanel)=>[
-			text = modelObject.ganador.nombreJugador + "vs" + modelObject.perdedor.nombreJugador
+			text = modelObject.ganador.nombreJugador + " vs " + modelObject.perdedor.nombreJugador
 			foreground = Color.WHITE
 			background = Color.BLACK
 			]
 	
 		new Label(mainPanel)=>[
 			if(!(modelObject.poderAtaqueGanador == modelObject.poderAtaquePerdedor)){
-			text = "Ganaste contra" + modelObject.perdedor.nombreJugador }
+			text = "Ganador" + modelObject.ganador.nombreJugador }
 				else { 
 					text = "empate contra" + modelObject.perdedor.nombreJugador
 						}
@@ -59,68 +60,123 @@ class ResultadoDueloWindow extends Dialog <ResultadoDuelo>{//
 			background = Color.YELLOW
 			]
 
-		val sndMainPanel = new Panel(mainPanel).layout = new HorizontalLayout()
-		
-		
-	
-		var panelInfo = new Panel(mainPanel)
-		panelInfo.setLayout(new HorizontalLayout)
+	crearStats(mainPanel)
 	
 	if(!(modelObject.poderAtaqueGanador == modelObject.poderAtaquePerdedor)){
-	new Label(panelInfo)=>[
+	new Label(mainPanel)=>[
 			text = "Ganador: " + modelObject.ganador.nombreJugador + "!!" +  "- " + modelObject.poderAtaqueGanador + "puntos contra " + modelObject.poderAtaquePerdedor 
 			foreground = Color.BLUE
 			background = Color.YELLOW
 			]
 		}
 		else 	{
-			new Label(panelInfo)=>[
+			new Label(mainPanel)=>[
 			text = "Empate " + modelObject.ganador.nombreJugador + " "  + modelObject.poderAtaqueGanador + " puntos contra " + modelObject.poderAtaquePerdedor 
 			foreground = Color.BLUE
 			background = Color.YELLOW
 			]
 			}
 }
+def void crearStats(Panel panel){
+		
+		var Panel stats = new Panel(panel).layout = new HorizontalLayout()
+		crearStatsPorGanador(stats)
+		crearStatsPorGanador(stats)
+	
+		
+		}
 
-	def void crearStatsPorJugador(Panel panel){
-			panel.setLayout(new ColumnLayout(3))
-			new Label(panel)=>[
+	def void crearStatsPorGanador(Panel panel){
+	
+	
+		var Panel dataDelGanador = new Panel(panel).layout = new VerticalLayout()
+		new Label(dataDelGanador)=>[
 			text = modelObject.ganador.nombreJugador
 			foreground = Color.WHITE
 			background = Color.BLUE
 		]
-			new Label(panel)=>[
-			text = "Stats" + modelObject.ganadorPersonaje
+
+		new Label(dataDelGanador)=>[
+			text = "Stats " + modelObject.ganadorPersonaje.nombre
 			foreground = Color.BLUE
 		]
-		new Label(panel).text="Jugadas"
 		
-		new Label(panel).bindValueToProperty("estadisticasDeJugadorConPersonaje.cantJugados")
 		
-		new Label(panel).text="Ganadas"
+		var Panel stats = new Panel(dataDelGanador).layout = new ColumnLayout(2)
+
+	
+		new Label(stats).text="Jugadas"
 		
-		new Label(panel).bindValueToProperty("estadisticasDeJugadorConPersonaje.cantDuelosGanados")
+		new Label(stats).bindValueToProperty("estGanadorConPersonaje.jugados")
 		
-		new Label(panel).text="Kills"
+		new Label(stats).text="Ganadas"
 		
-		new Label(panel).bindValueToProperty("estadisticasDeJugadorConPersonaje.cantKills")
+		new Label(stats).bindValueToProperty("estGanadorConPersonaje.cantDuelosGanados")
 		
-		new Label(panel).text="Deads"
+		new Label(stats).text="Kills"
 		
-		new Label(panel).bindValueToProperty("estadisticasDeJugadorConPersonaje.cantDeads")
+		new Label(stats).bindValueToProperty("estGanadorConPersonaje.cantKills")
 		
-		new Label(panel).text="Assists"
+		new Label(stats).text="Deads"
 		
-		new Label(panel).bindValueToProperty("estadisticasDeJugadorConPersonaje.assists")
+		new Label(stats).bindValueToProperty("estGanadorConPersonaje.cantDeads")
 		
-		new Label(panel).text="Mejor ubicación"
+		new Label(stats).text="Assists"
 		
-		new Label(panel).bindValueToProperty("estadisticasDeJugadorConPersonaje.mejorUbicacion")
+		new Label(stats).bindValueToProperty("estGanadorConPersonaje.assists")
 		
-		new Label(panel).text="Puntaje"
+		new Label(stats).text="Mejor ubicación"
 		
-		new Label(panel).bindValueToProperty("estadisticasDeJugadorConPersonaje.clasificacion")
+		new Label(stats).bindValueToProperty("estGanadorConPersonaje.mejorUbicacion")
+		
+		new Label(stats).text="Puntaje"
+		
+		new Label(stats).bindValueToProperty("estGanadorConPersonaje.clasificacion")
+		
+		}
+		
+		def void crearStatsPorPerdedor(Panel panel){
 			
+		new Label(panel)=>[
+			text = modelObject.perdedor.nombreJugador
+			foreground = Color.WHITE
+			background = Color.BLUE
+		]
+		new Label(panel)=>[
+			text = "Stats " + modelObject.perdedorPersonaje.nombre
+			foreground = Color.BLUE
+		]
+		
+		var Panel stats = new Panel(panel).layout = new ColumnLayout(2)
+		
+		new Label(stats).text="Jugadas"
+		
+		new Label(stats).bindValueToProperty("estGanadorConPersonaje.jugados")
+		
+		new Label(stats).text="Ganadas"
+		
+		new Label(stats).bindValueToProperty("estGanadorConPersonaje.cantDuelosGanados")
+		
+		new Label(stats).text="Kills"
+		
+		new Label(stats).bindValueToProperty("estGanadorConPersonaje.cantKills")
+		
+		new Label(stats).text="Deads"
+		
+		new Label(stats).bindValueToProperty("estGanadorConPersonaje.cantDeads")
+		
+		new Label(stats).text="Assists"
+		
+		new Label(stats).bindValueToProperty("estGanadorConPersonaje.assists")
+		
+		new Label(stats).text="Mejor ubicación"
+		
+		new Label(stats).bindValueToProperty("estGanadorConPersonaje.mejorUbicacion")
+		
+		new Label(stats).text="Puntaje"
+		
+		new Label(stats).bindValueToProperty("modelObject.estGanadorConPersonaje.clasificacion")
+		
 		}
 }
 
