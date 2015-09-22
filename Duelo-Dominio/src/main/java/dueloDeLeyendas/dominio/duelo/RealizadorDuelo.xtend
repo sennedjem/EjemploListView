@@ -6,8 +6,12 @@ import dueloDeLeyendas.dominio.jugador.Jugador
 import dueloDeLeyendas.dominio.personaje.Personaje
 import dueloDeLeyendas.dominio.estadisticas.Estadisticas
 
+/**Modela al realizador de duelo */
 @Accessors class RealizadorDuelo {
 
+	/**Recibe a los jugadores, personajes y la posicion para el duelo. Despues de encontrar al ganador
+	 * actualiza las estadisticas de cada uno dependiendo el resultado
+	 */
 	def ResultadoDuelo realizarDuelo(String pos, Jugador ret, Jugador riv, Personaje retPer, Personaje rivPer) {
 		var Estadisticas estadisticasDeRetadorConSuPj = ret.getEstadisticas(retPer)
 		var Estadisticas estadisticasDeRivalConSuPj = riv.getEstadisticas(rivPer)	

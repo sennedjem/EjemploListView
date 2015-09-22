@@ -4,6 +4,7 @@ import org.eclipse.xtend.lib.annotations.Accessors
 import dueloDeLeyendas.dominio.jugador.Jugador
 import dueloDeLeyendas.dominio.personaje.Personaje
 
+
 @Accessors class ResultadoDuelo {
 	var Jugador iniciador
 	var Jugador retado

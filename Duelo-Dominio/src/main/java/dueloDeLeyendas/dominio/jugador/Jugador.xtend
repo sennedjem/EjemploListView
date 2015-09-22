@@ -10,9 +10,7 @@ import dueloDeLeyendas.dominio.personaje.Personaje
 import dueloDeLeyendas.dominio.sistemaDeDuelos.SistemaDeDuelos
 
 @Accessors class Jugador {
-	/*
-	 * Modela al jugador
-	 */
+	/**Modela al jugador */
 	
 	var String nombreJugador
 	var Integer pesoDenuncias
@@ -22,7 +20,7 @@ import dueloDeLeyendas.dominio.sistemaDeDuelos.SistemaDeDuelos
 	var SistemaDeDuelos sistema
 	
 	
-	/*Crea una nueva instancia de jugador con los parametros necesarios */
+	/** Crea una nueva instancia de jugador con los parametros necesarios */
 	new(String nombre, SistemaDeDuelos sist){
 		nombreJugador = nombre
 		pesoDenuncias = 0
@@ -32,17 +30,17 @@ import dueloDeLeyendas.dominio.sistemaDeDuelos.SistemaDeDuelos
 		sistema = sist
 	}
 
-	/*Inicia un nuevo duelo con uno mismo como parametro */
+	/** Inicia un nuevo duelo con uno mismo como parametro */
 	def void iniciarDuelo (SistemaDeDuelos sistema, Personaje personaje, String posicion){
 		sistema.iniciarDuelo(this, personaje,posicion)
 	} 
 	
-	/*Devuelve el raking de jugador */
+	/**Devuelve el raking de jugador */
 	def Integer getRanking() {
 		pesoDenuncias* cantDuelosGanados
 	}
 	
-	/*Devuelde la cantidad de duelos ganador por el jugador */
+	/**Devuelde la cantidad de duelos ganador por el jugador */
 	def cantDuelosGanados() {
 		var Integer cantidadDG = 0
 		for (Estadisticas e: misEstadisticas)
@@ -51,13 +49,13 @@ import dueloDeLeyendas.dominio.sistemaDeDuelos.SistemaDeDuelos
 		return cantidadDG
 	}
 	
-	/*Agrega un personaje a la lista de personajes */
+	/**Agrega un personaje a la lista de personajes */
 	def agregarPersonaje(Personaje pers){
 		personajes.add(pers)
 		misEstadisticas.add(new Estadisticas(pers, this))
 	}
 	
-	/*Devuelve la estadistica correspondiente al personaje pasado por parametro */
+	/**Devuelve la estadistica correspondiente al personaje pasado por parametro */
 	def getEstadisticas (Personaje pers){
 		var Estadisticas estadistica
 		for (Estadisticas est: misEstadisticas)
@@ -66,7 +64,7 @@ import dueloDeLeyendas.dominio.sistemaDeDuelos.SistemaDeDuelos
 		estadistica
 	}
 	
-	/*Desde el duelo, suma lo necesario a las estadisticas del personaje cuando gana */
+	/**Desde el duelo, suma lo necesario a las estadisticas del personaje cuando gana */
 	def ganeSumarAEstadisticas(Jugador retador, Personaje personaje, String posicion, double clasificacion) {
 		var Estadisticas est = getEstadisticas(personaje)
 		if (retador == this)
@@ -75,7 +73,7 @@ import dueloDeLeyendas.dominio.sistemaDeDuelos.SistemaDeDuelos
 			est.actualizarGane()
 	}
 	
-	/*Desde el duelo, suma lo necesario a las estadisticas del personaje cuando pierde */
+	/**Desde el duelo, suma lo necesario a las estadisticas del personaje cuando pierde */
 	def perdiSumarAEstadisticas(Jugador retador, Personaje personaje, String posicion, double clasificacion) {
 		var Estadisticas est = getEstadisticas(personaje)
 		if (retador == this)
@@ -84,7 +82,7 @@ import dueloDeLeyendas.dominio.sistemaDeDuelos.SistemaDeDuelos
 			est.actualizarPerdi()
 	}
 	
-	/*Desde el duelo, suma lo necesario a las estadisticas del personaje cuando empata */
+	/**Desde el duelo, suma lo necesario a las estadisticas del personaje cuando empata */
 	def empateSumarAEstadisticas(Jugador retador,Personaje personaje, String ubicacion, double clasificacion) {
 		val Estadisticas est = getEstadisticas(personaje)
 		if (retador == this)
@@ -93,13 +91,13 @@ import dueloDeLeyendas.dominio.sistemaDeDuelos.SistemaDeDuelos
 			est.actualizarEmpate()
 	}
 	
-	/*Suma al peso de denuncias cuando es denunciado */
+	/**Suma al peso de denuncias cuando es denunciado */
 	def sumaleATuPesoDeDenuncia(Integer peso) {
 		this.setPesoDenuncias (this.pesoDenuncias + peso)
 	}
 	
 
-	/*Suma una calificacion pasada por parametro a la estadistica de un personaje, tambien pasado por parametro */
+	/**Suma una calificacion pasada por parametro a la estadistica de un personaje, tambien pasado por parametro */
 	def sumaCalificacion(Personaje per ,Integer i) {
 		val Estadisticas est = getEstadisticas(per)
 		est.setClasificacion(i)

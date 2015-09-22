@@ -27,9 +27,7 @@ class DueloDeLeyendasModel {
 	RealizadorDuelo realizador
 	ResultadoDuelo resultado
 	
-	/**
-	 * Inicializa todos los colaboradores de la clase
-	 */
+	/**Inicializa todos los colaboradores de la clase */
 	new(){
 		sistema = new SistemaDeDuelos(new RealizadorDuelo)
 		jugador = new Jugador("Marcos", sistema)
@@ -39,11 +37,9 @@ class DueloDeLeyendasModel {
 		inicializarStats
 	}	
 	
-	/**
-	 * Inicializa los 8 personajes de la pantalla principal, los agrega a la lista de personajes del modelo,
+	/** Inicializa los 8 personajes de la pantalla principal, los agrega a la lista de personajes del modelo,
 	 * le agrega cuatro personajes al jugador, y pone al primer personaje como el personaje 
-	 * seleccionado por defecto en la pantalla
-	 */
+	 * seleccionado por defecto en la pantalla */
 	def inicializarPersonajes(){
 		var habilidades = #["Ataque", "Defensa"]
 		var habilidades2= #["Auto recuperacion"]
@@ -92,9 +88,7 @@ class DueloDeLeyendasModel {
 		personajeSeleccionado = new PersonajePuntaje(per1, jugador.getEstadisticas(per1).getClasificacion)
 	}
 	
-	/**
-	 * Setea los stats para todos los personajes del jugador y crea la lista de personajes para la tabla
-	 */
+	/**Setea los stats para todos los personajes del jugador y crea la lista de personajes para la tabla */
 	def inicializarStats(){
 		setearEstadisticas(jugador, personajes.get(0), 60, 40, 5, 8, "TOP")
 		setearEstadisticas(jugador, personajes.get(1), 40, 50, 4, 9, "MID")
@@ -104,9 +98,7 @@ class DueloDeLeyendasModel {
 		personajesFiltrados = getPersonajePuntaje()
 	}
 	
-	/**
-	 * Setea las estadisticas del personaje pasado por parametro y con el jugador y datos pasados por parámetro
-	 */
+	/**Setea las estadisticas del personaje pasado por parametro y con el jugador y datos pasados por parámetro */
 	def setearEstadisticas(Jugador jugador, Personaje personaje, Integer clas, Integer assist,
 							Integer deads, Integer kills, String pos) {
 		jugador.getEstadisticas(personaje)=>[
@@ -121,10 +113,8 @@ class DueloDeLeyendasModel {
 	
 	}
 		
-	/**
-	 * Devuelve la lista de PersonajePuntaje en base a los personajes del sistema para mostrar en la 
-	 * tabla de personajes de la pantalla
-	 */
+	/**Devuelve la lista de PersonajePuntaje en base a los personajes del sistema para mostrar en la 
+	 * tabla de personajes de la pantalla */
 	def getPersonajePuntaje(){
 		var List<PersonajePuntaje> perpunt = new ArrayList
 		for (Personaje p : personajes)
@@ -138,10 +128,8 @@ class DueloDeLeyendasModel {
 		perpunt
 	}
 	
-	/**
-	 * Devuelve la lista de PersonajePuntaje en base a la lista pasasda por parametro para mostrar en la 
-	 * pantalla al realizar la busqueda de los personajes
-	 */
+	/**Devuelve la lista de PersonajePuntaje en base a la lista pasasda por parametro para mostrar en la 
+	 * pantalla al realizar la busqueda de los personajes */
 	def getPersonajePuntaje(List<Personaje> pers){
 		var List<PersonajePuntaje> perpunt = new ArrayList
 		for (Personaje p : pers)
@@ -155,10 +143,8 @@ class DueloDeLeyendasModel {
 		perpunt
 	}
 	
-	/**
-	 * Setea el string buscado con lo que se pasa por parametro y busca entre los personajes disponibles
-	 * los que tengan algo de ese string para mostrarlo en la tabla de personajes de la pantalla
-	 */
+	/** Setea el string buscado con lo que se pasa por parametro y busca entre los personajes disponibles
+	 * los que tengan algo de ese string para mostrarlo en la tabla de personajes de la pantalla */
 	def void setBuscado(String nombre){
 		buscado = nombre
 		if (nombre == ""){
@@ -168,9 +154,7 @@ class DueloDeLeyendasModel {
 		personajesFiltrados = getPersonajePuntaje(filtrados)
 	}
 
-	/**
-	 * Devuelve los stats del personaje seleccionado actualmente
-	 */
+	/** Devuelve los stats del personaje seleccionado actualmente */
 	def getStatsPersonajeSeleccionado(){
 		if(personajeSeleccionado != null)
 			jugador.getEstadisticas(personajeSeleccionado.pers)
@@ -178,18 +162,14 @@ class DueloDeLeyendasModel {
 			  this.dummyStats(personajeSeleccionado)
 	}
 	
-	/**
-	 * Setea el personaje seleccionado con el que se pasa por parámetro y dispara la notificación
-	 * para que se actualicen sus datos en la pantalla
-	 */
+	/** Setea el personaje seleccionado con el que se pasa por parámetro y dispara la notificación
+	 * para que se actualicen sus datos en la pantalla */
 	def setPersonajeSeleccionado(PersonajePuntaje p){
 		personajeSeleccionado = p
 		ObservableUtils.firePropertyChanged(this, "statsPersonajeSeleccionado")
 	}
 	
-	/**
-	 * Crea una serie de stats en cero para los personajes que el jugador todavia no uso
-	 */
+	/** Crea una serie de stats en cero para los personajes que el jugador todavia no uso */
 	def dummyStats(PersonajePuntaje pp){
 		var est = new Estadisticas(pp.pers, null)=>[
 			assists = new Integer(0)
@@ -205,9 +185,7 @@ class DueloDeLeyendasModel {
 		est
 	}
 	
-	/**
-	 * Setea el resultado del duelo en el colaborador de la clase
-	 */
+	/** Setea el resultado del duelo en el colaborador de la clase */
 	def ResultadoDuelo setResultado(){
 		resultado = sistema.iniciarDuelo(jugador, personajeSeleccionado.pers, posicion)
 	}
