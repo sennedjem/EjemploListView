@@ -148,8 +148,14 @@ import java.util.ArrayList
 		return cantPosicionIdeal
 	} 
 	
+	/**Determina si el personaje del jugador es Rampage */
 	def esRampage(){
 		return cantDuelosGanados >= 5 && vecesQueUsoPosicionIdeal >=5
+	}
+	
+	/**Determina si el personaje del jugador es Dominador */
+	def esDominador(){
+		return cantDuelosGanados >= 2 && vecesQueUsoPosicionIdeal >=2
 	}
 	
 }
