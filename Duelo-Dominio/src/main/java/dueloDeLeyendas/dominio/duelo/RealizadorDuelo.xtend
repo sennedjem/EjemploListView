@@ -4,19 +4,23 @@ package dueloDeLeyendas.dominio.duelo
 import org.eclipse.xtend.lib.annotations.Accessors
 import dueloDeLeyendas.dominio.jugador.Jugador
 import dueloDeLeyendas.dominio.personaje.Personaje
+ import java.util.Random;
 import dueloDeLeyendas.dominio.estadisticas.Estadisticas
 
 /**Modela al realizador de duelo */
 @Accessors class RealizadorDuelo {
 
+	Random rnd = new Random(50)
 	/**Recibe a los jugadores, personajes y la posicion para el duelo. Despues de encontrar al ganador
 	 * actualiza las estadisticas de cada uno dependiendo el resultado
 	 */
 	def ResultadoDuelo realizarDuelo(String pos, Jugador ret, Jugador riv, Personaje retPer, Personaje rivPer) {
+		
 		var Estadisticas estadisticasDeRetadorConSuPj = ret.getEstadisticas(retPer)
-		var Estadisticas estadisticasDeRivalConSuPj = riv.getEstadisticas(rivPer)	
-		var double poderAtaqueRetador = estadisticasDeRetadorConSuPj.poderDeAtaque
-		var double poderAtaqueRival = estadisticasDeRivalConSuPj.poderDeAtaque
+		var Estadisticas estadisticasDeRivalConSuPj = riv.getEstadisticas(rivPer)
+			
+		var double poderAtaqueRetador = estadisticasDeRetadorConSuPj.poderDeAtaque*(rnd.nextDouble())
+		var double poderAtaqueRival = estadisticasDeRivalConSuPj.poderDeAtaque*(rnd.nextDouble())
 		
 		if (poderAtaqueRetador > poderAtaqueRival) {
 			ret.ganeSumarAEstadisticas(ret,retPer, pos,poderAtaqueRetador)
