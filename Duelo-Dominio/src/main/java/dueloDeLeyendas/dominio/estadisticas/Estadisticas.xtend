@@ -9,9 +9,7 @@ import dueloDeLeyendas.dominio.jugador.Jugador
 import dueloDeLeyendas.dominio.personaje.Personaje
 import org.uqbar.commons.utils.Observable
 
-/*
- * Esta clase modela las estadísticas correspondientes a un jugador y un personaje
- */
+/**Modela las estadísticas correspondientes a un jugador y un personaje */
  
 @Observable
 @Accessors class Estadisticas {
@@ -28,10 +26,8 @@ import org.uqbar.commons.utils.Observable
 	var String mejorUbicacion
 	var double clasificacion
 	
-	/**
-	 * Este constructor crea una instancia de la clase Estadisticas con los personajes y jugadores pasados
-	 * por parametro y todos los demas valores inicializados en 0, o lista vacia.
-	 */
+	/**Crea una instancia de la clase Estadisticas con los personajes y jugadores pasados
+	 * por parametro y todos los demas valores inicializados en 0, o lista vacia. */
 	new (Personaje pers, Jugador jug){
 		jugador = jug
 		personaje = pers
@@ -46,55 +42,43 @@ import org.uqbar.commons.utils.Observable
 		clasificacion = 0
 	}
 	
-	/**
-	 * Este metodo aumenta en uno la cantidad de duelos iniciados.
-	 */
+	/**Aumenta en uno la cantidad de duelos iniciados. */
 	 def void sumarIniciado(){
 	 	cantDuelosIniciados ++  
 	 }
 	 
-	 /*
-	 * Este metodo aumenta en uno la cantidad de duelos ganados.
-	 */
+	 /**Aumenta en uno la cantidad de duelos ganados. */
 	 def void sumarGanado(){
 	 	cantDuelosGanados ++
 	 }
 	  
-	 /*
-	 * Este metodo aumenta en uno la cantidad de kills.
-	 */
+	 /**Aumenta en uno la cantidad de kills. */
 	 def void sumarKill(){
 	  	cantKills ++
 	 }
 	   
-	 /*
-	 * Este metodo aumenta en uno la cantidad de kills.
-	 */
+	 /**Aumenta en uno la cantidad de kills. */
 	 def void sumarDead(){
 	  	cantDeads ++
 	 }
 	    
-	 /*
-	 * Este metodo aumenta en uno la cantidad de assists.
-	 */
+	 /**Aumenta en uno la cantidad de assists. */
 	 def void sumarAssist(){
 	   	assists ++
 	 }
 	     
-	 /*
-	 * Este metodo agrega la ubicacion en que el personaje fue utilizado en un duelo
-	 */
+	 /**Agrega la ubicacion en que el personaje fue utilizado en un duelo */
 	 def void agregarUbicacion(String ubicacion){
 	   	ubicacionesUsadas.add(ubicacion)
 	 }
 	
-	def sumarEmpate(String string) {
+	/*def sumarEmpate(String string) {
 		throw new UnsupportedOperationException("TODO: auto-generated method stub")
 	}
 	
 	def sumarPerdida(String string) {
 		throw new UnsupportedOperationException("TODO: auto-generated method stub")
-	}
+	}*/
 	
 	def sumarVictoria(String string) {
 		sumarKill
@@ -103,6 +87,7 @@ import org.uqbar.commons.utils.Observable
 		setMejorUbicacion(string)
 	}
 	
+	/**Actualiza los parametros necesario cuando el jugador que inicia el duelo ganó el mismo */
 	def actualizarGaneRetador(String posicion, double clasificacion) {
 		sumarIniciado
 		sumarGanado
@@ -120,6 +105,7 @@ import org.uqbar.commons.utils.Observable
 		sumarDead
 	}
 	
+	/**Actualiza los parametros necesario cuando el jugador que inicia el duelo perdio el mismo */
 	def actualizarPerdiRetador(String posicion, double clasificacion) {
 		sumarIniciado
 		agregarUbicacion(posicion)
@@ -130,13 +116,12 @@ import org.uqbar.commons.utils.Observable
 		sumarAssist
 	}
 	
+	/**Actualiza los parametros necesario cuando el jugador que inicia el duelo empato el mismo */
 	def actualizarEmpateRetador(String posicion,double clasificacion) {
 		sumarIniciado
 		sumarAssist
 		agregarUbicacion(posicion)
-		setClasificacion(clasificacion)
-		
-		
+		setClasificacion(clasificacion)	
 	}
 	
 	def setJugados(Integer n){
@@ -147,9 +132,7 @@ import org.uqbar.commons.utils.Observable
 		cantDuelosGanados + assists + cantDeads
 	}
 	
-	/**
-	 * Calcula el poder de ataque del personaje del jugador
-	 */
+	/**Calcula el poder de ataque del personaje del jugador */
 	def double poderDeAtaque(){
 		return (clasificacion * (cantKills + assists / 2 - cantDeads) * cantDuelosIniciados)
 	} 
