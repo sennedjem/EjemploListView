@@ -33,6 +33,7 @@ class DueloDeLeyendasModel {
 		jugador = new Jugador("Marcos", sistema)
 		personajes = new ArrayList
 		personajesFiltrados = new ArrayList
+		sistema.agregarJugador(new Jugador("CapitanZanahoria", sistema))
 		inicializarPersonajes
 		inicializarStats
 	}	
