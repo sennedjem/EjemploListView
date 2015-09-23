@@ -91,7 +91,8 @@ class DueloDeLeyendasModel {
 			agregarPersonaje(per4)
 			agregarPersonaje(per5)
 		]
-		personajeSeleccionado = new PersonajePuntaje(per1, jugador.getEstadisticas(per1).getClasificacion)
+		
+		personajeSeleccionado = new PersonajePuntaje(per1, jugador.getEstadisticas(per1).getClasificacionString)
 	}
 	
 	/**Setea los stats para todos los personajes del jugador y crea la lista de personajes para la tabla */
@@ -133,10 +134,10 @@ class DueloDeLeyendasModel {
 		var List<PersonajePuntaje> perpunt = new ArrayList
 		for (Personaje p : personajes)
 			if (jugador.getEstadisticas(p) == null){
-				perpunt.add(new PersonajePuntaje(p, 0))
+				perpunt.add(new PersonajePuntaje(p, "NOOB"))
 				}
 				else{ 
-					val double clas = jugador.getEstadisticas(p).getClasificacion
+					val String clas = jugador.getEstadisticas(p).getClasificacionString
 					perpunt.add (new PersonajePuntaje(p,clas))
 			}
 		perpunt
@@ -148,10 +149,10 @@ class DueloDeLeyendasModel {
 		var List<PersonajePuntaje> perpunt = new ArrayList
 		for (Personaje p : pers)
 			if (jugador.getEstadisticas(p) == null){
-				perpunt.add(new PersonajePuntaje(p, 0))
+				perpunt.add(new PersonajePuntaje(p, "NOOB"))
 				}
 				else{
-					val double clas = jugador.getEstadisticas(p).getClasificacion
+					val String clas = jugador.getEstadisticas(p).getClasificacionString
 					perpunt.add (new PersonajePuntaje(p,clas))
 			}
 		perpunt
@@ -201,6 +202,8 @@ class DueloDeLeyendasModel {
 	
 	/** Setea el resultado del duelo en el colaborador de la clase */
 	def ResultadoDuelo setResultado(){
+		if (!jugador.personajes.contains(personajeSeleccionado.pers))
+			jugador.agregarPersonaje(personajeSeleccionado.pers)
 		resultado = sistema.iniciarDuelo(jugador, personajeSeleccionado.pers, posicion)
 	}
 

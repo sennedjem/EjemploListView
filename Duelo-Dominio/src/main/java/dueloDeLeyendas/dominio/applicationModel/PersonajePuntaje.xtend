@@ -10,7 +10,7 @@ class PersonajePuntaje {
 	Personaje pers
 	double clasificacion
 	
-	new (Personaje p, double c){
+	new (Personaje p, String c){
 		pers = p
 		clasificacion = c
 	}

@@ -134,6 +134,19 @@ import java.util.ArrayList
 		cantDuelosGanados + assists + cantDeads
 	}
 	
+	def String getClasificacionString() {
+	 	var String clas
+	 	val double clasificacion = this.clasificacion
+	 	switch clas {
+	 		case clasificacion >= 100 : clas = "RAMPAGE"
+	 		case clasificacion >=75 && clasificacion < 100 : clas = "DOMINADOR"
+	 		case clasificacion >=60  && clasificacion <75  : clas = "KILLING-SPREAD"
+	 		case clasificacion >=15 && clasificacion <60   : clas = "MANCO"
+	 		case clasificacion < 15  : clas = "NOOB"
+	 	}
+	 	clas
+	 }
+	 
 	/**Calcula el poder de ataque del personaje del jugador */
 	def double poderDeAtaque(){
 		return (clasificacion * (cantKills + assists / 2 - cantDeads) * cantDuelosIniciados)
@@ -148,7 +161,6 @@ import java.util.ArrayList
 		return cantPosicionIdeal
 	} 
 	
-	/**Determina si el personaje del jugador es Rampage */
 	def esRampage(){
 		return cantDuelosGanados >= 5 && vecesQueUsoPosicionIdeal >=5
 	}
