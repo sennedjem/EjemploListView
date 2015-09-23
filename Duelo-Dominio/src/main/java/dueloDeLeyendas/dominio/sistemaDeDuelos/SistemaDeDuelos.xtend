@@ -44,8 +44,12 @@ import java.util.Random
 	def Jugador generarJugadorMrX(Jugador jugador, Personaje personaje) {
 		var Jugador mrX= new Jugador("MR.x", this)
 		val Personaje per=filtrarPersonaje(personajesDisponibles, personaje)
-		val Estadisticas est = new Estadisticas(per, mrX)
-		mrX => [
+		mrX.agregarPersonaje(per)
+		this.agregarJugador(mrX)
+		mrX.getEstadisticas(per)=>[
+			cantDuelosIniciados = 10
+		]
+		/*mrX => [
 		puntuacionRanking = jugador.puntuacionRanking
 		pesoDenuncias = jugador.pesoDenuncias
 		agregarPersonaje(per)]
@@ -59,7 +63,7 @@ import java.util.Random
 			mejorUbicacion = "TOP"
 			clasificacion = 20
 		]
-		mrX.misEstadisticas.add(est)
+		mrX.misEstadisticas.add(est)*/
 		mrX
 	}
 	
