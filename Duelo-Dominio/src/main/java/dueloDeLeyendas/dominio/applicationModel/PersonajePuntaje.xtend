@@ -8,7 +8,7 @@ import org.uqbar.commons.utils.Observable
 @Accessors
 class PersonajePuntaje {
 	Personaje pers
-	double clasificacion
+	String clasificacion
 	
 	new (Personaje p, String c){
 		pers = p
