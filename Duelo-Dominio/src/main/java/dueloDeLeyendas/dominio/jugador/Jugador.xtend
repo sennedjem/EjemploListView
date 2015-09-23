@@ -68,28 +68,22 @@ import org.uqbar.commons.utils.Observable
 	/**Desde el duelo, suma lo necesario a las estadisticas del personaje cuando gana */
 	def ganeSumarAEstadisticas(Jugador retador, Personaje personaje, String posicion, double clasificacion) {
 		var Estadisticas est = getEstadisticas(personaje)
-		if (retador == this)
-			est.actualizarGaneRetador(posicion,clasificacion)
-		 else 
-			est.actualizarGane()
+		if (retador == this) est.actualizarGaneRetador(posicion,clasificacion)
+		 else est.actualizarGane
 	}
 	
 	/**Desde el duelo, suma lo necesario a las estadisticas del personaje cuando pierde */
 	def perdiSumarAEstadisticas(Jugador retador, Personaje personaje, String posicion, double clasificacion) {
 		var Estadisticas est = getEstadisticas(personaje)
-		if (retador == this)
-			est.actualizarPerdiRetador(posicion, clasificacion)
-		 else 
-			est.actualizarPerdi()
+		if (retador == this) est.actualizarPerdiRetador(posicion, clasificacion)
+		 else est.actualizarPerdi
 	}
 	
 	/**Desde el duelo, suma lo necesario a las estadisticas del personaje cuando empata */
 	def empateSumarAEstadisticas(Jugador retador,Personaje personaje, String ubicacion, double clasificacion) {
 		val Estadisticas est = getEstadisticas(personaje)
-		if (retador == this)
-			est.actualizarEmpateRetador(ubicacion, clasificacion)
-		else
-			est.actualizarEmpate()
+		if (retador == this) est.actualizarEmpateRetador(ubicacion, clasificacion)
+		else est.actualizarEmpate
 	}
 	
 	/**Suma al peso de denuncias cuando es denunciado */

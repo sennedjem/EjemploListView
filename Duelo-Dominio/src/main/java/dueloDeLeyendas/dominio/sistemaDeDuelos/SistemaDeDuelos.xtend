@@ -65,8 +65,7 @@ import java.util.Random
  				personajesAptos.add(e.personaje)
 		if (personajesAptos.size > 0)
 			personajeApto= filtrarPersonaje(jugador.personajes,personaje)
-		else 
-			personajeApto= filtrarPersonaje(personajesAptos,personaje)
+		else personajeApto= filtrarPersonaje(personajesAptos,personaje)
 			 	
 		return personajeApto
 	}
