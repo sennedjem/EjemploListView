@@ -22,6 +22,7 @@ class DueloDeLeyendasWindow extends SimpleWindow <DueloDeLeyendasModel>{
 	
 	new(WindowOwner parent, DueloDeLeyendasModel model) {
 		super(parent, model)
+		title = "Duelo De Leyendas"
 		taskDescription = "¡Bienvenido: " + modelObject.jugador.nombreJugador + "! Desde esta pantalla podras elegir un personaje para batirte a duelo con otro jugador.
 ¡Recuerda siempre revisar tus stats!"
 	}
@@ -31,7 +32,7 @@ class DueloDeLeyendasWindow extends SimpleWindow <DueloDeLeyendasModel>{
 	}
 	
 	override protected createFormPanel(Panel mainPanel) {
-		val tag = new Label(mainPanel)=>[
+		new Label(mainPanel)=>[
 			text= "¡Selecciona tu personaje para el duelo!"
 			foreground = Color.WHITE
 			background = Color.BLACK
@@ -95,11 +96,10 @@ class DueloDeLeyendasWindow extends SimpleWindow <DueloDeLeyendasModel>{
 	def crearTablaPersonajes(Panel panel){
 		val table = new Table<PersonajePuntaje> (panel, typeof(PersonajePuntaje))=>[
 			bindItemsToProperty("personajesFiltrados")
-			bindValueToProperty("personajeSeleccionado") //personajesFiltrados
-			height = 1000
-			width = 10000
+			bindValueToProperty("personajeSeleccionado") 
+			height = 150
 		]
-		this.describeResultGrid(table)
+		describeResultGrid(table)
 	}
 	
 	def describeResultGrid (Table<PersonajePuntaje> table){
@@ -192,8 +192,7 @@ class DueloDeLeyendasWindow extends SimpleWindow <DueloDeLeyendasModel>{
 	def iniciarDuelo(String pos){
 		try {
 			modelObject.setPosicion = pos
-			modelObject.setResultado
-			openDialog(new ResultadoDueloWindow(this, modelObject.resultado))
+			openDialog(new ResultadoDueloWindow(this, modelObject.iniciarDuelo))
 		} catch(NoHayRival e){
 			this.openDialog(new NoHayRivalWindow(this, modelObject))
 		}

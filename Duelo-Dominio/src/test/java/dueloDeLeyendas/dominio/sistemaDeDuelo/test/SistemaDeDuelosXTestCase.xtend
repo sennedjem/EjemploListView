@@ -26,7 +26,6 @@ class SistemaDeDuelosXTestCase {
 		jugador.agregarPersonaje(personaje)
 		sistema.agregarPersonaje(personaje)
 		sistema.agregarPersonaje(personaje1)
-		sistema.generarJugadorMrX(jugador, personaje)
 	}
 	
 	@Test def void testduelosIniciadosMrX(){

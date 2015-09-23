@@ -6,6 +6,7 @@ import org.uqbar.commons.utils.Observable
 
 @Observable
 @Accessors
+
 class PersonajePuntaje {
 	Personaje pers
 	String clasificacion

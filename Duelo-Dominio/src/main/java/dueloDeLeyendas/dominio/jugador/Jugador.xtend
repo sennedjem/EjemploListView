@@ -1,13 +1,12 @@
 package dueloDeLeyendas.dominio.jugador
 
-
-import java.util.List
-
-import org.eclipse.xtend.lib.annotations.Accessors
-import java.util.ArrayList
+import dueloDeLeyendas.dominio.applicationModel.PersonajePuntaje
 import dueloDeLeyendas.dominio.estadisticas.Estadisticas
 import dueloDeLeyendas.dominio.personaje.Personaje
 import dueloDeLeyendas.dominio.sistemaDeDuelos.SistemaDeDuelos
+import java.util.ArrayList
+import java.util.List
+import org.eclipse.xtend.lib.annotations.Accessors
 import org.uqbar.commons.utils.Observable
 
 @Observable
@@ -103,6 +102,17 @@ import org.uqbar.commons.utils.Observable
 	def sumaCalificacion(Personaje per ,Integer i) {
 		val Estadisticas est = getEstadisticas(per)
 		est.setClasificacion(i)
+	}
+	
+	def getPuntajePara(Personaje personaje) {
+			val estadistica = getEstadisticas(personaje)
+			if (estadistica == null) new PersonajePuntaje(personaje, "NOOB")
+			else new PersonajePuntaje(personaje,estadistica.clasificacionString)
+	}
+	
+	def peleasCon(Personaje personaje) {
+		if (!this.personajes.contains(personaje))
+			this.agregarPersonaje(personaje)
 	}
 	
 	

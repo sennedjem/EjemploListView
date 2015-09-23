@@ -1,44 +1,60 @@
 package dueloDeLeyendas.dominio.applicationModel
 
-import dueloDeLeyendas.dominio.jugador.Jugador
-import dueloDeLeyendas.dominio.sistemaDeDuelos.SistemaDeDuelos
-import dueloDeLeyendas.dominio.personaje.Personaje
-import java.util.HashSet
-import org.eclipse.xtend.lib.annotations.Accessors
-import java.util.List
-import java.util.ArrayList
-import org.uqbar.commons.utils.Observable
-import dueloDeLeyendas.dominio.estadisticas.Estadisticas
-import org.uqbar.commons.model.ObservableUtils
 import dueloDeLeyendas.dominio.duelo.RealizadorDuelo
 import dueloDeLeyendas.dominio.duelo.ResultadoDuelo
+import dueloDeLeyendas.dominio.estadisticas.Estadisticas
+import dueloDeLeyendas.dominio.jugador.Jugador
+import dueloDeLeyendas.dominio.personaje.Personaje
+import dueloDeLeyendas.dominio.sistemaDeDuelos.SistemaDeDuelos
+import java.util.ArrayList
+import java.util.List
+import org.eclipse.xtend.lib.annotations.Accessors
+import org.uqbar.commons.model.ObservableUtils
+import org.uqbar.commons.utils.Observable
 
+/*
+ * Inicializacion a la Application
+ */
 @Observable
 @Accessors
 class DueloDeLeyendasModel {
-	Jugador jugador
-	SistemaDeDuelos sistema
-	List<PersonajePuntaje> personajesFiltrados
 	List<Personaje> personajes
-	PersonajePuntaje personajeSeleccionado
-	String buscado
-	Estadisticas statsPersonajeSeleccionado
 	String posicion
 	RealizadorDuelo realizador
-	ResultadoDuelo resultado
-	//Jugador capitanZanahoria
+	Jugador capitanZanahoria
+	
+	
 	
 	/**Inicializa todos los colaboradores de la clase */
 	new(){
 		sistema = new SistemaDeDuelos(new RealizadorDuelo)
 		jugador = new Jugador("Marcos", sistema)
-		//capitanZanahoria = new Jugador("capitanZanahoria", sistema)
+		capitanZanahoria = new Jugador("capitanZanahoria", sistema)
 		personajes = new ArrayList
-		personajesFiltrados = new ArrayList
-		//sistema.agregarJugador(capitanZanahoria)
+		sistema.agregarJugador(capitanZanahoria)
 		inicializarPersonajes
 		inicializarStats
+		
+
+		
+		todosLosPersonajes = personajes.map[ jugador.getPuntajePara(it)]
 	}	
+	
+	/** Crea una serie de stats en cero para los personajes que el jugador todavia no uso */
+	def dummyStats(PersonajePuntaje pp){
+		var est = new Estadisticas(pp.pers, null)=>[
+			assists = new Integer(0)
+			cantDeads = new Integer(0)
+			cantDuelosGanados = new Integer(0)
+			cantDuelosIniciados = new Integer(0)
+			cantKills = new Integer(0)
+			mejorUbicacion = ""
+			ubicacionesUsadas = new ArrayList()
+			jugados = new Integer(0)
+			clasificacion = new Integer(0)
+		]
+		est
+	}
 	
 	/** Inicializa los 8 personajes de la pantalla principal, los agrega a la lista de personajes del modelo,
 	 * le agrega cuatro personajes al jugador, y pone al primer personaje como el personaje 
@@ -88,33 +104,31 @@ class DueloDeLeyendasModel {
 			agregarPersonaje(per4)
 			agregarPersonaje(per5)
 		]
-		//capitanZanahoria.agregarPersonaje(per2)
+		
+
 		
 		personajeSeleccionado = new PersonajePuntaje(per1, jugador.getEstadisticas(per1).getClasificacionString)
 	}
 	
 	/**Setea los stats para todos los personajes del jugador y crea la lista de personajes para la tabla */
 	def inicializarStats(){
-		setearEstadisticas(jugador, personajes.get(0), 60, 40, 5, 8, "TOP")
-		setearEstadisticas(jugador, personajes.get(1), 40, 50, 4, 9, "MID")
-		setearEstadisticas(jugador, personajes.get(3), 10, 70, 7, 0, "JUNGLE")
-		setearEstadisticas(jugador, personajes.get(4), 55, 45, 4, 20, "BOT")
-		//setearEstadisticas(capitanZanahoria, personajes.get(1), 40, 50, 4, 9, "MID")
-		
-		personajesFiltrados = getPersonajePuntaje()
-
+		setearEstadisticas(jugador, personajes.get(0), 60, 40, 1, 8, 62, "TOP")
+		setearEstadisticas(jugador, personajes.get(1), 40, 50, 1, 9, 55, "MID")
+		setearEstadisticas(jugador, personajes.get(3), 10, 70, 1, 0, 75,  "JUNGLE")
+		setearEstadisticas(jugador, personajes.get(4), 55, 45, 1, 20, 60, "BOT")
 	}	
 
 	
 	/**Setea las estadisticas del personaje pasado por parametro y con el jugador y datos pasados por parámetro */
-	def setearEstadisticas(Jugador jugador, Personaje personaje, Integer clas, Integer assist1,
-							Integer deads, Integer kills, String pos) {
+	def setearEstadisticas(Jugador jugador, Personaje personaje, Integer clas, Integer assist,
+							Integer deads, Integer kills, Integer jug, String pos) {
 		jugador.getEstadisticas(personaje)=>[
-			assists = assist1
+			assists = assist
 			cantDeads = deads
 			cantDuelosGanados = 7
 			cantKills = kills
 			clasificacion = clas
+			jugados = jug
 			mejorUbicacion = pos
 			cantDuelosIniciados = 1
 			ubicacionesUsadas = new ArrayList()
@@ -122,54 +136,34 @@ class DueloDeLeyendasModel {
 		]
 	
 	}
-		
-	/**Devuelve la lista de PersonajePuntaje en base a los personajes del sistema para mostrar en la 
-	 * tabla de personajes de la pantalla */
-	def getPersonajePuntaje(){
-		var List<PersonajePuntaje> perpunt = new ArrayList
-		for (Personaje p : personajes)
-			if (jugador.getEstadisticas(p) == null){
-				perpunt.add(new PersonajePuntaje(p, "NOOB"))
-				}
-				else{ 
-					val String clas = jugador.getEstadisticas(p).getClasificacionString
-					perpunt.add (new PersonajePuntaje(p,clas))
-			}
-		perpunt
-	}
+
+
+	//
+	//Hasta aca
+	//	
 	
-	/**Devuelve la lista de PersonajePuntaje en base a la lista pasasda por parametro para mostrar en la 
-	 * pantalla al realizar la busqueda de los personajes */
-	def getPersonajePuntaje(List<Personaje> pers){
-		var List<PersonajePuntaje> perpunt = new ArrayList
-		for (Personaje p : pers)
-			if (jugador.getEstadisticas(p) == null){
-				perpunt.add(new PersonajePuntaje(p, "NOOB"))
-				}
-				else{
-					val String clas = jugador.getEstadisticas(p).getClasificacionString
-					perpunt.add (new PersonajePuntaje(p,clas))
-			}
-		perpunt
-	}
+	private PersonajePuntaje personajeSeleccionado
+	private String buscado
+	private Jugador jugador
+	private List<PersonajePuntaje> todosLosPersonajes
+	private SistemaDeDuelos sistema
 	
 	/** Setea el string buscado con lo que se pasa por parametro y busca entre los personajes disponibles
 	 * los que tengan algo de ese string para mostrarlo en la tabla de personajes de la pantalla */
 	def void setBuscado(String nombre){
 		buscado = nombre
-		if (nombre == ""){
-			personajesFiltrados = getPersonajePuntaje(personajes)
-		}
-		var filtrados = personajes.filter[it.nombre.contains(nombre)].toList
-		personajesFiltrados = getPersonajePuntaje(filtrados)
+		ObservableUtils.firePropertyChanged(this,"resultadoBusquedaDePersonajes")
+	}
+	
+	def List<PersonajePuntaje> getResultadoBusquedaDePersonajes(){
+		if (buscado.empty) todosLosPersonajes
+		else todosLosPersonajes.filter[it.pers.nombre.contains(buscado)].toList
 	}
 
 	/** Devuelve los stats del personaje seleccionado actualmente */
 	def getStatsPersonajeSeleccionado(){
-		if(personajeSeleccionado != null)
-			jugador.getEstadisticas(personajeSeleccionado.pers)
-			else
-			  this.dummyStats(personajeSeleccionado)
+		if(personajeSeleccionado != null) jugador.getEstadisticas(personajeSeleccionado.pers)
+		else this.dummyStats(personajeSeleccionado)
 	}
 	
 	/** Setea el personaje seleccionado con el que se pasa por parámetro y dispara la notificación
@@ -179,27 +173,9 @@ class DueloDeLeyendasModel {
 		ObservableUtils.firePropertyChanged(this, "statsPersonajeSeleccionado")
 	}
 	
-	/** Crea una serie de stats en cero para los personajes que el jugador todavia no uso */
-	def dummyStats(PersonajePuntaje pp){
-		var est = new Estadisticas(pp.pers, null)=>[
-			assists = new Integer(0)
-			cantDeads = new Integer(0)
-			cantDuelosGanados = new Integer(0)
-			cantDuelosIniciados = new Integer(0)
-			cantKills = new Integer(0)
-			mejorUbicacion = ""
-			ubicacionesUsadas = new ArrayList()
-			jugados = new Integer(0)
-			clasificacion = new Integer(0)
-		]
-		est
-	}
-	
-	/** Setea el resultado del duelo en el colaborador de la clase */
-	def ResultadoDuelo setResultado(){
-		if (!jugador.personajes.contains(personajeSeleccionado.pers))
-			jugador.agregarPersonaje(personajeSeleccionado.pers)
-		resultado = sistema.iniciarDuelo(jugador, personajeSeleccionado.pers, posicion)
+	def ResultadoDuelo iniciarDuelo(){
+		jugador.peleasCon(personajeSeleccionado.pers)
+		sistema.iniciarDuelo(jugador, personajeSeleccionado.pers, posicion)
 	}
 
 } 

@@ -40,33 +40,6 @@ import java.util.Random
 		throw new NoHayRival()
 	}
 	
-	/**Crea y retorna al jugador Mr.X cuando no hay un rival apropiado. Se inicializa con parametros identicos al retador*/
-	def Jugador generarJugadorMrX(Jugador jugador, Personaje personaje) {
-		var Jugador mrX= new Jugador("MR.x", this)
-		val Personaje per=filtrarPersonaje(personajesDisponibles, personaje)
-		mrX.agregarPersonaje(per)
-		this.agregarJugador(mrX)
-		mrX.getEstadisticas(per)=>[
-			cantDuelosIniciados = 10
-		]
-		/*mrX => [
-		puntuacionRanking = jugador.puntuacionRanking
-		pesoDenuncias = jugador.pesoDenuncias
-		agregarPersonaje(per)]
-		est=>[
-			cantDuelosIniciados = 10
-			cantDuelosGanados = 10
-			cantKills = 10
-			cantDeads = 10
-			assists = 10
-			ubicacionesUsadas = new ArrayList()
-			mejorUbicacion = "TOP"
-			clasificacion = 20
-		]
-		mrX.misEstadisticas.add(est)*/
-		mrX
-	}
-	
 	/**Busca un personaje para el duelo distinto al del retador */
 	def Personaje filtrarPersonaje(List<Personaje> personajes, Personaje pers) {
 		for(Personaje j: personajes)
@@ -76,8 +49,8 @@ import java.util.Random
 
 	/**Inicia un nuevo duelo con los parametros necesarios */
 	def ResultadoDuelo iniciarDuelo(Jugador ret, Personaje personaje, String pos){
-		val Personaje rivPers = this.buscarPersonajeParaDuelo(ret, personaje)
 		val Jugador rival = this.encontrarRivalAcorde (ret, personaje)
+		val Personaje rivPers = this.buscarPersonajeParaDuelo(ret, personaje)
 		rival.agregarPersonaje(rivPers)
 		realizadorDuelo.realizarDuelo(pos, ret, rival, personaje, rivPers)
 	}

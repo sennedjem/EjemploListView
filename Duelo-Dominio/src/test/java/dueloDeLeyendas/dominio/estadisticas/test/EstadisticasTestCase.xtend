@@ -60,23 +60,10 @@ class EstadisticasTestCase {
 		assertEquals (assists, 1)
 	}
 	
-	@Test def void testAgregarUbicacionSinRepetidos(){
+	@Test def void testAgregarUbicacion(){
 		est.agregarUbicacion("TOP")
 		val List<String> ubicaciones = est.getUbicacionesUsadas
 		
 		assertTrue (ubicaciones.contains("TOP"))		
-	}
-	
-	@Test def void testAgregarUbicacionConRepetidos(){
-		est.agregarUbicacion("MID")
-		var List<String> ubicaciones = est.getUbicacionesUsadas
-		
-		assertTrue (ubicaciones.contains("MID"))
-		assertEquals (ubicaciones.size, 1)
-		
-		est.agregarUbicacion("MID")
-		
-		assertTrue (ubicaciones.contains("MID"))
-		assertEquals (ubicaciones.size,1)
 	}
 }

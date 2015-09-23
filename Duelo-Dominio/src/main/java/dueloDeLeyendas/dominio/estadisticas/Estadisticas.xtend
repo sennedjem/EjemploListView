@@ -2,8 +2,6 @@ package dueloDeLeyendas.dominio.estadisticas
 
 
 import org.eclipse.xtend.lib.annotations.Accessors
-import java.util.Set
-import java.util.HashSet
 
 import dueloDeLeyendas.dominio.jugador.Jugador
 import dueloDeLeyendas.dominio.personaje.Personaje
@@ -74,18 +72,16 @@ import java.util.Random
 	 def void agregarUbicacion(String ubicacion){
 	   	ubicacionesUsadas.add(ubicacion)
 	 }
-	
-	/*def sumarEmpate(String string) {
-		throw new UnsupportedOperationException("TODO: auto-generated method stub")
+	 
+	/**Suma uno a los duelos jugados */
+	def sumarJugado(){
+		jugados = jugados +1
 	}
-	
-	def sumarPerdida(String string) {
-		throw new UnsupportedOperationException("TODO: auto-generated method stub")
-	}*/
 	
 	def sumarVictoria(String string) {
 		sumarKill
 		sumarGanado
+		sumarJugado
 		agregarUbicacion(string)
 		setMejorUbicacion(string)
 	}
@@ -94,6 +90,7 @@ import java.util.Random
 	def actualizarGaneRetador(String posicion, double clasificacion) {
 		sumarIniciado
 		sumarGanado
+		sumarJugado
 		agregarUbicacion(posicion)
 		setMejorUbicacion(posicion)
 		setClasificacion(clasificacion)
@@ -102,27 +99,32 @@ import java.util.Random
 	def actualizarGane() {
 		sumarGanado
 		sumarKill
+		sumarJugado
 	}
 	
 	def actualizarPerdi() {
 		sumarDead
+		sumarJugado
 	}
 	
 	/**Actualiza los parametros necesario cuando el jugador que inicia el duelo perdio el mismo */
 	def actualizarPerdiRetador(String posicion, double clasificacion) {
 		sumarIniciado
+		sumarJugado
 		agregarUbicacion(posicion)
 		setClasificacion(clasificacion)
 	}
 	
 	def actualizarEmpate() {
 		sumarAssist
+		sumarJugado
 	}
 	
 	/**Actualiza los parametros necesario cuando el jugador que inicia el duelo empato el mismo */
 	def actualizarEmpateRetador(String posicion,double clasificacion) {
 		sumarIniciado
 		sumarAssist
+		sumarJugado
 		agregarUbicacion(posicion)
 		setClasificacion(clasificacion)	
 	}
@@ -131,14 +133,9 @@ import java.util.Random
 		jugados = n
 	}
 	
-	def getJugadosn(){
-		cantDuelosGanados + assists + cantDeads
-	}
-	
 	/**Evalua y aplica la clasificacion correspondiente */
 	def String getClasificacionString() {
 	 	var String clas
-	 	val double clasificacion = this.clasificacion
 	 	switch clas {
 	 		case esRampage : clas = "RAMPAGE"
 	 		case esDominador : clas = "DOMINADOR"
@@ -152,7 +149,7 @@ import java.util.Random
 	 
 	/**Calcula el poder de ataque del personaje del jugador */
 	def double poderDeAtaque(){
-		return (clasificacion * (cantKills + assists / 2 - cantDeads) * cantDuelosIniciados)
+		return ((cantKills + assists % 2 - cantDeads) * cantDuelosIniciados)
 	} 
 	 
 	def vecesQueUsoPosicionIdeal(){
@@ -169,7 +166,7 @@ import java.util.Random
 	def numeroRandom(){
 		val Random rand = new Random(System.currentTimeMillis())
 		return rand.nextInt(150)
-}
+} 
 	
 	def esRampage(){
 		return cantDuelosGanados >= 5 && vecesQueUsoPosicionIdeal >=5 && numeroRandom >90

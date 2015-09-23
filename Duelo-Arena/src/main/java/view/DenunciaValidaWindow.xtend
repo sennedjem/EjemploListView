@@ -13,6 +13,7 @@ class DenunciaValidaWindow extends Dialog<Denuncia>{
 	
 	new(WindowOwner parent, Denuncia model) {
 		super(parent, model)
+		title = "Denuncia Procesada"
 	}
 	
 	override protected addActions(Panel actionsPanel) {

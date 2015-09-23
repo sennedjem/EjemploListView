@@ -14,8 +14,7 @@ class DenunciaInvalidaWindow extends Dialog<Denuncia> {
 	
 	new(WindowOwner parent, Denuncia model) {
 		super(parent, model)
-		modelObject.motivo = new AbusoDelSistemaDeDenuncias
-		modelObject.denunciante.sumaleATuPesoDeDenuncia(modelObject.motivo.peso)
+		title = "Su Denuncia Ha Sido Invalida"
 	}
 	
 	override protected addActions(Panel actionsPanel) {

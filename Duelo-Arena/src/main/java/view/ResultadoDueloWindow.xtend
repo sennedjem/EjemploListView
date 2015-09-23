@@ -1,18 +1,16 @@
 package view
 
+import dueloDeLeyendas.dominio.denuncias.Denuncia
+import dueloDeLeyendas.dominio.duelo.ResultadoDuelo
+import java.awt.Color
+import org.uqbar.arena.layout.ColumnLayout
+import org.uqbar.arena.layout.HorizontalLayout
+import org.uqbar.arena.layout.VerticalLayout
+import org.uqbar.arena.widgets.Button
+import org.uqbar.arena.widgets.Label
+import org.uqbar.arena.widgets.Panel
 import org.uqbar.arena.windows.Dialog
 import org.uqbar.arena.windows.WindowOwner
-import dueloDeLeyendas.dominio.duelo.ResultadoDuelo
-import org.uqbar.arena.widgets.Panel
-import org.uqbar.arena.widgets.Label
-import java.awt.Color
-import org.uqbar.arena.layout.HorizontalLayout
-import org.uqbar.arena.layout.ColumnLayout
-import org.uqbar.arena.widgets.Button
-import dueloDeLeyendas.dominio.denuncias.Denuncia
-import org.uqbar.arena.layout.VerticalLayout
-import dueloDeLeyendas.dominio.jugador.Jugador
-import dueloDeLeyendas.dominio.personaje.Personaje
 
 /**Modela la ventana que muestra el resultado de un duelo */
 class ResultadoDueloWindow extends Dialog <ResultadoDuelo>{//
@@ -20,6 +18,7 @@ class ResultadoDueloWindow extends Dialog <ResultadoDuelo>{//
 	
 	new(WindowOwner owner, ResultadoDuelo resultado) {
 		super(owner, resultado)
+		title = "Resultado del Duelo"
 	}
 	
 	override protected addActions(Panel actionsPanel) {

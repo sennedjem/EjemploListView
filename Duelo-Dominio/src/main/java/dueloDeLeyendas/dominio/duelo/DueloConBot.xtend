@@ -25,8 +25,8 @@ class DueloConBot {
 		bot.agregarPersonaje(personajeBot)
 		var Estadisticas estRetador = ret.getEstadisticas(retPer)
 		
-		val poderAtaqueRetador = estRetador.poderDeAtaque*(rnd.nextInt)
-		val poderAtaqueBot = 10 * (rnd.nextInt)
+		val poderAtaqueRetador = estRetador.poderDeAtaque//*(rnd.nextInt)
+		val poderAtaqueBot = 10 //* (rnd.nextInt)
 		
 		val double dif = poderAtaqueRetador - poderAtaqueBot
 		
@@ -47,7 +47,7 @@ class DueloConBot {
 	
 	def perdioRetador(Jugador ret, Personaje retPer, String pos, double poderAtaqueRetador, Jugador bot, Personaje personajeBot, double poderAtaqueBot){
 		ret.perdiSumarAEstadisticas(ret,retPer,pos,poderAtaqueRetador)
-		return new ResultadoDuelo(ret, bot,ret, bot, retPer, personajeBot, pos, poderAtaqueRetador, poderAtaqueBot)
+		return new ResultadoDuelo(ret, bot,bot, ret, personajeBot, retPer, pos, poderAtaqueBot , poderAtaqueRetador)
 	}
 	
 	def empate(Jugador ret, Personaje retPer, String pos, double poderAtaqueRetador, Jugador bot, Personaje personajeBot, double poderAtaqueBot){

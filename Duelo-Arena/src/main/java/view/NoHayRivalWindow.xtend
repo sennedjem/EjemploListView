@@ -12,8 +12,9 @@ import dueloDeLeyendas.dominio.duelo.DueloConBot
 /**Modela la ventana que se muestra cuando no se encuentra un rival para un jugador que quiere realizar un duelo */
 class NoHayRivalWindow extends Dialog<DueloDeLeyendasModel>{
 	
-	new(SimpleWindow parent, DueloDeLeyendasModel model) {
-		super(parent, model)		
+	new(SimpleWindow<DueloDeLeyendasModel> parent, DueloDeLeyendasModel model) {
+		super(parent, model)
+		title = "No Hay Rival En El Sistema"
 	}
 	
 	
@@ -34,7 +35,6 @@ class NoHayRivalWindow extends Dialog<DueloDeLeyendasModel>{
 		var DueloConBot dcb = new DueloConBot(modelObject.sistema)
 		var Personaje persBot = modelObject.sistema.buscarPersonajeParaDuelo(modelObject.jugador, modelObject.personajeSeleccionado.pers)
 		var dueloBot = dcb.realizarDueloBot(modelObject.posicion, modelObject.jugador, modelObject.personajeSeleccionado.pers, persBot)
-		//val resultadoDuelo = dueloBot.realizarDuelo(modelObject.posicion,modelObject.jugador,mrX,modelObject.personajeSeleccionado.pers,modelObject.sistema.buscarPersonajeParaDuelo(modelObject.jugador, modelObject.personajeSeleccionado.pers)) 
 		openDialog(new ResultadoDueloWindow(this, dueloBot))
 		this.close
 	}

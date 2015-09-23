@@ -17,6 +17,7 @@ class CrearDenunciaWindow extends Dialog<Denuncia> {
 	
 	new(WindowOwner parent, Denuncia model) {
 		super(parent, model)
+		title = "Realizar Denuncia"
 	}
 	
 	override protected addActions(Panel actionsPanel) {
