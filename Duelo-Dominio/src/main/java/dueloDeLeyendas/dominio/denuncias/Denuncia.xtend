@@ -5,8 +5,10 @@ import org.eclipse.xtend.lib.annotations.Accessors
 import dueloDeLeyendas.dominio.jugador.Jugador
 import java.util.List
 import java.util.ArrayList
+import org.uqbar.commons.utils.Observable
 
 /**Modela a las denuncias con sus diferentes tipos */
+@Observable
 @Accessors class Denuncia {
 	String justificacion
 	Jugador denunciante
