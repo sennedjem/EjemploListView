@@ -1,14 +1,13 @@
 package view
 
-import dueloDeLeyendas.dominio.sistemaDeDuelos.SistemaDeDuelos
 import org.uqbar.arena.widgets.Button
 import org.uqbar.arena.widgets.Panel
 import org.uqbar.arena.windows.SimpleWindow
-import org.uqbar.arena.windows.WindowOwner
 import org.uqbar.arena.widgets.Label
 import org.uqbar.arena.windows.Dialog
 import dueloDeLeyendas.dominio.applicationModel.DueloDeLeyendasModel
-import dueloDeLeyendas.dominio.duelo.RealizadorDuelo
+import dueloDeLeyendas.dominio.personaje.Personaje
+import dueloDeLeyendas.dominio.duelo.DueloConBot
 
 /**Modela la ventana que se muestra cuando no se encuentra un rival para un jugador que quiere realizar un duelo */
 class NoHayRivalWindow extends Dialog<DueloDeLeyendasModel>{
@@ -32,10 +31,11 @@ class NoHayRivalWindow extends Dialog<DueloDeLeyendasModel>{
 	
 	/**Genera un bot para pelear contra el retador, se realiza el duelo y se abre la ventana con el resultado del mismo */
 	def generarBot() {
-		val mrX = modelObject.sistema.generarJugadorMrX(modelObject.jugador, modelObject.personajeSeleccionado.pers)
-		var dueloBot = new RealizadorDuelo
-		val resultadoDuelo = dueloBot.realizarDuelo(modelObject.posicion,modelObject.jugador,mrX,modelObject.personajeSeleccionado.pers,modelObject.sistema.buscarPersonajeParaDuelo(modelObject.jugador, modelObject.personajeSeleccionado.pers)) 
-		openDialog(new ResultadoDueloWindow(this, resultadoDuelo))
+		var DueloConBot dcb = new DueloConBot(modelObject.sistema)
+		var Personaje persBot = modelObject.sistema.buscarPersonajeParaDuelo(modelObject.jugador, modelObject.personajeSeleccionado.pers)
+		var dueloBot = dcb.realizarDueloBot(modelObject.posicion, modelObject.jugador, modelObject.personajeSeleccionado.pers, persBot)
+		//val resultadoDuelo = dueloBot.realizarDuelo(modelObject.posicion,modelObject.jugador,mrX,modelObject.personajeSeleccionado.pers,modelObject.sistema.buscarPersonajeParaDuelo(modelObject.jugador, modelObject.personajeSeleccionado.pers)) 
+		openDialog(new ResultadoDueloWindow(this, dueloBot))
 		this.close
 	}
 	
