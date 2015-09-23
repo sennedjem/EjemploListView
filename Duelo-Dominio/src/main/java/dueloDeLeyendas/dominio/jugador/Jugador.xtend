@@ -8,7 +8,9 @@ import java.util.ArrayList
 import dueloDeLeyendas.dominio.estadisticas.Estadisticas
 import dueloDeLeyendas.dominio.personaje.Personaje
 import dueloDeLeyendas.dominio.sistemaDeDuelos.SistemaDeDuelos
+import org.uqbar.commons.utils.Observable
 
+@Observable
 @Accessors class Jugador {
 	/**Modela al jugador */
 	
