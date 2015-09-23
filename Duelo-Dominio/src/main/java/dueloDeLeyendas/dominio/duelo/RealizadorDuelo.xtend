@@ -6,11 +6,13 @@ import dueloDeLeyendas.dominio.jugador.Jugador
 import dueloDeLeyendas.dominio.personaje.Personaje
  import java.util.Random;
 import dueloDeLeyendas.dominio.estadisticas.Estadisticas
+import org.uqbar.commons.utils.Observable
 
 /**Modela al realizador de duelo */
-@Accessors class RealizadorDuelo {
+@Observable
+@Accessors class RealizadorDuelo{
 
-	Random rnd = new Random(50)
+	Random rnd = new Random(2)
 	/**Recibe a los jugadores, personajes y la posicion para el duelo. Despues de encontrar al ganador
 	 * actualiza las estadisticas de cada uno dependiendo el resultado
 	 */
@@ -19,8 +21,8 @@ import dueloDeLeyendas.dominio.estadisticas.Estadisticas
 		var Estadisticas estadisticasDeRetadorConSuPj = ret.getEstadisticas(retPer)
 		var Estadisticas estadisticasDeRivalConSuPj = riv.getEstadisticas(rivPer)
 			
-		var double poderAtaqueRetador = estadisticasDeRetadorConSuPj.poderDeAtaque*(rnd.nextDouble())
-		var double poderAtaqueRival = estadisticasDeRivalConSuPj.poderDeAtaque*(rnd.nextDouble())
+		var double poderAtaqueRetador = estadisticasDeRetadorConSuPj.poderDeAtaque*(rnd.nextInt())
+		var double poderAtaqueRival = estadisticasDeRivalConSuPj.poderDeAtaque*(rnd.nextInt())
 		
 		if (poderAtaqueRetador > poderAtaqueRival) {
 			ret.ganeSumarAEstadisticas(ret,retPer, pos,poderAtaqueRetador)
