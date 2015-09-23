@@ -135,8 +135,8 @@ import java.util.Random
 		cantDuelosGanados + assists + cantDeads
 	}
 	
-	//-----CREO QUE ASI DEBERIA QUEDAR-----//
-	/*def String getClasificacionString() {
+	/**Evalua y aplica la clasificacion correspondiente */
+	def String getClasificacionString() {
 	 	var String clas
 	 	val double clasificacion = this.clasificacion
 	 	switch clas {
@@ -148,20 +148,7 @@ import java.util.Random
 	 	}
 	 	clas
 	 }
-	 */
-	
-	def String getClasificacionString() {
-	 	var String clas
-	 	val double clasificacion = this.clasificacion
-	 	switch clas {
-	 		case clasificacion >= 100 : clas = "RAMPAGE"
-	 		case clasificacion >=75 && clasificacion < 100 : clas = "DOMINADOR"
-	 		case clasificacion >=60  && clasificacion <75  : clas = "KILLING-SPREAD"
-	 		case clasificacion >=15 && clasificacion <60   : clas = "MANCO"
-	 		case clasificacion < 15  : clas = "NOOB"
-	 	}
-	 	clas
-	 }
+	 
 	 
 	/**Calcula el poder de ataque del personaje del jugador */
 	def double poderDeAtaque(){
