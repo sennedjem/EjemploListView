@@ -205,3 +205,8 @@ class DueloDeLeyendasWindow extends SimpleWindow <DueloDeLeyendasModel>{
 	}
 
 }
+	def openDialog(Dialog<?> dialog) {
+		dialog.open
+	}
+
+}
