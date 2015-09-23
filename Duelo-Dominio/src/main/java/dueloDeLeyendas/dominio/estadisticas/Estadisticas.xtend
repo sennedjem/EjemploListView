@@ -135,6 +135,21 @@ import java.util.Random
 		cantDuelosGanados + assists + cantDeads
 	}
 	
+	//-----CREO QUE ASI DEBERIA QUEDAR-----//
+	/*def String getClasificacionString() {
+	 	var String clas
+	 	val double clasificacion = this.clasificacion
+	 	switch clas {
+	 		case esRampage : clas = "RAMPAGE"
+	 		case esDominador : clas = "DOMINADOR"
+	 		case esKillingSpread  : clas = "KILLING-SPREAD"
+	 		case esManco : clas = "MANCO"
+	 		default : clas = "NOOB"
+	 	}
+	 	clas
+	 }
+	 */
+	
 	def String getClasificacionString() {
 	 	var String clas
 	 	val double clasificacion = this.clasificacion
