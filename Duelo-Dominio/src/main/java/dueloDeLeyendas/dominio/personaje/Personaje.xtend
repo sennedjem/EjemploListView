@@ -2,8 +2,10 @@ package dueloDeLeyendas.dominio.personaje
 
 import java.util.List
 import org.eclipse.xtend.lib.annotations.Accessors
+import org.uqbar.commons.utils.Observable
 
 /* Modela a los personajes y sus caracteristicas */
+@Observable
 @Accessors class Personaje {
 	
 	val String nombre
