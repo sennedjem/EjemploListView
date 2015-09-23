@@ -11,7 +11,7 @@ import dueloDeLeyendas.dominio.duelo.RealizadorDuelo
 import dueloDeLeyendas.dominio.estadisticas.Estadisticas
 import dueloDeLeyendas.dominio.duelo.ResultadoDuelo
 import org.uqbar.commons.utils.Observable
-import java.util.HashSet
+import java.util.Random
 
 @Observable
 @Accessors class SistemaDeDuelos {
@@ -144,5 +144,9 @@ import java.util.HashSet
 	def void quitarDebilidad(Personaje per, String debilidad){
 		if(personajesDisponibles.contains(per))
 			per.especialidades.remove(debilidad)
+	}
+	
+	public def randomEntreRango(Integer minimo, Integer maximo){
+		////DEFINIR RANDOM
 	}
 }
