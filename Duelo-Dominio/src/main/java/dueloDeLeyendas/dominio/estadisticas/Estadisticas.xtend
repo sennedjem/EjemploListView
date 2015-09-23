@@ -10,6 +10,7 @@ import dueloDeLeyendas.dominio.personaje.Personaje
 import org.uqbar.commons.utils.Observable
 import java.util.List
 import java.util.ArrayList
+import java.util.Random
 
 /**Modela las estadísticas correspondientes a un jugador y un personaje */
  
@@ -161,13 +162,27 @@ import java.util.ArrayList
 		return cantPosicionIdeal
 	} 
 	
+	
+	///DEBERIA IR EN OTRA CLASE
+	def numeroRandom(){
+		val Random rand = new Random(System.currentTimeMillis())
+		return rand.nextInt(150)
+}
+	
 	def esRampage(){
-		return cantDuelosGanados >= 5 && vecesQueUsoPosicionIdeal >=5
+		return cantDuelosGanados >= 5 && vecesQueUsoPosicionIdeal >=5 && numeroRandom >90
 	}
 	
 	/**Determina si el personaje del jugador es Dominador */
 	def esDominador(){
-		return cantDuelosGanados >= 2 && vecesQueUsoPosicionIdeal >=2
+		return cantDuelosGanados >= 2 && vecesQueUsoPosicionIdeal >=2 && numeroRandom >70
 	}
 	
+	def esKillingSpread(){
+		return numeroRandom >50
+	}
+	
+	def esManco(){
+		return numeroRandom >30
+	}
 }

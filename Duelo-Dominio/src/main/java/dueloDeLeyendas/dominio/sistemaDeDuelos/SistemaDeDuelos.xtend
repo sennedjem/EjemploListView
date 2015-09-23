@@ -145,8 +145,4 @@ import java.util.Random
 		if(personajesDisponibles.contains(per))
 			per.especialidades.remove(debilidad)
 	}
-	
-	public def randomEntreRango(Integer minimo, Integer maximo){
-		////DEFINIR RANDOM
-	}
 }
