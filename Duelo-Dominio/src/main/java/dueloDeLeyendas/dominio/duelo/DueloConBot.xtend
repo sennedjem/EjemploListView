@@ -11,7 +11,7 @@ import java.util.Random
 
 @Observable
 @Accessors
-class DueloConBot  {
+class DueloConBot {
 	SistemaDeDuelos sistema
 	Random rnd = new Random(50)
 	

@@ -43,7 +43,7 @@ import org.uqbar.commons.utils.Observable
 	}
 	
 	/**Devuelde la cantidad de duelos ganador por el jugador */
-	def cantDuelosGanados() {
+	def cantDuelosGanados() { 
 		var Integer cantidadDG = 0
 		for (Estadisticas e: misEstadisticas)
 			cantidadDG = cantidadDG + e.getCantDuelosGanados

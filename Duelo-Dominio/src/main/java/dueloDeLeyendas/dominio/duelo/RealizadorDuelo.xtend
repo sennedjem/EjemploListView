@@ -11,7 +11,7 @@ import dueloDeLeyendas.dominio.sistemaDeDuelos.SistemaDeDuelos
 
 /**Calcula ganadores y perdedores a la hora de hacer un duelo */
 @Observable
-@Accessors class RealizadorDuelo{
+@Accessors class RealizadorDuelo {
 	SistemaDeDuelos sis;
 	Random rnd = new Random(System.currentTimeMillis())
 	Integer numRandom = rnd.nextInt(2)

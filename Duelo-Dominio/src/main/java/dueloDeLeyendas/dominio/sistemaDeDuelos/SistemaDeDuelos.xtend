@@ -45,7 +45,7 @@ import java.util.Random
 	def Personaje filtrarPersonaje(List<Personaje> personajes, Personaje pers) {
 		for(Personaje j: personajes)
 			if(j != pers)
-			return j
+			return j 
 	}
 
 	/**Inicia un nuevo duelo con los parametros necesarios */

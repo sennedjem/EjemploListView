@@ -25,7 +25,7 @@ import org.uqbar.commons.utils.Observable
 		retadoPersonaje = personaje2
 		posicion = string
 		poderAtaqueIniciador = d
-		poderAtaqueRetado = e
+		poderAtaqueRetado = e 
 	}
 	def esEmpate() {
 		poderAtaqueIniciador == poderAtaqueRetado

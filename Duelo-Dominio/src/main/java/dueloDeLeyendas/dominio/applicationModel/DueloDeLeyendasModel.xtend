@@ -140,7 +140,7 @@ class DueloDeLeyendasModel {
 		ObservableUtils.firePropertyChanged(this, "statsPersonajeSeleccionado")
 	}
 	
-	def ResultadoDuelo iniciarDuelo(){
+	def ResultadoDuelo  iniciarDuelo(){
 		jugador.peleasCon(personajeSeleccionado.pers)
 		sistema.iniciarDuelo(jugador, personajeSeleccionado.pers, posicion)
 	}

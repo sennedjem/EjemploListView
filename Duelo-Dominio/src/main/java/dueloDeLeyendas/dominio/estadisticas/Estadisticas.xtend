@@ -104,7 +104,7 @@ import dueloDeLeyendas.dominio.duelo.ResultadoDuelo
 	}
 	
 	
-	///DEBERIA IR EN OTRA CLASE
+	///DEBERIA IR EN OTRA CLASE 
 	def numeroRandom(){
 		val Random rand = new Random(System.currentTimeMillis())
 		return rand.nextInt(150)

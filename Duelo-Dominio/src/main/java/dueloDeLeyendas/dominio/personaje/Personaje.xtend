@@ -8,7 +8,7 @@ import org.uqbar.commons.utils.Observable
 @Observable
 @Accessors class Personaje {
 	
-	val String nombre
+	val String nombre 
 	val List<String> especialidades
 	val List<String> debilidades
 	val String posicionIdeal
