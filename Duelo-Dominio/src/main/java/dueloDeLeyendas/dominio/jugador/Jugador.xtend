@@ -16,7 +16,6 @@ import org.uqbar.commons.utils.Observable
 	var String nombreJugador
 	var Integer pesoDenuncias
 	var Integer puntuacionRanking
-	var List<Personaje> personajes
 	var List<Estadisticas> misEstadisticas
 	var SistemaDeDuelos sistema
 	
@@ -26,15 +25,17 @@ import org.uqbar.commons.utils.Observable
 		nombreJugador = nombre
 		pesoDenuncias = 0
 		puntuacionRanking = 0
-		personajes = new ArrayList
 		misEstadisticas = new ArrayList
 		sistema = sist
+		agregarTodosLosPjAEstadisticas
 	}
-
-	/** Inicia un nuevo duelo con uno mismo como parametro */
-	def void iniciarDuelo (SistemaDeDuelos sistema, Personaje personaje, String posicion){
-		sistema.iniciarDuelo(this, personaje,posicion)
-	} 
+	
+	def agregarTodosLosPjAEstadisticas() {
+		
+		 for(Personaje per: sistema.personajesDisponibles){
+			agregarEstadistica(per)
+         }
+	}
 	
 	/**Devuelve el raking de jugador */
 	def Integer getRanking() {
@@ -50,10 +51,9 @@ import org.uqbar.commons.utils.Observable
 		return cantidadDG
 	}
 	
-	/**Agrega un personaje a la lista de personajes */
-	def agregarPersonaje(Personaje pers){
-		personajes.add(pers)
-		misEstadisticas.add(new Estadisticas(pers, this))
+	
+	def agregarEstadistica(Personaje pers){
+		misEstadisticas.add(new Estadisticas(pers, this,sistema))
 	}
 	
 	/**Devuelve la estadistica correspondiente al personaje pasado por parametro */
@@ -65,26 +65,6 @@ import org.uqbar.commons.utils.Observable
 		estadistica
 	}
 	
-	/**Desde el duelo, suma lo necesario a las estadisticas del personaje cuando gana */
-	def ganeSumarAEstadisticas(Jugador retador, Personaje personaje, String posicion, double clasificacion) {
-		var Estadisticas est = getEstadisticas(personaje)
-		if (retador == this) est.actualizarGaneRetador(posicion,clasificacion)
-		 else est.actualizarGane
-	}
-	
-	/**Desde el duelo, suma lo necesario a las estadisticas del personaje cuando pierde */
-	def perdiSumarAEstadisticas(Jugador retador, Personaje personaje, String posicion, double clasificacion) {
-		var Estadisticas est = getEstadisticas(personaje)
-		if (retador == this) est.actualizarPerdiRetador(posicion, clasificacion)
-		 else est.actualizarPerdi
-	}
-	
-	/**Desde el duelo, suma lo necesario a las estadisticas del personaje cuando empata */
-	def empateSumarAEstadisticas(Jugador retador,Personaje personaje, String ubicacion, double clasificacion) {
-		val Estadisticas est = getEstadisticas(personaje)
-		if (retador == this) est.actualizarEmpateRetador(ubicacion, clasificacion)
-		else est.actualizarEmpate
-	}
 	
 	/**Suma al peso de denuncias cuando es denunciado */
 	def sumaleATuPesoDeDenuncia(Integer peso) {
@@ -104,9 +84,17 @@ import org.uqbar.commons.utils.Observable
 			else new PersonajePuntaje(personaje,estadistica.clasificacionString)
 	}
 	
-	def peleasCon(Personaje personaje) {
-		if (!this.personajes.contains(personaje))
-			this.agregarPersonaje(personaje)
+	def peleasCon(Personaje per) {
+		if (noJugeConPersonaje(per))
+			this.agregarEstadistica(per)
+	}
+	
+	def personajesConLosQueJuge() {
+		misEstadisticas.map[personaje]
+	}
+	
+	def noJugeConPersonaje(Personaje per) {
+		!this.misEstadisticas.forall[e| e.personaje== per]
 	}
 	
 	

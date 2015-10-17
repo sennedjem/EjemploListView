@@ -7,34 +7,52 @@ import dueloDeLeyendas.dominio.estadisticas.Estadisticas
 import org.uqbar.commons.utils.Observable
 
 @Observable
-@Accessors class ResultadoDuelo {
+@Accessors  class ResultadoDuelo {
 	var Jugador iniciador
 	var Jugador retado
-	var Jugador ganador
-	var Jugador perdedor
-	var Personaje ganadorPersonaje
-	var Personaje perdedorPersonaje 
-	var Estadisticas estGanadorConPersonaje
-	var Estadisticas estPerdedorConPersonaje
+	var Personaje iniciadorPersonaje
+	var Personaje retadoPersonaje 
 	var String posicion
-	var double poderAtaqueGanador
-	var double poderAtaquePerdedor
+	var double poderAtaqueIniciador
+	var double poderAtaqueRetado
 	
 	
 	
-	new(Jugador elQueInicio,Jugador quienRetaron,Jugador jugador, Jugador jugador2, Personaje personaje, Personaje personaje2, String string, double d, double e) {
+	new(Jugador elQueInicio,Jugador jRetado, Personaje personaje, Personaje personaje2, String string, double d, double e) {
 		iniciador = elQueInicio
-		retado = quienRetaron
-		ganador = jugador
-		perdedor = jugador2
-		ganadorPersonaje = personaje
-		perdedorPersonaje = personaje2
-		estGanadorConPersonaje = ganador.getEstadisticas(ganadorPersonaje)
-		estPerdedorConPersonaje = perdedor.getEstadisticas(perdedorPersonaje)
+		retado = jRetado
+		iniciadorPersonaje = personaje
+		retadoPersonaje = personaje2
 		posicion = string
-		poderAtaqueGanador = d
-		poderAtaquePerdedor = e
+		poderAtaqueIniciador = d
+		poderAtaqueRetado = e
 	}
+	def esEmpate() {
+		poderAtaqueIniciador == poderAtaqueRetado
+	}
+	
+	def participo(Jugador jugador) {
+		esIniciador(jugador)|| esRetado(jugador)
+	}
+	def esIniciador(Jugador jugador) {
+		iniciador.nombreJugador.equals(jugador.nombreJugador)
+	}
+	
+	def esRetado(Jugador jugador) {
+		retado.nombreJugador.equals(jugador.nombreJugador)
+	}
+	
+	def ganoIniciador() {
+		poderAtaqueIniciador > poderAtaqueRetado
+	}
+	
+	def ganoRetado() {
+		poderAtaqueIniciador < poderAtaqueRetado
+	}
+
+
+
+	
 	
 	
 }

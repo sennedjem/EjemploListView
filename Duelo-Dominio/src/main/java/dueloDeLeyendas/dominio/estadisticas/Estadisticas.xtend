@@ -9,6 +9,8 @@ import org.uqbar.commons.utils.Observable
 import java.util.List
 import java.util.ArrayList
 import java.util.Random
+import dueloDeLeyendas.dominio.sistemaDeDuelos.SistemaDeDuelos
+import dueloDeLeyendas.dominio.duelo.ResultadoDuelo
 
 /**Modela las estadísticas correspondientes a un jugador y un personaje */
  
@@ -17,121 +19,22 @@ import java.util.Random
 	
 	val Personaje personaje
 	val Jugador jugador
-	var Integer cantDuelosIniciados
-	var Integer cantDuelosGanados
-	var Integer cantKills
-	var Integer cantDeads
-	var Integer assists
-	var Integer jugados
-	var List<String>ubicacionesUsadas
 	var String mejorUbicacion
 	var double clasificacion
+	var SistemaDeDuelos sistema
 	
 	/**Crea una instancia de la clase Estadisticas con los personajes y jugadores pasados
 	 * por parametro y todos los demas valores inicializados en 0, o lista vacia. */
-	new (Personaje pers, Jugador jug){
+	new (Personaje pers, Jugador jug,SistemaDeDuelos sis){
 		jugador = jug
 		personaje = pers
-		cantDuelosIniciados = 0
-		cantDuelosGanados = 0
-		cantKills = 0
-		cantDeads = 0
-		assists = 0
-		jugados = 0
-	    ubicacionesUsadas = new ArrayList()	
-		mejorUbicacion = ""
+		mejorUbicacion = personaje.posicionIdeal
 		clasificacion = 0
+		sistema = sis
 	}
 	
-	/**Aumenta en uno la cantidad de duelos iniciados. */
-	 def void sumarIniciado(){
-	 	cantDuelosIniciados ++  
-	 }
-	 
-	 /**Aumenta en uno la cantidad de duelos ganados. */
-	 def void sumarGanado(){
-	 	cantDuelosGanados ++
-	 }
-	  
-	 /**Aumenta en uno la cantidad de kills. */
-	 def void sumarKill(){
-	  	cantKills ++
-	 }
-	   
-	 /**Aumenta en uno la cantidad de kills. */
-	 def void sumarDead(){
-	  	cantDeads ++
-	 }
-	    
-	 /**Aumenta en uno la cantidad de assists. */
-	 def void sumarAssist(){
-	   	assists ++
-	 }
-	     
-	 /**Agrega la ubicacion en que el personaje fue utilizado en un duelo */
-	 def void agregarUbicacion(String ubicacion){
-	   	ubicacionesUsadas.add(ubicacion)
-	 }
-	 
-	/**Suma uno a los duelos jugados */
-	def sumarJugado(){
-		jugados = jugados +1
-	}
 	
-	def sumarVictoria(String string) {
-		sumarKill
-		sumarGanado
-		sumarJugado
-		agregarUbicacion(string)
-		setMejorUbicacion(string)
-	}
 	
-	/**Actualiza los parametros necesario cuando el jugador que inicia el duelo ganó el mismo */
-	def actualizarGaneRetador(String posicion, double clasificacion) {
-		sumarIniciado
-		sumarGanado
-		sumarJugado
-		agregarUbicacion(posicion)
-		setMejorUbicacion(posicion)
-		setClasificacion(clasificacion)
-	}
-	
-	def actualizarGane() {
-		sumarGanado
-		sumarKill
-		sumarJugado
-	}
-	
-	def actualizarPerdi() {
-		sumarDead
-		sumarJugado
-	}
-	
-	/**Actualiza los parametros necesario cuando el jugador que inicia el duelo perdio el mismo */
-	def actualizarPerdiRetador(String posicion, double clasificacion) {
-		sumarIniciado
-		sumarJugado
-		agregarUbicacion(posicion)
-		setClasificacion(clasificacion)
-	}
-	
-	def actualizarEmpate() {
-		sumarAssist
-		sumarJugado
-	}
-	
-	/**Actualiza los parametros necesario cuando el jugador que inicia el duelo empato el mismo */
-	def actualizarEmpateRetador(String posicion,double clasificacion) {
-		sumarIniciado
-		sumarAssist
-		sumarJugado
-		agregarUbicacion(posicion)
-		setClasificacion(clasificacion)	
-	}
-	
-	def setJugados(Integer n){
-		jugados = n
-	}
 	
 	/**Evalua y aplica la clasificacion correspondiente */
 	def String getClasificacionString() {
@@ -149,17 +52,56 @@ import java.util.Random
 	 
 	/**Calcula el poder de ataque del personaje del jugador */
 	def double poderDeAtaque(){
-		return ((cantKills + assists % 2 - cantDeads) * cantDuelosIniciados)
-	} 
+		return ((getCantKills + getAssists % 2  - getCantDeads) * getCantDuelosIniciados)
+	}
+	
+	def Integer getCantDuelosIniciados() {
+		0 + sistema.resultadosDuelo.filter[esIniciador(this.jugador)].size
+	}
+	
+	
+	def  Integer getCantDeads() {
+		0 +sistema.resultadosDuelo.filter[ esRetado(this.jugador)&& (poderAtaqueIniciador > poderAtaqueRetado)].size
+	}
+
+	
+	def Integer getAssists() {
+		0 + sistema.resultadosDuelo.filter[participo(this.jugador)&&esEmpate].size
+	}
+
+	
+	def Integer getCantKills() {
+		0 +sistema.resultadosDuelo.filter[esRetado(this.jugador) && ganoRetado].size
+	}
+	
+	def Integer getCantGanadosEIniciados() {
+		0 +sistema.resultadosDuelo.filter[esIniciador(this.jugador) && ganoIniciador].size
+	}
+	
+	def Integer getGetCantDuelosGanados() {
+		0 +this.getCantGanadosEIniciados + this.getCantKills 	
+	}
+	
+	def Personaje getPersonaje() {
+		this.personaje
+	}
 	 
 	def vecesQueUsoPosicionIdeal(){
 		var cantPosicionIdeal = 0
-		for(ubicacion: ubicacionesUsadas){
+		for(ubicacion: getUbicacionesUsadas){
 			if(ubicacion == mejorUbicacion)
 				cantPosicionIdeal ++
 		}
 		return cantPosicionIdeal
-	} 
+	}
+	
+	def getUbicacionesUsadas() {
+	var posicionesQueJugoComoIniciador = new ArrayList<String>
+	for(ResultadoDuelo res : sistema.resultadosDuelo)
+	if(res.esIniciador(this.jugador))
+	posicionesQueJugoComoIniciador.add(res.posicion)
+	posicionesQueJugoComoIniciador
+	}
 	
 	
 	///DEBERIA IR EN OTRA CLASE
@@ -169,12 +111,12 @@ import java.util.Random
 } 
 	
 	def esRampage(){
-		return cantDuelosGanados >= 5 && vecesQueUsoPosicionIdeal >=5 && numeroRandom >90
+		return getCantDuelosGanados >= 5 && vecesQueUsoPosicionIdeal >=5 && numeroRandom >90
 	}
 	
 	/**Determina si el personaje del jugador es Dominador */
 	def esDominador(){
-		return cantDuelosGanados >= 2 && vecesQueUsoPosicionIdeal >=2 && numeroRandom >70
+		return getCantDuelosGanados >= 2 && vecesQueUsoPosicionIdeal >=2 && numeroRandom >70
 	}
 	
 	def esKillingSpread(){
@@ -184,4 +126,7 @@ import java.util.Random
 	def esManco(){
 		return numeroRandom >30
 	}
+	
+
+	
 }

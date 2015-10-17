@@ -20,6 +20,7 @@ import java.util.Random
 	var List<Personaje> personajesDisponibles
 	var List<Personaje> personajesDesactivados
 	val RealizadorDuelo realizadorDuelo
+	var List<ResultadoDuelo> resultadosDuelo
 	
 	/**Constructor, crea una nueva instacia de sistema con un realizador de duelos*/
 	new(RealizadorDuelo rd){
@@ -51,8 +52,10 @@ import java.util.Random
 	def ResultadoDuelo iniciarDuelo(Jugador ret, Personaje personaje, String pos){
 		val Jugador rival = this.encontrarRivalAcorde (ret, personaje)
 		val Personaje rivPers = this.buscarPersonajeParaDuelo(ret, personaje)
-		rival.agregarPersonaje(rivPers)
-		realizadorDuelo.realizarDuelo(pos, ret, rival, personaje, rivPers)
+		rival.agregarEstadistica(rivPers)
+		var ResultadoDuelo res= realizadorDuelo.realizarDuelo(pos, ret, rival, personaje, rivPers)
+		resultadosDuelo.add(res)
+		res
 	}
 	
 	/**Retorna un personaje apto para iniciar el duelo, de no encontrar ninguno devuelve cualquier personaje siendo este
@@ -64,7 +67,7 @@ import java.util.Random
 			if (e.cantDuelosIniciados > 0)
  				personajesAptos.add(e.personaje)
 		if (personajesAptos.size > 0)
-			personajeApto= filtrarPersonaje(jugador.personajes,personaje)
+			personajeApto= filtrarPersonaje(jugador.personajesConLosQueJuge,personaje)
 		else personajeApto= filtrarPersonaje(personajesAptos,personaje)
 			 	
 		return personajeApto

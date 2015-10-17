@@ -41,20 +41,6 @@ class DueloDeLeyendasModel {
 	}	
 	
 	/** Crea una serie de stats en cero para los personajes que el jugador todavia no uso */
-	def dummyStats(PersonajePuntaje pp){
-		var est = new Estadisticas(pp.pers, null)=>[
-			assists = new Integer(0)
-			cantDeads = new Integer(0)
-			cantDuelosGanados = new Integer(0)
-			cantDuelosIniciados = new Integer(0)
-			cantKills = new Integer(0)
-			mejorUbicacion = ""
-			ubicacionesUsadas = new ArrayList()
-			jugados = new Integer(0)
-			clasificacion = new Integer(0)
-		]
-		est
-	}
 	
 	/** Inicializa los 8 personajes de la pantalla principal, los agrega a la lista de personajes del modelo,
 	 * le agrega cuatro personajes al jugador, y pone al primer personaje como el personaje 
@@ -99,10 +85,10 @@ class DueloDeLeyendasModel {
 		]
 		
 		jugador =>[
-			agregarPersonaje(per1)
-			agregarPersonaje(per2)
-			agregarPersonaje(per4)
-			agregarPersonaje(per5)
+			agregarEstadistica(per1)
+			agregarEstadistica(per2)
+			agregarEstadistica(per4)
+			agregarEstadistica(per5)
 		]
 		
 
@@ -112,30 +98,12 @@ class DueloDeLeyendasModel {
 	
 	/**Setea los stats para todos los personajes del jugador y crea la lista de personajes para la tabla */
 	def inicializarStats(){
-		setearEstadisticas(jugador, personajes.get(0), 60, 40, 1, 8, 62, "TOP")
-		setearEstadisticas(jugador, personajes.get(1), 40, 50, 1, 9, 55, "MID")
-		setearEstadisticas(jugador, personajes.get(3), 10, 70, 1, 0, 75,  "JUNGLE")
-		setearEstadisticas(jugador, personajes.get(4), 55, 45, 1, 20, 60, "BOT")
+
 	}	
 
 	
 	/**Setea las estadisticas del personaje pasado por parametro y con el jugador y datos pasados por parámetro */
-	def setearEstadisticas(Jugador jugador, Personaje personaje, Integer clas, Integer assist,
-							Integer deads, Integer kills, Integer jug, String pos) {
-		jugador.getEstadisticas(personaje)=>[
-			assists = assist
-			cantDeads = deads
-			cantDuelosGanados = 7
-			cantKills = kills
-			clasificacion = clas
-			jugados = jug
-			mejorUbicacion = pos
-			cantDuelosIniciados = 1
-			ubicacionesUsadas = new ArrayList()
 
-		]
-	
-	}
 
 
 	//
@@ -162,8 +130,7 @@ class DueloDeLeyendasModel {
 
 	/** Devuelve los stats del personaje seleccionado actualmente */
 	def getStatsPersonajeSeleccionado(){
-		if(personajeSeleccionado != null) jugador.getEstadisticas(personajeSeleccionado.pers)
-		else this.dummyStats(personajeSeleccionado)
+	
 	}
 	
 	/** Setea el personaje seleccionado con el que se pasa por parámetro y dispara la notificación
