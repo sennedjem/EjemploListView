@@ -1,0 +1,17 @@
+<!-- Panel de stats y jugar-->
+		<div class="estadisticas">
+			<table style="width:100%">
+				<tr class ="tractor">
+					<th>Especialidades:</th>
+					<td><div class="col-md-12" ng-repeat="hab in personajeActual.caracteristicas.Habilidades"><font color="white" >{{hab}}</font></div></td>
+				</tr>
+				<tr class ="tractor"> 
+					<th>Debilidades:</th>
+					<td ng-repeat="deb in personajeActual.caracteristicas.Debilidades">{{deb}}</td>
+				</tr>
+				<tr class ="tractor">
+					<th>Mejor posición:</th>
+					<td>{{personajeActual.caracteristicas.MejorPosicion}}</td>
+				</tr>
+			</table>
+		</div>
