@@ -21,4 +21,4 @@ ganasteApp.service('ServiceResultado', function(){
 				 }
 	}
 }
-)
+)+
