@@ -18,7 +18,7 @@ class TareasController {
 	extension JSONUtils = new JSONUtils
 
 	def static void main(String[] args) {
-		XTRest.start(TareasController, 9000)
+		XTRest.start(DueloController, 9000)
 	}
 	
 	@Get("/posiciones")
@@ -34,6 +34,14 @@ class TareasController {
 		ok(posiciones.toJson)
 	}
 	
+	@Get("/personajes")
+	def Result personajes(){
+		val pers = new RepoWeb().personajes
+		response.contentType = ContentType.APPLICATION_JSON
+		ok(pers.toJson)
+	}
+	
+	
 	@Get("/tareas")
 	def Result tareas() {
 		val tareas = RepoTareas.instance.allInstances
@@ -41,12 +49,7 @@ class TareasController {
 		ok(tareas.toJson)
 	}
 	
-	@Get("/personajes")
-	def Result personajes(){
-		val pers = new RepoWeb().personajes
-		response.contentType = ContentType.APPLICATION_JSON
-		ok(pers.toJson)
-	}
+	
 
 	@Put('/tareas/:id')
 	def Result actualizar(@Body String body) {
