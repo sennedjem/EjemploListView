@@ -7,10 +7,11 @@ dueloApp.controller('DueloController', function($scope, ServiceJuego) {
     $scope.posiciones = listaPosiciones
   });
 
+  $scope.personajes = ServiceJuego.datosDelJuego().personajes;
   $scope.personajeActual=$scope.datosDelJuego.personajeActual;
   $scope.nombre=$scope.personajeActual.id;
 
-  $scope.resultado = 3;
+  $scope.resultado = 2;
 
   $scope.mifoto =function (personaje) {
          $scope.personajeActual=personaje;

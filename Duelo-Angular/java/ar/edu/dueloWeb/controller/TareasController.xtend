@@ -18,7 +18,7 @@ class TareasController {
 	extension JSONUtils = new JSONUtils
 
 	def static void main(String[] args) {
-		XTRest.start(DueloController, 9000)
+		XTRest.start(TareasController, 9000)
 	}
 	
 	@Get("/posiciones")
@@ -39,6 +39,11 @@ class TareasController {
 		val pers = new RepoWeb().personajes
 		response.contentType = ContentType.APPLICATION_JSON
 		ok(pers.toJson)
+	}
+	
+	@Get("/personajeEstaditica")
+	def Result personajeEstadistica(){
+		val persE = new RepoWeb().getE
 	}
 	
 	
