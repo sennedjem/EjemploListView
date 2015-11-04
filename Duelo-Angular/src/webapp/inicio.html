@@ -10,6 +10,9 @@
 
 	<!-- Mi estilo en css-->
 	<link rel="stylesheet" href="css/myStyle.css">
+	
+	<!-- GitHub Buttons -->
+<script async defer id="github-bjs" src="https://buttons.github.io/buttons.js"></script>
 
 	<!--LA PUTA QUE TE PARIO ANGULAR  -->
 	<script src="node_modules/angular/angular.min.js"></script>
@@ -31,26 +34,26 @@
 <body ng-controller='DueloController'>
 	<h1 class="header1">¡Selecciona tu personaje! </h1>
 	<!-- Panel de personajes a seleccionar-->
-	<div class="col-md-4 columnasStruct" style="padding:0 30px;">
-		<div class="col-md-6 " style="color:black; padding:0 15px;" ng-repeat="pers in datosDelJuego.personajes" >	
+	<div class="col-md-4 columnasStruct" >
+		<div class="col-md-6 colorNegro" ng-repeat="pers in datosDelJuego.personajes" >	
 			<img 
 			ng-src="{{pers.path}}" class="img img-rounded" alt="Responsive imagen" 
 			ng-click="mifoto(pers)" />
 		</div><!-- SIN SACAR EL ESTILO NO SE PUEDE HACER DIRECTIVA-->
 	</div>
 	<!-- Panel de personaje seleccionado-->
-	<div class="col-md-4 columnasSinStruct container-fluid" style="padding:0 15px;">
+	<div class="col-md-4 columnasSinStruct container-fluid" >
 
-		<div class="nombrePJSeleccionado" id="tituloSeleccionado" size="5">
+		<div class="nombrePJSeleccionado" id="tituloSeleccionado" >
 			{{personajeActual.id}}
 		</div>
-		<div style="padding:0 15px;" >
+		<div class="padding15" >
 			<img src="{{personajeActual.path}}" class="imgSeleccionada img-rounded" />
 		</div><!-- SIN SACAR EL ESTILO NO SE PUEDE HACER DIRECTIVA-->
 
 	</div>
 	<!-- Panel de stats y jugar-->
-	<div class="col-md-4 columnasStruct container" style="padding:0 15px;">
+	<div class="col-md-4 columnasStruct container padding15" >
 		<div class="panelEstadisticasYJugar">
 			<habilidades-data></habilidades-data>
 			<stat-jugar-data></stat-jugar-data>

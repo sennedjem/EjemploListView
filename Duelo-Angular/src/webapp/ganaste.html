@@ -1,11 +1,24 @@
 
+<!DOCTYPE html>
+<html>
+<head>
+<script src="js/jquery-1.11.3.min.js"></script>
+<link rel="stylesheet" href="css/bootstrap.css">
+<link rel="stylesheet" href="css/bootstrap-theme.css">
+<link rel="stylesheet" href="css/myStyleResultado.css">
+<link rel="stylesheet" href="css/myStyle.css">
+<script src="js/bootstrap.js"></script>
+ <meta charset="UTF-8">
+<title> Duelo de leyendas </title>
+</head>
+<body>
 <!-- Panel de stats-->
-<div class = "col-md-6  panelResultadoBlanco"  style="margin:0 30px;" ng-show="resultado==1">
+<div class = "col-md-6  panelResultadoBlanco"   ng-show="resultado==1">
 <h1 class="header2"> AMUMU VS ASHE</h1>
 	<!-- Panel de jugador 1-->
-	<div class = "col-md-6">
-	<div> <img src="http://i.imgur.com/uLCwMOS.jpg"  width="100%" height="400px" style="margin-bottom:30px;"></div>
-	<table id = "t01"; style="width:100%" >
+	<div class = "col-md-6 colorNegro">
+	<div> <img src="http://i.imgur.com/uLCwMOS.jpg" class= "imagenResultado"></div>
+	<table id = "t01"; class="tablaStats" >
   	<tr>
    	 <td>Jugadas</td>
    	 <td>11</td> 
@@ -38,9 +51,9 @@
 	</div>
 
 	<!-- Panel de jugador 2-->
-	<div class = "col-md-6 " >
-	<img src="http://dota2walls.com/wp-content/uploads/2014/09/Dota-2-Skywrath-Mage-Wallpaper-1.jpg" width="100%" height="400" style="margin-bottom:30px;">
-	<table id = "t01"; style="width:100%">
+	<div class = "col-md-6 colorNegro" >
+	<img src="http://dota2walls.com/wp-content/uploads/2014/09/Dota-2-Skywrath-Mage-Wallpaper-1.jpg" class= "imagenResultado">
+	<table id = "t01"; class="tablaStats">
   	<tr>
    	 <td>Jugadas</td>
    	 <td>5</td> 
@@ -71,13 +84,13 @@
   	</tr>
   	</table>
 	</div>
-
+</div>
 
 <!-- Panel de victoria -->
-<div class="col-md-6  panelResultadoCeleste" style="margin:0 30px;">
+<div class="col-md-6  panelResultadoCeleste espacio" >
 <div class=" row boxWin " >
-  <div style="margin-top: 200px;margin-bottom: 200px;">
-  <h1 style="text-align:center"> GANASTE </h1>
+  <div class="marginTopBot">
+  <h1 class="textoCentro"> GANASTE PUTO </h1>
   <br>
   <h2 style="text-align:center"> 60 A 12 </h2>
   <br>
@@ -86,7 +99,7 @@
   </div>
 </div>
 </div>
-</div>
+
 
 <div ng-show="resultado==2">
   <perdiste-data></perdiste-data>
@@ -95,3 +108,5 @@
 <div ng-show="resultado==3">
   <no-hay-rival-data></no-hay-rival-data>
 </div>
+</body>
+</html>
