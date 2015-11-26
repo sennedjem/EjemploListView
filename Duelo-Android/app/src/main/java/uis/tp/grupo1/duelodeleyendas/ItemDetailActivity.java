@@ -20,20 +20,13 @@ import android.widget.Button;
  * This activity is mostly just a 'shell' activity containing nothing
  * more than a {@link ItemDetailFragment}.
  */
-public class ItemDetailActivity extends AppCompatActivity implements View.OnClickListener {
+public class ItemDetailActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_item_detail);
         Button b = (Button) findViewById(R.id.button);
-        b.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(ItemDetailActivity.this, EstadisticasActivity.class);
-                startActivity(i);
-            }
-        });}
         Toolbar toolbar = (Toolbar) findViewById(R.id.detail_toolbar);
         setSupportActionBar(toolbar);
 
@@ -62,6 +55,17 @@ public class ItemDetailActivity extends AppCompatActivity implements View.OnClic
                     .add(R.id.item_detail_container, fragment)
                     .commit();
         }
+
+        Button btnIr= (Button) findViewById(R.id.button);
+        btnIr.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent= new Intent(ItemDetailActivity.this, EstadisticasActivity.class);
+                startActivity(intent);
+            }
+        });
+
+
     }
 
     @Override
@@ -81,9 +85,4 @@ public class ItemDetailActivity extends AppCompatActivity implements View.OnClic
         return super.onOptionsItemSelected(item);
     }
 
-    @Override
-    public void onClick(View v) {
-        Intent i = new Intent(ItemDetailActivity.this, EstadisticasActivity.class);
-        startActivity(i);
-    }
 }
