@@ -97,6 +97,10 @@ import org.uqbar.commons.utils.Observable
 		!this.misEstadisticas.forall[e| e.personaje== per]
 	}
 	
+	def agregarPersonajes(java.util.ArrayList<dueloDeLeyendas.dominio.personaje.Personaje> personajes) {
+		personajes.addAll(personajes)
+	}
+	
 	
 	
 	

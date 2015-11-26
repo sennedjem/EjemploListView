@@ -20,7 +20,7 @@ import java.util.Random
 	var List<Personaje> personajesDisponibles
 	var List<Personaje> personajesDesactivados
 	val RealizadorDuelo realizadorDuelo
-	var List<ResultadoDuelo> resultadosDuelo
+	var List<ResultadoDuelo> resultadosDuelo = newArrayList
 	
 	/**Constructor, crea una nueva instacia de sistema con un realizador de duelos*/
 	new(RealizadorDuelo rd){
