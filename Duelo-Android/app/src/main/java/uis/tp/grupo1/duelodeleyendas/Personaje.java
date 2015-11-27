@@ -6,7 +6,6 @@ import java.util.List;
 public class Personaje {
 
 
-    private String id;
     private String nombre;
     private List<String> habilidades;
     private List<String> debilidades;
@@ -14,19 +13,10 @@ public class Personaje {
     private Estadisticas stats;
 
     public Personaje(String unid,String name, String pos){
-        this.id = unid;
         this.nombre = name;
         this.habilidades = new ArrayList<String>();
         this.debilidades = new ArrayList<String>();
         this.mejorPos = pos;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
     }
 
 

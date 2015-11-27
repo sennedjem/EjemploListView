@@ -32,10 +32,6 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <android.support.v4.widget.NestedScrollView android:id="@+id/item_detail_container"
-        android:layout_width="match_parent" android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
-
     <LinearLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
@@ -48,17 +44,30 @@
         android:weightSum="1">
 
 
+        <ImageView
+            android:id="@+id/imageView1"
+            android:layout_width="139dp"
+            android:layout_height="352dp"
+            android:src="@drawable/android"
+            android:visibility="visible" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="214dp"
+            android:text="New Text"
+            android:id="@+id/pepe"
+            android:layout_gravity="center_vertical" />
+
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Estadisticas"
             android:id="@+id/button"/>
 
-        <ImageView
-            android:id="@+id/imageView1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/android" />
+        <android.support.v4.widget.NestedScrollView android:id="@+id/item_detail_container"
+            android:layout_width="wrap_content" android:layout_height="wrap_content"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
     </LinearLayout>
 
 

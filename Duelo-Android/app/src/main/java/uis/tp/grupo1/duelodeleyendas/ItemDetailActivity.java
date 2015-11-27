@@ -61,6 +61,7 @@ public class ItemDetailActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent= new Intent(ItemDetailActivity.this, EstadisticasActivity.class);
+                intent.putExtra("nombre",ItemDetailFragment.nombrePersonaje);
                 startActivity(intent);
             }
         });

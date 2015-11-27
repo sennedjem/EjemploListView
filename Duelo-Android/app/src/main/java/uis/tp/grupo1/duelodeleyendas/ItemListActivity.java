@@ -6,12 +6,26 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
+
+import java.util.ArrayList;
+import java.util.List;
+
+
+import retrofit.Call;
+import retrofit.Callback;
+import retrofit.GsonConverterFactory;
+import retrofit.Response;
+import retrofit.Retrofit;
+import uis.tp.grupo1.duelodeleyendas.dummy.PersonajesServices;
 
 public class ItemListActivity extends AppCompatActivity
         implements ItemListFragment.Callbacks {
 
     private boolean mTwoPane;
+    private List<String> personajes = new ArrayList<String>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,6 +36,32 @@ public class ItemListActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
         toolbar.setTitle(getTitle());
 
+
+
+        final String BASE_URL = "http://127.0.0.1:9000";
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        PersonajesServices service = retrofit.create(PersonajesServices.class);
+
+        Call<List<String>> call = service.getPersonajes();
+        call.enqueue(new Callback<List<String>>() {
+            @Override
+            public void onResponse(Response<List<String>> response, Retrofit retrofit) {
+                List<String> personajesNombres = response.body();
+                personajes = personajesNombres;
+                TextView texto = (TextView) findViewById(R.id.caja_de_texto);
+                texto.setText(personajes.get(0));
+            }
+
+            @Override
+            public void onFailure(Throwable t) {
+                TextView texto = (TextView) findViewById(R.id.caja_de_texto);
+                texto.setText("error");
+            }
+        });
 
         if (findViewById(R.id.item_detail_container) != null) {
             // The detail container view will be present only in the
@@ -36,7 +76,6 @@ public class ItemListActivity extends AppCompatActivity
                     .findFragmentById(R.id.item_list))
                     .setActivateOnItemClick(true);
         }
-
     }
 
     @Override
@@ -61,4 +100,6 @@ public class ItemListActivity extends AppCompatActivity
             startActivity(detailIntent);
         }
     }
+
+
 }

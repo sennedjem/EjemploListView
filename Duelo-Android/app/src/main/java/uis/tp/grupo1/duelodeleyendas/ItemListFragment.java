@@ -3,15 +3,31 @@ package uis.tp.grupo1.duelodeleyendas;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
+import java.util.ArrayList;
+import java.util.List;
+
+
+import retrofit.Call;
+import retrofit.Callback;
+import retrofit.GsonConverterFactory;
+import retrofit.Response;
+import retrofit.Retrofit;
+import android.view.View;
+import android.widget.TextView;
 import uis.tp.grupo1.duelodeleyendas.dummy.DummyContent;
+import uis.tp.grupo1.duelodeleyendas.dummy.PersonajesServices;
 
 public class ItemListFragment extends ListFragment {
 
     private RepoPersonajes repo = new RepoPersonajes();
+
+
 
     private static final String STATE_ACTIVATED_POSITION = "activated_position";
 
@@ -36,11 +52,12 @@ public class ItemListFragment extends ListFragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+
         setListAdapter(new ArrayAdapter<Personaje>(
                 getActivity(),
                 android.R.layout.simple_list_item_activated_1,
                 android.R.id.text1,
-                repo.personajes()));
+                    repo.personajes()));
     }
 
     @Override

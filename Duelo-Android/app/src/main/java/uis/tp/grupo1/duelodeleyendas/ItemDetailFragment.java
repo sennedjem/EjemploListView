@@ -30,7 +30,7 @@ public class ItemDetailFragment extends Fragment {
      * The dummy content this fragment is presenting.
      */
     private Personaje mItem;
-
+    public static  String nombrePersonaje = "sarasa" ;
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
@@ -47,10 +47,11 @@ public class ItemDetailFragment extends Fragment {
             // arguments. In a real-world scenario, use a Loader
             // to load content from a content provider.
             mItem = new RepoPersonajes().getPorNombre(getArguments().getString(ARG_ITEM_ID));
+            nombrePersonaje = mItem.getNombre();
             Activity activity = this.getActivity();
             CollapsingToolbarLayout appBarLayout = (CollapsingToolbarLayout) activity.findViewById(R.id.toolbar_layout);
             if (appBarLayout != null) {
-                appBarLayout.setTitle(mItem.getNombre());
+                appBarLayout.setTitle(nombrePersonaje);
             }
         }
     }
