@@ -9,9 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import java.util.concurrent.atomic.AtomicReference;
 
-import uis.tp.grupo1.duelodeleyendas.dummy.DummyContent;
 
 /**
  * A fragment representing a single Item detail screen.

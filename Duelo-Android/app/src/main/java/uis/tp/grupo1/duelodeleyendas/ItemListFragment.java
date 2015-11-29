@@ -4,17 +4,17 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import retrofit.Callback;
-import retrofit.RestAdapter;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
+import uis.tp.grupo1.duelodeleyendas.Adapters.PersonajesAdapter;
+import uis.tp.grupo1.duelodeleyendas.Services.PersonajesServices;
+import uis.tp.grupo1.duelodeleyendas.Services.RepoPersonajes;
 
 
 public class ItemListFragment extends ListFragment {
@@ -47,8 +47,6 @@ public class ItemListFragment extends ListFragment {
         super.onCreate(savedInstanceState);
         obtenerPersonajes();
     }
-
-
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
@@ -90,26 +88,8 @@ public class ItemListFragment extends ListFragment {
     }
 
 
-/*    private List<String> obtenerPersonajes() {
-        PersonajesServices pjServices = createPeliculasServices();
-        pjServices.getPersonajesNombres(new Callback<List<String>>() {
-            @Override
-            public void success(List<String> pjs, Response response) {
-                personajes = pjs;
-            }
-
-            @Override
-            public void failure(RetrofitError error) {
-
-            }
-
-        });
-        return personajes;
-    }
-*/
-
     private void obtenerPersonajes() {
-        PersonajesServices pjServices = createPeliculasServices();
+        PersonajesServices pjServices = repo.createPeliculasServices();
         pjServices.getPersonajesNombres(new Callback<List<String>>() {
             @Override
             public void success(List<String> pjs, Response response) {
@@ -145,12 +125,5 @@ public class ItemListFragment extends ListFragment {
         mActivatedPosition = position;
     }
 
-    private PersonajesServices createPeliculasServices(){
-        String SERVER_IP = "127.0.0.1";
-        String SERVER_IP_GENY= "127.0.0.1";
-        String API_URL = "http://192.168.1.37:9000";
-        RestAdapter restAdapter = new RestAdapter.Builder().setEndpoint(API_URL).build();
-        PersonajesServices personajesServicess = restAdapter.create(PersonajesServices.class);
-        return personajesServicess;
-    }
+
 }

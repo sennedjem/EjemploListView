@@ -10,14 +10,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 import retrofit.Callback;
-import retrofit.RestAdapter;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
+import uis.tp.grupo1.duelodeleyendas.Services.PersonajesServices;
+import uis.tp.grupo1.duelodeleyendas.Services.RepoPersonajes;
 
 public class ItemListActivity extends AppCompatActivity
         implements ItemListFragment.Callbacks {
 
     private boolean mTwoPane;
+    private RepoPersonajes repo = new RepoPersonajes();
     private List<String> personajes = new ArrayList<String>();
 
     @Override
@@ -44,7 +46,7 @@ public class ItemListActivity extends AppCompatActivity
                     .setActivateOnItemClick(true);
         }
 
-        PersonajesServices pjServices = createPeliculasServices();
+        PersonajesServices pjServices = repo.createPeliculasServices();
         pjServices.getPersonajesNombres(new Callback<List<String>>() {
             @Override
             public void success(List<String> pjs, Response response) {
@@ -86,14 +88,7 @@ public class ItemListActivity extends AppCompatActivity
         }
     }
 
-    private PersonajesServices createPeliculasServices(){
-        String SERVER_IP = "127.0.0.1";
-        String SERVER_IP_GENY= "127.0.0.1";
-        String API_URL = "http://192.168.1.37:9000";
-        RestAdapter restAdapter = new RestAdapter.Builder().setEndpoint(API_URL).build();
-        PersonajesServices personajesServicess = restAdapter.create(PersonajesServices.class);
-        return personajesServicess;
-    }
+
 
 
 }
