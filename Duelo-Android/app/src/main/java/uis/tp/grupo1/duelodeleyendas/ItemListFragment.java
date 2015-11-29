@@ -3,7 +3,6 @@ package uis.tp.grupo1.duelodeleyendas;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
-import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -12,21 +11,16 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
-
-import retrofit.Call;
 import retrofit.Callback;
-import retrofit.GsonConverterFactory;
-import retrofit.Response;
-import retrofit.Retrofit;
-import android.view.View;
-import android.widget.TextView;
-import uis.tp.grupo1.duelodeleyendas.dummy.DummyContent;
-import uis.tp.grupo1.duelodeleyendas.dummy.PersonajesServices;
+import retrofit.RestAdapter;
+import retrofit.RetrofitError;
+import retrofit.client.Response;
+
 
 public class ItemListFragment extends ListFragment {
 
     private RepoPersonajes repo = new RepoPersonajes();
-
+    private  List<String> personajes = new ArrayList<String>();
 
 
     private static final String STATE_ACTIVATED_POSITION = "activated_position";
@@ -51,14 +45,10 @@ public class ItemListFragment extends ListFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-
-        setListAdapter(new ArrayAdapter<Personaje>(
-                getActivity(),
-                android.R.layout.simple_list_item_activated_1,
-                android.R.id.text1,
-                    repo.personajes()));
+        obtenerPersonajes();
     }
+
+
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
@@ -88,7 +78,7 @@ public class ItemListFragment extends ListFragment {
     @Override
     public void onListItemClick(ListView listView, View view, int position, long id) {
         super.onListItemClick(listView, view, position, id);
-        mCallbacks.onItemSelected(repo.personajes().get(position).getNombre());
+        mCallbacks.onItemSelected(personajes.get(position));
     }
 
     @Override
@@ -99,10 +89,46 @@ public class ItemListFragment extends ListFragment {
         }
     }
 
-    /**
-     * Turns on activate-on-click mode. When this mode is on, list items will be
-     * given the 'activated' state when touched.
-     */
+
+/*    private List<String> obtenerPersonajes() {
+        PersonajesServices pjServices = createPeliculasServices();
+        pjServices.getPersonajesNombres(new Callback<List<String>>() {
+            @Override
+            public void success(List<String> pjs, Response response) {
+                personajes = pjs;
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+
+            }
+
+        });
+        return personajes;
+    }
+*/
+
+    private void obtenerPersonajes() {
+        PersonajesServices pjServices = createPeliculasServices();
+        pjServices.getPersonajesNombres(new Callback<List<String>>() {
+            @Override
+            public void success(List<String> pjs, Response response) {
+                personajes = pjs;
+                agregarPersonajes(pjs);
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+
+            }
+        });
+    }
+
+    private void agregarPersonajes(List<String> pjs) {
+        setListAdapter(new PersonajesAdapter(getActivity(), pjs));
+    }
+
+
     public void setActivateOnItemClick(boolean activateOnItemClick) {
         getListView().setChoiceMode(activateOnItemClick
                 ? ListView.CHOICE_MODE_SINGLE
@@ -117,5 +143,14 @@ public class ItemListFragment extends ListFragment {
         }
 
         mActivatedPosition = position;
+    }
+
+    private PersonajesServices createPeliculasServices(){
+        String SERVER_IP = "127.0.0.1";
+        String SERVER_IP_GENY= "127.0.0.1";
+        String API_URL = "http://192.168.1.37:9000";
+        RestAdapter restAdapter = new RestAdapter.Builder().setEndpoint(API_URL).build();
+        PersonajesServices personajesServicess = restAdapter.create(PersonajesServices.class);
+        return personajesServicess;
     }
 }

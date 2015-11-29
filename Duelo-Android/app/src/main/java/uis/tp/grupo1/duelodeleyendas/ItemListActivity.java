@@ -4,22 +4,15 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.util.Log;
-import android.view.View;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
 
-
-import retrofit.Call;
 import retrofit.Callback;
-import retrofit.GsonConverterFactory;
-import retrofit.Response;
-import retrofit.Retrofit;
-import uis.tp.grupo1.duelodeleyendas.dummy.PersonajesServices;
+import retrofit.RestAdapter;
+import retrofit.RetrofitError;
+import retrofit.client.Response;
 
 public class ItemListActivity extends AppCompatActivity
         implements ItemListFragment.Callbacks {
@@ -37,32 +30,6 @@ public class ItemListActivity extends AppCompatActivity
         toolbar.setTitle(getTitle());
 
 
-
-        final String BASE_URL = "http://127.0.0.1:9000";
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-
-        PersonajesServices service = retrofit.create(PersonajesServices.class);
-
-        Call<List<String>> call = service.getPersonajes();
-        call.enqueue(new Callback<List<String>>() {
-            @Override
-            public void onResponse(Response<List<String>> response, Retrofit retrofit) {
-                List<String> personajesNombres = response.body();
-                personajes = personajesNombres;
-                TextView texto = (TextView) findViewById(R.id.caja_de_texto);
-                texto.setText(personajes.get(0));
-            }
-
-            @Override
-            public void onFailure(Throwable t) {
-                TextView texto = (TextView) findViewById(R.id.caja_de_texto);
-                texto.setText("error");
-            }
-        });
-
         if (findViewById(R.id.item_detail_container) != null) {
             // The detail container view will be present only in the
             // large-screen layouts (res/values-large and
@@ -76,6 +43,24 @@ public class ItemListActivity extends AppCompatActivity
                     .findFragmentById(R.id.item_list))
                     .setActivateOnItemClick(true);
         }
+
+        PersonajesServices pjServices = createPeliculasServices();
+        pjServices.getPersonajesNombres(new Callback<List<String>>() {
+            @Override
+            public void success(List<String> pjs, Response response) {
+                personajes = pjs;
+                if(personajes.size()> 0) {
+                    TextView texto = (TextView) findViewById(R.id.caja_de_texto);
+                    texto.setText(personajes.get(0));
+                }
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+                TextView texto = (TextView) findViewById(R.id.caja_de_texto);
+                texto.setText("no se pudo conectar");
+            }
+        });
     }
 
     @Override
@@ -99,6 +84,15 @@ public class ItemListActivity extends AppCompatActivity
             detailIntent.putExtra(ItemDetailFragment.ARG_ITEM_ID, id);
             startActivity(detailIntent);
         }
+    }
+
+    private PersonajesServices createPeliculasServices(){
+        String SERVER_IP = "127.0.0.1";
+        String SERVER_IP_GENY= "127.0.0.1";
+        String API_URL = "http://192.168.1.37:9000";
+        RestAdapter restAdapter = new RestAdapter.Builder().setEndpoint(API_URL).build();
+        PersonajesServices personajesServicess = restAdapter.create(PersonajesServices.class);
+        return personajesServicess;
     }
 
 
