@@ -1,0 +1,54 @@
+	<!--Panel de juego -->
+		<div>
+			<h1>Jugar!</h1>
+		</div>
+
+		<div class="botones" ng-repeat="posicion in posiciones">
+			<button data-toggle="modal" class="btn btn-default col-md-8 col-md-offset-2 botonConEspacio" data-target="#myModal" >{{posicion}}</button>	
+		</div>
+	<img class="barraSeparadora" src="barra.png"    name="fotoVisor"/>
+	
+		<h1 class="tituloConMarginTop">Stats</h1>
+		<div class="stats" >
+		<table class="tablaStats">
+				<tr>
+				<hola></hola>
+				</tr>
+				<tr>
+					<th>Jugadas</th>
+					<td>{{personajeActual.stat.jugadas}}</td>
+				</tr>
+				<tr> 
+					<th>Ganadas</th>
+					<td>{{personajeActual.stat.ganadas}}</td>
+				</tr>
+				<tr>
+					<th>Kills</th>
+					<td>{{personajeActual.stat.kills}}</td>
+				</tr>
+				<tr>
+					<th>Deads</th>
+					<td>{{personajeActual.stat.deads}}</td>
+				</tr>
+				<tr>
+					<th>Assists</th>
+					<td>{{personajeActual.stat.assists}}</td>
+				</tr>
+				<tr>
+					<th>Mejor Ubicación</th>
+					<td>{{personajeActual.stat.mejorUbicacion}}</td>
+				</tr>
+				<tr>
+					<th>Puntaje</th>
+					<td>{{personajeActual.stat.puntaje}}</td>
+				</tr>
+				
+			</table>
+		</div>
+        
+	</div>
+<!-- Modal -->
+<div id="myModal" class="modal fade" role="dialog">
+  <ganaste-data></ganaste-data>
+</div>
+</div>

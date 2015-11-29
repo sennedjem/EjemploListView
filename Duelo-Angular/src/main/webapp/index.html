@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html ng-app="dueloDeLeyendasApp">
+<head>
+	<script src="js/jquery-1.11.3.min.js"></script>
+	<script src="node_modules/angular/angular.min.js"></script>
+
+	<!-- Bootstrap-->
+	<link rel="stylesheet" href="css/bootstrap.css">
+	<link rel="stylesheet" href="css/bootstrap-theme.css">
+	<script src="js/bootstrap.js"></script>
+
+	<!-- Mi estilo en css-->
+	<link rel="stylesheet" href="css/myStyle.css">
+
+	<!--Angular  -->
+	<script src="js/controller.js"></script>
+	<script src="js/directives.js"></script>
+
+
+	<meta charset="UTF-8">
+	<title> Duelo de leyendas </title>
+</head>
+
+<body ng-controller='DueloCtrl'>
+	<h1 class="header1">¡Selecciona tu personaje! </h1>
+	<!-- Panel de personajes a seleccionar-->
+	<div class="col-md-4 columnasStruct" >
+		<div class="col-md-6 colorNegro" ng-repeat="pers in personajes" >	
+			<img 
+			ng-src="{{pers.path}}" class="img img-rounded" alt="Responsive imagen" 
+			ng-click="mifoto(pers)" />
+		</div><!-- SIN SACAR EL ESTILO NO SE PUEDE HACER DIRECTIVA-->
+	</div>
+	<!-- Panel de personaje seleccionado-->
+	<div class="col-md-4 columnasSinStruct container-fluid" >
+
+		<div class="nombrePJSeleccionado" id="tituloSeleccionado" >
+			{{personajeActual.nombre}}
+		</div>
+		<div class="padding15" >
+			<img src="{{personajeActual.path}}" class="imgSeleccionada img-rounded" />
+		</div><!-- SIN SACAR EL ESTILO NO SE PUEDE HACER DIRECTIVA-->
+
+	</div>
+	<!-- Panel de stats y jugar-->
+	<div class="col-md-4 columnasStruct container padding15" >
+		<div class="panelEstadisticasYJugar">
+			<habilidades-data></habilidades-data>
+			<stat-jugar-data></stat-jugar-data>
+			
+			<!--Panel de juego -->
+		<panel-de-juego-data></panel-de-juego-data>
+		</div>
+		
+	</div>
+	</body>
+	</html>
