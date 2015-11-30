@@ -20,6 +20,6 @@ public interface PersonajesServices {
     @GET("/personajesNombres/{persNombre}")
     void getPersonajePorNombre(@Path("persNombre") String personaje, Callback<PersonajeRep> callback);
 
-    @GET("/estadisticas/{persNombre}")
-    void getEstadisticasPersonajePorNombre(@Path("persNombre") String personaje, Callback<EstadisticasRep> callback);
+    @GET("/estadisticas/{nombrePer}")
+    void getEstadisticas(@Path("nombrePer") String personaje,Callback<EstadisticasRep> callback);
 }

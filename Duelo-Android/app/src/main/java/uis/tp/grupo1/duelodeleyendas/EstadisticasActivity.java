@@ -18,49 +18,55 @@ import uis.tp.grupo1.duelodeleyendas.Services.RepoPersonajes;
 
 public class EstadisticasActivity extends AppCompatActivity {
 
-    private RepoPersonajes repo = new RepoPersonajes();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_estadisticas);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbarEst);
         setSupportActionBar(toolbar);
-        TextView texto = (TextView)findViewById(R.id.caja_de_texto);
-        texto.setText(getIntent().getStringExtra("nombre"));
+        toolbar.setTitle("Holis");
         obtenerPersonaje(getIntent().getStringExtra("nombre"));
-
     }
 
     private void obtenerPersonaje(String idd) {
-        PersonajesServices pjService = repo.createPersonajesServices();
-        pjService.getEstadisticasPersonajePorNombre(idd, new Callback<EstadisticasRep>() {
+        PersonajesServices pjService = RepoPersonajes.createPersonajesServices();
+        pjService.getEstadisticas(idd, new Callback<EstadisticasRep>() {
             @Override
-            public void success(EstadisticasRep pjEst, Response response) {
-                asignarValores(pjEst);
+            public void success(EstadisticasRep estadisticasRep, Response response) {
+                asignarValores(estadisticasRep);
             }
 
             @Override
             public void failure(RetrofitError error) {
+                EstadisticasRep x = new EstadisticasRep();
+                x.setJugadas(1);
+                x.setGanadas(1);
+                x.setKills(1);
+                x.setDeads(1);
+                x.setAssists(1);
+                x.setMejorUbicacion("la juana");
+                x.setPuntaje("diez mil");
+                asignarValores(x);
             }
         });
     }
 
     public void asignarValores(EstadisticasRep est){
         TextView ca00 = (TextView) findViewById(R.id.jugadasValue);
-        ca00.setText(est.getJugadas());
+        ca00.setText(""+est.getJugadas());
         TextView ca02 = (TextView) findViewById(R.id.ganadasValue);
-        ca00.setText(est.getGanadas());
+        ca02.setText(""+est.getGanadas());
         TextView ca03 = (TextView) findViewById(R.id.killsValue);
-        ca00.setText(est.getKills());
+        ca03.setText(""+est.getKills());
         TextView ca04 = (TextView) findViewById(R.id.deadsValue);
-        ca00.setText(est.getDeads());
+        ca04.setText(""+est.getDeads());
         TextView ca05 = (TextView) findViewById(R.id.assistsValue);
-        ca00.setText(est.getAssists());
+        ca05.setText(""+est.getAssists());
         TextView ca06 = (TextView) findViewById(R.id.mejorUbicacionValue);
-        ca00.setText(est.getMejorUbicacion());
+        ca06.setText(""+est.getMejorUbicacion());
         TextView ca07 = (TextView) findViewById(R.id.puntajeValue);
-        ca00.setText(est.getPuntaje());
+        ca07.setText(""+est.getPuntaje());
     }
     ;
 }

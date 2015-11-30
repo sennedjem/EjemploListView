@@ -9,6 +9,6 @@
     <string name="mejorUbicacion">Mejor Ubicación</string>
     <string name="puntaje">Puntaje</string>
     <string name="stats">Estadisticas</string>
-    <string name="title_activity_estadisticas">EstadisticasActivity</string>
+    <string name="title_activity_estadisticas">Estadisticas Del Personaje</string>
 
 </resources>

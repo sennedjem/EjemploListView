@@ -34,7 +34,7 @@ public class ItemDetailFragment extends Fragment {
     /**
      * The dummy content this fragment is presenting.
      */
-    private String mItem;
+    public static String mItem;
     public static String nombrePersonaje;
     private RepoPersonajes repoPersonajes= new RepoPersonajes();
 
@@ -63,6 +63,7 @@ public class ItemDetailFragment extends Fragment {
             }
 
         }
+
     }
 
 
@@ -76,14 +77,12 @@ public class ItemDetailFragment extends Fragment {
 
         // Show the dummy content as text in a TextView.
         if (nombrePersonaje != null) {
-            ((TextView) rootView.findViewById(R.id.libro_detail)).setText(nombrePersonaje);
+            //((TextView) rootView.findViewById(R.id.libro_detail)).setText(nombrePersonaje);
 
         }
 
         return rootView;
     }
 
-    private void setearVista(String par){
 
-    }
 }

@@ -15,10 +15,10 @@ public class RepoPersonajes {
     }
 
 
-    public PersonajesServices createPersonajesServices(){
+    public static PersonajesServices createPersonajesServices(){
         String SERVER_IP = "127.0.0.1";
         String SERVER_IP_GENY= "127.0.0.1";
-        String API_URL = "http://192.168.1.37:9000";
+        String API_URL = "http://10.12.0.200:9000";
         RestAdapter restAdapter = new RestAdapter.Builder().setEndpoint(API_URL).build();
         PersonajesServices personajesServicess = restAdapter.create(PersonajesServices.class);
         return personajesServicess;

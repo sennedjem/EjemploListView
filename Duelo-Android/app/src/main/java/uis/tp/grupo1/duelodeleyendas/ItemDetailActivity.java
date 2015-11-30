@@ -57,6 +57,7 @@ public class ItemDetailActivity extends AppCompatActivity {
             // Create the detail fragment and add it to the activity
             // using a fragment transaction.
             Bundle arguments = new Bundle();
+
             arguments.putString(ItemDetailFragment.ARG_ITEM_ID,
                     getIntent().getStringExtra(ItemDetailFragment.ARG_ITEM_ID));
             ItemDetailFragment fragment = new ItemDetailFragment();
@@ -68,18 +69,19 @@ public class ItemDetailActivity extends AppCompatActivity {
 
         }
 
-        final String loco = ItemDetailFragment.nombrePersonaje;
+        final String loco = getIntent().getStringExtra(ItemDetailFragment.ARG_ITEM_ID);
 
         Button btnIr= (Button) findViewById(R.id.button);
         btnIr.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent= new Intent(ItemDetailActivity.this, EstadisticasActivity.class);
-                intent.putExtra("nombre",loco);
+                Intent intent = new Intent(ItemDetailActivity.this, EstadisticasActivity.class);
+                intent.putExtra("nombre", loco);
                 startActivity(intent);
             }
         });
         obtenerPersonaje(loco);
+
 
     }
 

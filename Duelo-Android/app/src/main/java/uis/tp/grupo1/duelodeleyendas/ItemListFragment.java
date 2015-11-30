@@ -93,7 +93,6 @@ public class ItemListFragment extends ListFragment {
         pjServices.getPersonajesNombres(new Callback<List<String>>() {
             @Override
             public void success(List<String> pjs, Response response) {
-                personajes = pjs;
                 agregarPersonajes(pjs);
             }
 
@@ -106,6 +105,7 @@ public class ItemListFragment extends ListFragment {
 
     private void agregarPersonajes(List<String> pjs) {
         setListAdapter(new PersonajesAdapter(getActivity(), pjs));
+        this.personajes = pjs;
     }
 
 
