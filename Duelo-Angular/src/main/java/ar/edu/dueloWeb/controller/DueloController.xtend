@@ -58,7 +58,7 @@ class DueloController {
 		ok(pri.toJson)
 	}
 	
-	@Get("/personajesNombres/:personaje/estadisticas")
+	@Get("/estadisticas/:personaje")
 	def Result estadisticasDePersonaje(){
 		val pers = repo.personajes.filter[nombre.equals(personaje)]
 		val pri = pers.get(0).stat

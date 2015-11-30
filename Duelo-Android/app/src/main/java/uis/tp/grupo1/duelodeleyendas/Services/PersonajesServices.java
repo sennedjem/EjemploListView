@@ -5,6 +5,7 @@ package uis.tp.grupo1.duelodeleyendas.Services;
     import retrofit.Callback;
     import retrofit.http.GET;
     import retrofit.http.Path;
+    import uis.tp.grupo1.duelodeleyendas.Model.EstadisticasRep;
     import uis.tp.grupo1.duelodeleyendas.Model.PersonajeRep;
 
 
@@ -18,4 +19,7 @@ public interface PersonajesServices {
 
     @GET("/personajesNombres/{persNombre}")
     void getPersonajePorNombre(@Path("persNombre") String personaje, Callback<PersonajeRep> callback);
+
+    @GET("/estadisticas/{persNombre}")
+    void getEstadisticasPersonajePorNombre(@Path("persNombre") String personaje, Callback<EstadisticasRep> callback);
 }
