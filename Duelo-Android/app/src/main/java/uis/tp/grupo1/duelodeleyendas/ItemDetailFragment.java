@@ -35,7 +35,7 @@ public class ItemDetailFragment extends Fragment {
      * The dummy content this fragment is presenting.
      */
     private String mItem;
-    public  String nombrePersonaje;
+    public static String nombrePersonaje;
     private RepoPersonajes repoPersonajes= new RepoPersonajes();
 
 

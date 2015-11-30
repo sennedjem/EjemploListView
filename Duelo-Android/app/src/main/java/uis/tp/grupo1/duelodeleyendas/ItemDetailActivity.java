@@ -30,7 +30,7 @@ import uis.tp.grupo1.duelodeleyendas.Services.RepoPersonajes;
  */
 public class ItemDetailActivity extends AppCompatActivity {
     private RepoPersonajes repoPersonajes= new RepoPersonajes();
-    private String nombrePersonaje;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,22 +61,25 @@ public class ItemDetailActivity extends AppCompatActivity {
                     getIntent().getStringExtra(ItemDetailFragment.ARG_ITEM_ID));
             ItemDetailFragment fragment = new ItemDetailFragment();
             fragment.setArguments(arguments);
-            this.nombrePersonaje = fragment.nombrePersonaje;
+
             getSupportFragmentManager().beginTransaction()
                     .add(R.id.item_detail_container, fragment)
                     .commit();
+
         }
+
+        final String loco = ItemDetailFragment.nombrePersonaje;
 
         Button btnIr= (Button) findViewById(R.id.button);
         btnIr.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent= new Intent(ItemDetailActivity.this, EstadisticasActivity.class);
-                intent.putExtra("nombre",nombrePersonaje);
+                intent.putExtra("nombre",loco);
                 startActivity(intent);
             }
         });
-        obtenerPersonaje(nombrePersonaje);
+        obtenerPersonaje(loco);
 
     }
 
