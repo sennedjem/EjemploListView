@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -12,6 +13,7 @@ import java.util.List;
 import retrofit.Callback;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
+import uis.tp.grupo1.duelodeleyendas.Model.PersonajeRep;
 import uis.tp.grupo1.duelodeleyendas.Services.PersonajesServices;
 import uis.tp.grupo1.duelodeleyendas.Services.RepoPersonajes;
 
@@ -45,9 +47,7 @@ public class ItemListActivity extends AppCompatActivity
                     .findFragmentById(R.id.item_list))
                     .setActivateOnItemClick(true);
         }
-
-        PersonajesServices pjServices = repo.createPeliculasServices();
-        pjServices.getPersonajesNombres(new Callback<List<String>>() {
+       /* pjServices.getPersonajePorNombre("Mirana" ,new Callback<List<String>>() {
             @Override
             public void success(List<String> pjs, Response response) {
                 personajes = pjs;
@@ -55,6 +55,25 @@ public class ItemListActivity extends AppCompatActivity
                     TextView texto = (TextView) findViewById(R.id.caja_de_texto);
                     texto.setText(personajes.get(0));
                 }
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+                TextView texto = (TextView) findViewById(R.id.caja_de_texto);
+                texto.setText("no se pudo conectar");
+            }
+        });
+    */
+        obtenerPj("Mirana");
+    }
+
+    private void obtenerPj(String idd) {
+        PersonajesServices pjsService = repo.createPersonajesServices();
+        pjsService.getPersonajePorNombre(idd, new Callback<PersonajeRep>() {
+            @Override
+            public void success(PersonajeRep pj, Response response) {
+                TextView texto = (TextView) findViewById(R.id.caja_de_texto);
+                texto.setText(pj.getPosicionIdeal());
             }
 
             @Override

@@ -89,7 +89,7 @@ public class ItemListFragment extends ListFragment {
 
 
     private void obtenerPersonajes() {
-        PersonajesServices pjServices = repo.createPeliculasServices();
+        PersonajesServices pjServices = repo.createPersonajesServices();
         pjServices.getPersonajesNombres(new Callback<List<String>>() {
             @Override
             public void success(List<String> pjs, Response response) {

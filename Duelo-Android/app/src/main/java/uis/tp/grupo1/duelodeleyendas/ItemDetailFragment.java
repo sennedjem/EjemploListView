@@ -4,11 +4,18 @@ import android.app.Activity;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import retrofit.Callback;
+import retrofit.RetrofitError;
+import retrofit.client.Response;
+import uis.tp.grupo1.duelodeleyendas.Model.PersonajeRep;
+import uis.tp.grupo1.duelodeleyendas.Services.PersonajesServices;
+import uis.tp.grupo1.duelodeleyendas.Services.RepoPersonajes;
 
 
 /**
@@ -28,7 +35,10 @@ public class ItemDetailFragment extends Fragment {
      * The dummy content this fragment is presenting.
      */
     private String mItem;
-    public static  String nombrePersonaje = "sarasa" ;
+    public  String nombrePersonaje;
+    private RepoPersonajes repoPersonajes= new RepoPersonajes();
+
+
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
@@ -51,8 +61,13 @@ public class ItemDetailFragment extends Fragment {
             if (appBarLayout != null) {
                 appBarLayout.setTitle(nombrePersonaje);
             }
+
         }
     }
+
+
+
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -60,11 +75,15 @@ public class ItemDetailFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_item_detail, container, false);
 
         // Show the dummy content as text in a TextView.
-        if (mItem != null) {
-            ((TextView) rootView.findViewById(R.id.item_detail)).setText(mItem);
+        if (nombrePersonaje != null) {
+            ((TextView) rootView.findViewById(R.id.libro_detail)).setText(nombrePersonaje);
 
         }
 
         return rootView;
+    }
+
+    private void setearVista(String par){
+
     }
 }

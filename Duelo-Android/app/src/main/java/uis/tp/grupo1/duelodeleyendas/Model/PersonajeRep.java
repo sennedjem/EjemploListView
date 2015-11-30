@@ -2,8 +2,6 @@ package uis.tp.grupo1.duelodeleyendas.Model;
 
 import java.util.List;
 
-import uis.tp.grupo1.duelodeleyendas.EstadisticasRep;
-
 /**
  * Created by sebastian on 29/11/15.
  */

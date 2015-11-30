@@ -10,6 +10,14 @@ import android.view.View;
 import android.support.v4.app.NavUtils;
 import android.view.MenuItem;
 import android.widget.Button;
+import android.widget.TextView;
+
+import retrofit.Callback;
+import retrofit.RetrofitError;
+import retrofit.client.Response;
+import uis.tp.grupo1.duelodeleyendas.Model.PersonajeRep;
+import uis.tp.grupo1.duelodeleyendas.Services.PersonajesServices;
+import uis.tp.grupo1.duelodeleyendas.Services.RepoPersonajes;
 
 /**
  * An activity representing a single Item detail screen. This
@@ -21,6 +29,8 @@ import android.widget.Button;
  * more than a {@link ItemDetailFragment}.
  */
 public class ItemDetailActivity extends AppCompatActivity {
+    private RepoPersonajes repoPersonajes= new RepoPersonajes();
+    private String nombrePersonaje;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +61,7 @@ public class ItemDetailActivity extends AppCompatActivity {
                     getIntent().getStringExtra(ItemDetailFragment.ARG_ITEM_ID));
             ItemDetailFragment fragment = new ItemDetailFragment();
             fragment.setArguments(arguments);
+            this.nombrePersonaje = fragment.nombrePersonaje;
             getSupportFragmentManager().beginTransaction()
                     .add(R.id.item_detail_container, fragment)
                     .commit();
@@ -61,11 +72,11 @@ public class ItemDetailActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent= new Intent(ItemDetailActivity.this, EstadisticasActivity.class);
-                intent.putExtra("nombre",ItemDetailFragment.nombrePersonaje);
+                intent.putExtra("nombre",nombrePersonaje);
                 startActivity(intent);
             }
         });
-
+        obtenerPersonaje(nombrePersonaje);
 
     }
 
@@ -84,6 +95,24 @@ public class ItemDetailActivity extends AppCompatActivity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void obtenerPersonaje(String idd) {
+        PersonajesServices pjService = repoPersonajes.createPersonajesServices();
+        pjService.getPersonajePorNombre(idd, new Callback<PersonajeRep>() {
+            @Override
+            public void success(PersonajeRep pj, Response response) {
+                mostrarPj(pj);
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+            }
+        });
+    }
+    private void mostrarPj(PersonajeRep pj) {
+        ((TextView) findViewById(R.id.pepe)).setText(pj.getNombre());
+
     }
 
 }
