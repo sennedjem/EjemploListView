@@ -8,6 +8,8 @@ import android.widget.ListAdapter;
 
 import java.util.List;
 
+import uis.tp.grupo1.duelodeleyendas.Adapters.AbstractListAdapter;
+
 /**
  * Created by sebastian on 29/11/15.
  */

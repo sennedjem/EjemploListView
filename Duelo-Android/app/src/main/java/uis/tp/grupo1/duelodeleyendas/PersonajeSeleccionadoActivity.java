@@ -8,11 +8,12 @@ import android.view.View;
 import android.support.v4.app.NavUtils;
 import android.view.MenuItem;
 import android.widget.Button;
-import android.widget.TextView;
+import android.widget.ImageView;
 
 import retrofit.Callback;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
+import uis.tp.grupo1.duelodeleyendas.Model.ImagenAdapter;
 import uis.tp.grupo1.duelodeleyendas.Model.PersonajeRep;
 import uis.tp.grupo1.duelodeleyendas.Services.PersonajesServices;
 import uis.tp.grupo1.duelodeleyendas.Services.RepoPersonajes;
@@ -114,7 +115,8 @@ public class PersonajeSeleccionadoActivity extends AppCompatActivity {
         });
     }
     private void mostrarPj(PersonajeRep pj) {
-        ((TextView) findViewById(R.id.pepe)).setText(pj.getNombre());
+        ImageView imgGenero = ((ImageView) findViewById(R.id.imagen));
+        imgGenero.setImageDrawable(getResources().getDrawable(new ImagenAdapter().getImagen(pj.getNombre())));
 
     }
 
