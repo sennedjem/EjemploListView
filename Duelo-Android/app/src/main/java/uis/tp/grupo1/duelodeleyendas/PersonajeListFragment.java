@@ -17,7 +17,7 @@ import uis.tp.grupo1.duelodeleyendas.Services.PersonajesServices;
 import uis.tp.grupo1.duelodeleyendas.Services.RepoPersonajes;
 
 
-public class ItemListFragment extends ListFragment {
+public class PersonajeListFragment extends ListFragment {
 
     private RepoPersonajes repo = new RepoPersonajes();
     private  List<String> personajes = new ArrayList<String>();
@@ -39,7 +39,7 @@ public class ItemListFragment extends ListFragment {
         }
     };
 
-    public ItemListFragment() {
+    public PersonajeListFragment() {
     }
 
     @Override

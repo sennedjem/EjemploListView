@@ -4,27 +4,20 @@ import android.app.Activity;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
-import retrofit.Callback;
-import retrofit.RetrofitError;
-import retrofit.client.Response;
-import uis.tp.grupo1.duelodeleyendas.Model.PersonajeRep;
-import uis.tp.grupo1.duelodeleyendas.Services.PersonajesServices;
 import uis.tp.grupo1.duelodeleyendas.Services.RepoPersonajes;
 
 
 /**
  * A fragment representing a single Item detail screen.
- * This fragment is either contained in a {@link ItemListActivity}
- * in two-pane mode (on tablets) or a {@link ItemDetailActivity}
+ * This fragment is either contained in a {@link PersonajeListActivity}
+ * in two-pane mode (on tablets) or a {@link PersonajeSeleccionadoActivity}
  * on handsets.
  */
-public class ItemDetailFragment extends Fragment {
+public class PersonajeSeleccionadoFragment extends Fragment {
     /**
      * The fragment argument representing the item ID that this fragment
      * represents.
@@ -35,7 +28,6 @@ public class ItemDetailFragment extends Fragment {
      * The dummy content this fragment is presenting.
      */
     public static String mItem;
-    public static String nombrePersonaje;
     private RepoPersonajes repoPersonajes= new RepoPersonajes();
 
 
@@ -43,7 +35,7 @@ public class ItemDetailFragment extends Fragment {
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
      */
-    public ItemDetailFragment() {
+    public PersonajeSeleccionadoFragment() {
     }
 
     @Override
@@ -55,11 +47,10 @@ public class ItemDetailFragment extends Fragment {
             // arguments. In a real-world scenario, use a Loader
             // to load content from a content provider.
             mItem = getArguments().getString(ARG_ITEM_ID);
-            nombrePersonaje = mItem;
             Activity activity = this.getActivity();
             CollapsingToolbarLayout appBarLayout = (CollapsingToolbarLayout) activity.findViewById(R.id.toolbar_layout);
             if (appBarLayout != null) {
-                appBarLayout.setTitle(nombrePersonaje);
+                appBarLayout.setTitle(mItem);
             }
 
         }
@@ -68,15 +59,13 @@ public class ItemDetailFragment extends Fragment {
 
 
 
-
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_item_detail, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_personaje_seleccionado, container, false);
 
         // Show the dummy content as text in a TextView.
-        if (nombrePersonaje != null) {
+        if (mItem != null) {
             //((TextView) rootView.findViewById(R.id.libro_detail)).setText(nombrePersonaje);
 
         }

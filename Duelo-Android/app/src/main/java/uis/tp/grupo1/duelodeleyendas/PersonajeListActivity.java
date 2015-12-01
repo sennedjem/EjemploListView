@@ -4,22 +4,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
-import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import retrofit.Callback;
-import retrofit.RetrofitError;
-import retrofit.client.Response;
-import uis.tp.grupo1.duelodeleyendas.Model.EstadisticasRep;
-import uis.tp.grupo1.duelodeleyendas.Model.PersonajeRep;
-import uis.tp.grupo1.duelodeleyendas.Services.PersonajesServices;
 import uis.tp.grupo1.duelodeleyendas.Services.RepoPersonajes;
 
-public class ItemListActivity extends AppCompatActivity
-        implements ItemListFragment.Callbacks {
+public class PersonajeListActivity extends AppCompatActivity
+        implements PersonajeListFragment.Callbacks {
 
     private boolean mTwoPane;
     private RepoPersonajes repo = new RepoPersonajes();
@@ -28,7 +20,7 @@ public class ItemListActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_item_app_bar);
+        setContentView(R.layout.activity_personaje_app_bar);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -44,7 +36,7 @@ public class ItemListActivity extends AppCompatActivity
 
             // In two-pane mode, list items should be given the
             // 'activated' state when touched.
-            ((ItemListFragment) getSupportFragmentManager()
+            ((PersonajeListFragment) getSupportFragmentManager()
                     .findFragmentById(R.id.item_list))
                     .setActivateOnItemClick(true);
         }
@@ -59,8 +51,8 @@ public class ItemListActivity extends AppCompatActivity
             // adding or replacing the detail fragment using a
             // fragment transaction.
             Bundle arguments = new Bundle();
-            arguments.putString(ItemDetailFragment.ARG_ITEM_ID, id);
-            ItemDetailFragment fragment = new ItemDetailFragment();
+            arguments.putString(PersonajeSeleccionadoFragment.ARG_ITEM_ID, id);
+            PersonajeSeleccionadoFragment fragment = new PersonajeSeleccionadoFragment();
             fragment.setArguments(arguments);
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.item_detail_container, fragment)
@@ -69,8 +61,8 @@ public class ItemListActivity extends AppCompatActivity
         } else {
             // In single-pane mode, simply start the detail activity
             // for the selected item ID.
-            Intent detailIntent = new Intent(this, ItemDetailActivity.class);
-            detailIntent.putExtra(ItemDetailFragment.ARG_ITEM_ID, id);
+            Intent detailIntent = new Intent(this, PersonajeSeleccionadoActivity.class);
+            detailIntent.putExtra(PersonajeSeleccionadoFragment.ARG_ITEM_ID, id);
             startActivity(detailIntent);
         }
     }
