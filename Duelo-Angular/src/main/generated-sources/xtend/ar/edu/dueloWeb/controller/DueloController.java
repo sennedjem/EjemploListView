@@ -114,7 +114,7 @@ public class DueloController extends ResultFactory {
     return _xblockexpression;
   }
   
-  @Get("/personajesNombres/:personaje/estadisticas")
+  @Get("/estadisticas/:personaje")
   public Result estadisticasDePersonaje(final String personaje, final String target, final Request baseRequest, final HttpServletRequest request, final HttpServletResponse response) {
     Result _xblockexpression = null;
     {
@@ -221,7 +221,7 @@ public class DueloController extends ResultFactory {
     }
     {
     	Matcher matcher = 
-    		Pattern.compile("/personajesNombres/(\\w+)/estadisticas").matcher(target);
+    		Pattern.compile("/estadisticas/(\\w+)").matcher(target);
     	if (request.getMethod().equalsIgnoreCase("Get") && matcher.matches()) {
     		// take parameters from request
     		
@@ -290,7 +290,7 @@ public class DueloController extends ResultFactory {
     	+ "			</tr>"
     	+ "			<tr>"
     	+ "				<td>GET</td>"
-    	+ "				<td>/personajesNombres/:personaje/estadisticas</td>"
+    	+ "				<td>/estadisticas/:personaje</td>"
     	+ "				<td>personaje</td>"
     	+ "			</tr>"
     	+ "			<tr>"

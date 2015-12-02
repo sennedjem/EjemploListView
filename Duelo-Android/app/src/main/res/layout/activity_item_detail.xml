@@ -14,7 +14,7 @@
         <android.support.design.widget.CollapsingToolbarLayout
             android:id="@+id/toolbar_layout"
             android:layout_width="match_parent"
-            android:layout_height="80dp"
+            android:layout_height="84dp"
             android:background="#ff0000">
 
             <android.support.v7.widget.Toolbar
@@ -47,7 +47,7 @@
             android:layout_alignParentTop="true"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
-            android:layout_marginTop="17dp" />
+            android:layout_marginTop="15dp" />
 
         <android.support.v4.widget.NestedScrollView android:id="@+id/item_detail_container"
             android:layout_width="wrap_content" android:layout_height="wrap_content"
@@ -61,7 +61,7 @@
             android:id="@+id/habilidades"
             android:layout_below="@+id/imagenPersonaje"
             android:layout_toRightOf="@+id/item_detail_container"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="15dp"
             android:layout_marginLeft="20dp"
             android:layout_alignRight="@+id/imagenPersonaje"
             android:layout_alignEnd="@+id/imagenPersonaje" />
@@ -94,7 +94,7 @@
             android:layout_below="@+id/especialidades"
             android:layout_toRightOf="@+id/item_detail_container"
             android:layout_toEndOf="@+id/item_detail_container"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="10dp"
             android:layout_marginLeft="20dp" />
 
         <ListView
@@ -117,21 +117,21 @@
             android:layout_below="@+id/debilidadesList"
             android:layout_toRightOf="@+id/item_detail_container"
             android:layout_toEndOf="@+id/item_detail_container"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="15dp"
             android:layout_marginLeft="20dp" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="mejorUbicacionValue"
+            android:layout_marginTop="5dp"
             android:id="@+id/mejorUbicacionValue"
 
             android:textAlignment="center"
-            android:layout_alignRight="@+id/imagenPersonaje"
-            android:layout_alignEnd="@+id/habilidades"
+
             android:layout_below="@+id/mejorUbicacion"
             android:layout_alignLeft="@+id/imagenPersonaje"
-            android:layout_alignStart="@+id/imagenPersonaje" />
+            android:layout_alignRight="@+id/imagenPersonaje" />
     </RelativeLayout>
 
 

@@ -17,6 +17,7 @@ class EstadisticasRep {
 		jugadas=estadistica.cantDuelosIniciados
 		ganadas=estadistica.cantGanadosEIniciados
 		kills=estadistica.cantKills
+		deads= estadistica.cantDeads
 		assists=estadistica.assists
 		mejorUbicacion=estadistica.mejorUbicacion
 		puntaje=estadistica.clasificacion.toString

@@ -11,7 +11,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme" >
         <activity
-            android:name=".PersonajeListActivity"
+            android:name=".ItemListActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar" >
             <intent-filter>
@@ -21,13 +21,13 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".PersonajeSeleccionadoActivity"
+            android:name=".ItemDetailActivity"
             android:label="@string/title_item_detail"
-            android:parentActivityName=".PersonajeListActivity"
+            android:parentActivityName=".ItemListActivity"
             android:theme="@style/AppTheme.NoActionBar" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".PersonajeListActivity" />
+                android:value=".ItemListActivity" />
         </activity>
         <activity
             android:name=".EstadisticasActivity"
