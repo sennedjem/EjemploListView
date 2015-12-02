@@ -10,5 +10,9 @@
     <string name="puntaje">Puntaje</string>
     <string name="stats">Estadisticas</string>
     <string name="title_activity_estadisticas">Estadisticas Del Personaje</string>
+    <string name="habilidades">Especialidades</string>
+    <string name="debilidades">Debilidades</string>
+    <string name="posicionIdeal">Posición Ideal</string>
+
 
 </resources>

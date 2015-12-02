@@ -1,4 +1,4 @@
-package uis.tp.grupo1.duelodeleyendas.Model;
+package uis.tp.grupo1.duelodeleyendas.Adapters;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -23,7 +23,7 @@ public class ImagenAdapter {
             mapaImagenes.put("Clinkz", R.drawable.clinkz);
             mapaImagenes.put("Draven", R.drawable.draven);
             mapaImagenes.put("Graves", R.drawable.graves);
-            mapaImagenes.put("Jayve", R.drawable.jayce);
+            mapaImagenes.put("Jayce", R.drawable.jayce);
         }
         return mapaImagenes;
     }

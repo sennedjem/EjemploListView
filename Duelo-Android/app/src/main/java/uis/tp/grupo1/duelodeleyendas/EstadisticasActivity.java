@@ -1,6 +1,8 @@
 package uis.tp.grupo1.duelodeleyendas;
 
+import android.app.Activity;
 import android.os.Bundle;
+import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -25,7 +27,6 @@ public class EstadisticasActivity extends AppCompatActivity {
         setContentView(R.layout.activity_estadisticas);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbarEst);
         setSupportActionBar(toolbar);
-        toolbar.setTitle("Holis");
         obtenerPersonaje(getIntent().getStringExtra("nombre"));
     }
 
@@ -47,7 +48,7 @@ public class EstadisticasActivity extends AppCompatActivity {
                 x.setAssists(1);
                 x.setMejorUbicacion("la juana");
                 x.setPuntaje("diez mil");
-                asignarValores(x);
+               asignarValores(x);
             }
         });
     }
@@ -55,16 +56,22 @@ public class EstadisticasActivity extends AppCompatActivity {
     public void asignarValores(EstadisticasRep est){
         TextView ca00 = (TextView) findViewById(R.id.jugadasValue);
         ca00.setText(""+est.getJugadas());
+
         TextView ca02 = (TextView) findViewById(R.id.ganadasValue);
         ca02.setText(""+est.getGanadas());
+
         TextView ca03 = (TextView) findViewById(R.id.killsValue);
         ca03.setText(""+est.getKills());
+
         TextView ca04 = (TextView) findViewById(R.id.deadsValue);
         ca04.setText(""+est.getDeads());
+
         TextView ca05 = (TextView) findViewById(R.id.assistsValue);
         ca05.setText(""+est.getAssists());
+
         TextView ca06 = (TextView) findViewById(R.id.mejorUbicacionValue);
         ca06.setText(""+est.getMejorUbicacion());
+
         TextView ca07 = (TextView) findViewById(R.id.puntajeValue);
         ca07.setText(""+est.getPuntaje());
     }

@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:fitsSystemWindows="true"
+    tools:context="uis.tp.grupo1.duelodeleyendas.ItemDetailActivity">
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/app_bar"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent" android:theme="@style/AppTheme.AppBarOverlay">
+
+        <android.support.design.widget.CollapsingToolbarLayout
+            android:id="@+id/toolbar_layout"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:background="#ff0000">
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/detail_toolbar"
+                android:layout_width="match_parent" android:layout_height="0dp"
+                android:background="#fe0000" />
+
+        </android.support.design.widget.CollapsingToolbarLayout>
+
+    </android.support.design.widget.AppBarLayout>
+
+    <RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:baselineAligned="false"
+        tools:context=".ItemListActivity"
+        android:weightSum="1"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true">
+
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Estadisticas"
+            android:id="@+id/button"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="17dp" />
+
+        <android.support.v4.widget.NestedScrollView android:id="@+id/item_detail_container"
+            android:layout_width="wrap_content" android:layout_height="wrap_content"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="@string/habilidades"
+            android:id="@+id/habilidades"
+            android:layout_below="@+id/imagenPersonaje"
+            android:layout_toRightOf="@+id/item_detail_container"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="20dp"
+            android:layout_alignRight="@+id/imagenPersonaje"
+            android:layout_alignEnd="@+id/imagenPersonaje" />
+
+        <ImageView
+            android:layout_width="300dp"
+            android:layout_height="150dp"
+            android:id="@+id/imagenPersonaje"
+            android:src="@drawable/clinkz"
+            android:textAlignment="center"
+            android:layout_marginTop="40dp"
+            android:layout_below="@+id/button"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="40dp" />
+
+        <ListView
+            android:layout_width="200dp"
+            android:layout_height="50dp"
+            android:id="@+id/especialidades"
+            android:textAlignment="gravity"
+            android:layout_below="@+id/habilidades"
+            android:layout_centerHorizontal="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="@string/debilidades"
+            android:id="@+id/debilidades"
+            android:layout_below="@+id/especialidades"
+            android:layout_toRightOf="@+id/item_detail_container"
+            android:layout_toEndOf="@+id/item_detail_container"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="20dp" />
+
+        <ListView
+            android:layout_width="200dp"
+            android:layout_height="50dp"
+            android:id="@+id/debilidadesList"
+            android:layout_below="@+id/debilidades"
+            android:layout_alignLeft="@+id/especialidades"
+            android:layout_alignStart="@+id/especialidades"
+            android:gravity="center"
+            android:layout_alignRight="@+id/especialidades"
+            android:layout_alignEnd="@+id/especialidades"
+            android:layout_alignParentBottom="false" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="@string/posicionIdeal"
+            android:id="@+id/mejorUbicacion"
+            android:layout_below="@+id/debilidadesList"
+            android:layout_toRightOf="@+id/item_detail_container"
+            android:layout_toEndOf="@+id/item_detail_container"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="20dp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="mejorUbicacionValue"
+            android:id="@+id/mejorUbicacionValue"
+
+            android:textAlignment="center"
+            android:layout_alignRight="@+id/imagenPersonaje"
+            android:layout_alignEnd="@+id/habilidades"
+            android:layout_below="@+id/mejorUbicacion"
+            android:layout_alignLeft="@+id/imagenPersonaje"
+            android:layout_alignStart="@+id/imagenPersonaje" />
+    </RelativeLayout>
+
+
+
+
+</android.support.design.widget.CoordinatorLayout>
