@@ -6,26 +6,6 @@
     android:layout_height="match_parent" android:fitsSystemWindows="true"
     tools:context="uis.tp.grupo1.duelodeleyendas.ItemDetailActivity">
 
-    <android.support.design.widget.AppBarLayout
-        android:id="@+id/app_bar"
-        android:layout_height="wrap_content"
-        android:layout_width="match_parent" android:theme="@style/AppTheme.AppBarOverlay">
-
-        <android.support.design.widget.CollapsingToolbarLayout
-            android:id="@+id/toolbar_layout"
-            android:layout_width="match_parent"
-            android:layout_height="84dp"
-            android:background="#ff0000">
-
-            <android.support.v7.widget.Toolbar
-                android:id="@+id/detail_toolbar"
-                android:layout_width="match_parent" android:layout_height="0dp"
-                android:background="#fe0000" />
-
-        </android.support.design.widget.CollapsingToolbarLayout>
-
-    </android.support.design.widget.AppBarLayout>
-
     <RelativeLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
@@ -39,15 +19,40 @@
         android:layout_centerHorizontal="true">
 
 
+        <android.support.design.widget.AppBarLayout
+            android:id="@+id/app_bar"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent" android:theme="@style/AppTheme.AppBarOverlay"
+            android:background="#fe0000"
+            >
+
+            <android.support.design.widget.CollapsingToolbarLayout
+                android:id="@+id/toolbar_layout"
+                android:layout_width="match_parent"
+                android:layout_height="84dp"
+                android:background="#fe0000"
+                >
+
+                <android.support.v7.widget.Toolbar
+                    android:id="@+id/detail_toolbar"
+                    android:layout_width="match_parent" android:layout_height="0dp"
+                    android:background="#fe0000" />
+
+            </android.support.design.widget.CollapsingToolbarLayout>
+
+        </android.support.design.widget.AppBarLayout>
+
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Estadisticas"
+            android:text="@string/stats"
             android:id="@+id/button"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            android:layout_marginTop="15dp" />
+            android:layout_below="@+id/mejorUbicacionValue"
+            android:layout_alignLeft="@+id/mejorUbicacionValue"
+            android:layout_alignStart="@+id/mejorUbicacionValue"
+            android:layout_alignRight="@+id/mejorUbicacionValue"
+            android:layout_alignEnd="@+id/mejorUbicacionValue"
+            android:layout_marginTop="5dp" />
 
         <android.support.v4.widget.NestedScrollView android:id="@+id/item_detail_container"
             android:layout_width="wrap_content" android:layout_height="wrap_content"
@@ -61,7 +66,7 @@
             android:id="@+id/habilidades"
             android:layout_below="@+id/imagenPersonaje"
             android:layout_toRightOf="@+id/item_detail_container"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="5dp"
             android:layout_marginLeft="20dp"
             android:layout_alignRight="@+id/imagenPersonaje"
             android:layout_alignEnd="@+id/imagenPersonaje" />
@@ -72,10 +77,9 @@
             android:id="@+id/imagenPersonaje"
             android:src="@drawable/clinkz"
             android:textAlignment="center"
-            android:layout_marginTop="40dp"
-            android:layout_below="@+id/button"
-            android:layout_centerHorizontal="true"
-            android:layout_marginLeft="40dp" />
+            android:layout_marginTop="15dp"
+            android:layout_below="@+id/app_bar"
+            android:layout_centerHorizontal="true" />
 
         <ListView
             android:layout_width="200dp"
@@ -94,7 +98,7 @@
             android:layout_below="@+id/especialidades"
             android:layout_toRightOf="@+id/item_detail_container"
             android:layout_toEndOf="@+id/item_detail_container"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="5dp"
             android:layout_marginLeft="20dp" />
 
         <ListView
@@ -117,21 +121,22 @@
             android:layout_below="@+id/debilidadesList"
             android:layout_toRightOf="@+id/item_detail_container"
             android:layout_toEndOf="@+id/item_detail_container"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="5dp"
             android:layout_marginLeft="20dp" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
+
             android:text="mejorUbicacionValue"
-            android:layout_marginTop="5dp"
             android:id="@+id/mejorUbicacionValue"
 
             android:textAlignment="center"
-
+            android:textAppearance="?android:attr/textAppearanceSmall"
             android:layout_below="@+id/mejorUbicacion"
             android:layout_alignLeft="@+id/imagenPersonaje"
             android:layout_alignRight="@+id/imagenPersonaje" />
+
+
     </RelativeLayout>
 
 
