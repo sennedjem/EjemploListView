@@ -13,11 +13,15 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import javax.xml.datatype.DatatypeConfigurationException;
+
 import retrofit.Callback;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
 import uis.tp.grupo1.duelodeleyendas.Adapters.ImagenAdapter;
 import uis.tp.grupo1.duelodeleyendas.Model.PersonajeRep;
+import uis.tp.grupo1.duelodeleyendas.Services.AsignarOnSuccesIgnoreFail;
+import uis.tp.grupo1.duelodeleyendas.Services.DataCointainer;
 import uis.tp.grupo1.duelodeleyendas.Services.PersonajesServices;
 import uis.tp.grupo1.duelodeleyendas.Services.RepoPersonajes;
 
@@ -30,7 +34,7 @@ import uis.tp.grupo1.duelodeleyendas.Services.RepoPersonajes;
  * This activity is mostly just a 'shell' activity containing nothing
  * more than a {@link ItemDetailFragment}.
  */
-public class ItemDetailActivity extends AppCompatActivity {
+public class ItemDetailActivity extends AppCompatActivity implements DataCointainer<PersonajeRep>{
     private RepoPersonajes repoPersonajes= new RepoPersonajes();
 
 
@@ -45,19 +49,7 @@ public class ItemDetailActivity extends AppCompatActivity {
 
         // Show the Up button in the action bar.
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-        // savedInstanceState is non-null when there is fragment state
-        // saved from previous configurations of this activity
-        // (e.g. when rotating the screen from portrait to landscape).
-        // In this case, the fragment will automatically be re-added
-        // to its container so we don't need to manually add it.
-        // For more information, see the Fragments API guide at:
-        //
-        // http://developer.android.com/guide/components/fragments.html
-        //
         if (savedInstanceState == null) {
-            // Create the detail fragment and add it to the activity
-            // using a fragment transaction.
             Bundle arguments = new Bundle();
 
             arguments.putString(ItemDetailFragment.ARG_ITEM_ID,
@@ -91,13 +83,6 @@ public class ItemDetailActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == android.R.id.home) {
-            // This ID represents the Home or Up button. In the case of this
-            // activity, the Up button is shown. Use NavUtils to allow users
-            // to navigate up one level in the application structure. For
-            // more details, see the Navigation pattern on Android Design:
-            //
-            // http://developer.android.com/design/patterns/navigation.html#up-vs-back
-            //
             NavUtils.navigateUpTo(this, new Intent(this, ItemListActivity.class));
             return true;
         }
@@ -106,20 +91,10 @@ public class ItemDetailActivity extends AppCompatActivity {
 
     private void obtenerPersonaje(String idd) {
         PersonajesServices pjService = repoPersonajes.createPersonajesServices();
-        pjService.getPersonajePorNombre(idd, new Callback<PersonajeRep>() {
-            @Override
-            public void success(PersonajeRep pj, Response response) {
-                mostrarPj(pj);
-
-            }
-
-            @Override
-            public void failure(RetrofitError error) {
-            }
-        });
+        pjService.getPersonajePorNombre(idd, new AsignarOnSuccesIgnoreFail<PersonajeRep>(this));
     }
 
-    private void mostrarPj(PersonajeRep pj) {
+    public void asignar(PersonajeRep pj) {
         ImageView imgGenero = ((ImageView) findViewById(R.id.imagenPersonaje));
         int entero = new ImagenAdapter().getImagen(pj.getNombre());
         imgGenero.setImageDrawable(getResources().getDrawable(entero));

@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">PruebaFragments</string>
+    <string name="titulo">PruebaFragments</string>
+    <string name="textoDetailPorDefecto">Default Text</string>
+    <string name="textoButton">Press to update</string>
+    <string name="title_activity_detail">DetailActivity</string>
+</resources>

@@ -15,10 +15,12 @@ import retrofit.RetrofitError;
 import retrofit.client.Response;
 import uis.tp.grupo1.duelodeleyendas.Model.EstadisticasRep;
 import uis.tp.grupo1.duelodeleyendas.Model.PersonajeRep;
+import uis.tp.grupo1.duelodeleyendas.Services.AsignarOnSuccesIgnoreFail;
+import uis.tp.grupo1.duelodeleyendas.Services.DataCointainer;
 import uis.tp.grupo1.duelodeleyendas.Services.PersonajesServices;
 import uis.tp.grupo1.duelodeleyendas.Services.RepoPersonajes;
 
-public class EstadisticasActivity extends AppCompatActivity {
+public class EstadisticasActivity extends AppCompatActivity implements DataCointainer<EstadisticasRep> {
 
 
     @Override
@@ -32,28 +34,10 @@ public class EstadisticasActivity extends AppCompatActivity {
 
     private void obtenerPersonaje(String idd) {
         PersonajesServices pjService = RepoPersonajes.createPersonajesServices();
-        pjService.getEstadisticas(idd, new Callback<EstadisticasRep>() {
-            @Override
-            public void success(EstadisticasRep estadisticasRep, Response response) {
-                asignarValores(estadisticasRep);
-            }
-
-            @Override
-            public void failure(RetrofitError error) {
-                EstadisticasRep x = new EstadisticasRep();
-                x.setJugadas(1);
-                x.setGanadas(1);
-                x.setKills(1);
-                x.setDeads(1);
-                x.setAssists(1);
-                x.setMejorUbicacion("la juana");
-                x.setPuntaje("diez mil");
-               asignarValores(x);
-            }
-        });
+        pjService.getEstadisticas(idd, new AsignarOnSuccesIgnoreFail<EstadisticasRep>(this));
     }
 
-    public void asignarValores(EstadisticasRep est){
+    public void asignar(EstadisticasRep est){
         TextView ca00 = (TextView) findViewById(R.id.jugadasValue);
         ca00.setText(""+est.getJugadas());
 

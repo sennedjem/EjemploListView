@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">ClaseIntents</string>
+    <string name="name">Mancuello</string>
+    <string name="Age">26</string>
+    <string name="Sport">Futbol</string>
+    <string name="yourIdIs">Your Id Is</string>
+    <string name="buttonId">Ask_Id</string>
+    <string name="buttonAccept">Accept</string>
+</resources>

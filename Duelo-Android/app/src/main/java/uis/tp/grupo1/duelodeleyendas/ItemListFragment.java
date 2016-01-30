@@ -20,8 +20,7 @@ import uis.tp.grupo1.duelodeleyendas.Services.RepoPersonajes;
 public class ItemListFragment extends ListFragment {
 
     private RepoPersonajes repo = new RepoPersonajes();
-    private  List<String> personajes = new ArrayList<String>();
-
+    private  List<String> personajes = new ArrayList<>();
 
     private static final String STATE_ACTIVATED_POSITION = "activated_position";
 
@@ -121,7 +120,6 @@ public class ItemListFragment extends ListFragment {
         } else {
             getListView().setItemChecked(position, true);
         }
-
         mActivatedPosition = position;
     }
 
